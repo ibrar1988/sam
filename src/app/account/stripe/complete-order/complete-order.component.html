@@ -1,0 +1,287 @@
+<script>
+
+    // fbq('track', 'Purchase', {
+  
+    //   value: 19.99,
+  
+    //   currency: 'USD',
+  
+    // });
+    // fbq('track', 'Purchase')
+  </script>
+  
+  
+<section style="padding-top: 20px;">
+    <div *ngIf="finishOrder == null" class="login-box card animated fadeIn">
+        <div class="card-body">
+            <div class="col-12">
+                <div class="row" style="text-align: center;">
+                    <div style="text-align: left;">
+                        <span style="font-size: 22px;">Payment Process</span>
+
+                    </div>
+
+
+
+                    <div class="mkd-separator-fullw" style="margin-bottom: 5px;">
+                    </div>
+                    <p style="font-size: 12px;">
+                        Follow these steps to activate your Premium benefits</p>
+                    <div class="col-12">
+
+
+                        <form class="form-horizontal form-material" #f="ngForm" id="loginform" (keyup)="uncomplete = false;" (ngSubmit)="checkout()">
+                            <div [hidden]="!step3">
+
+                                <div class="form-group">
+                                    <div style="text-align: center">
+                                        <span style="font-size: 20px;">Choose Your Plan</span>
+                                    </div>
+                                    <select (change)="onChange($event.target.value)" class="form-control" required>
+                              <option value="monthly">Monthly</option>
+                              <option value="annual">Annual</option>
+                            </select>
+                                </div>
+                                <div class="form-group">
+
+                                    <span style="font-size: 20px;text-align: center;">{{price | currency:'USD':true:'1.2-2'}}</span>
+
+                                </div>
+
+                            </div>
+                            <div [hidden]="!step4">
+                                <div class="form-group" style="background: rgba(204, 204, 204, 0.2); border-width: 2px; border-style: dashed; border-color: #CCC;padding: 10px;margin-bottom: 10px;">
+
+                                    <div style="text-align: center;margin-bottom: 10px;">
+                                        <span style="font-size: 20px;">Promo Code</span>
+                                    </div>
+                                    <div class="form-group" style="margin-bottom: 0;">
+                                        <input class="form-control" type="text" style="width: auto;" placeholder="Enter a Promo Code" name="promoCode" [(ngModel)]="coupon" required>
+                                        <button (click)="addCoupon()" class="btn-component" style="width:20%;margin: 0;padding:0;" type="button"><span> <i class="fa fa-ticket" aria-hidden="true"></i> Add </span></button>
+                                    </div>
+                                    <span style="font-size:12px;text-align: left;">If you have a promo code, enter it here</span>
+                                    <p *ngIf='couponValidated == 1' style="font-size:12px;text-align: center;color: seagreen"><b>Valid Coupon</b></p>
+                                    <p *ngIf='couponValidated == 2' style="font-size:12px;text-align: center;color: darkred"><b>Invalid Coupon</b></p>
+                                </div>
+
+
+
+
+
+
+                                <table style="margin-top: 25px;">
+                                    <tr>
+                                        <th style="width: 50%;">Item</th>
+                                        <th></th>
+                                        <th style="width: 50%;text-align: right;"> <span style="font-size:12px">{{item | uppercase}} SUBSCRIPTION</span></th>
+
+                                    </tr>
+                                    <tr>
+                                        <th style="width: 50%;">Price</th>
+                                        <th></th>
+                                        <td style="width: 50%;text-align: right;">{{price | currency:'USD':true:'1.2-2'}}</td>
+
+                                    </tr>
+                                    <tr>
+                                        <th style="width: 50%;">Subtotal</th>
+                                        <th></th>
+                                        <td style="width: 50%;text-align: right;">{{price | currency:'USD':true:'1.2-2'}}</td>
+
+                                    </tr>
+                                    <tr>
+                                        <th style="width: 50%;">Discounts</th>
+                                        <th></th>
+                                        <td style="width: 50%;text-align: right;color: green;">- {{discount | currency:'USD':true:'1.2-2'}}</td>
+
+
+                                    </tr>
+                                    <tr>
+                                        <th style="width: 50%;"><b>Total</b></th>
+                                        <th></th>
+                                        <td style="width: 50%;text-align: right;"><b>{{price - discount | currency:'USD':true:'1.2-2'}}</b></td>
+
+                                    </tr>
+                                </table>
+                            </div>
+
+
+                            <div class="form-group ">
+
+                                <div [hidden]="!step1">
+                                    <div style="text-align: left;">
+                                        <span style="font-size: 22px;">Personal Information</span>
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="col-12 col-md-12">
+                                            <div class="form-group">
+                                                <input class="form-control" type="text" placeholder="First Name" name="name" [(ngModel)]="billingRequest.first_name" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="col-12 col-md-12">
+                                            <div class="form-group">
+                                                <input class="form-control" type="text" placeholder="Last Name" name="lastname" [(ngModel)]="billingRequest.last_name" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="col-12 col-md-12">
+                                            <div class="form-group">
+                                                <input class="form-control" type="text" placeholder="Company" name="company" [(ngModel)]="billingRequest.company" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-12 col-md-12">
+                                            <div class="form-group">
+                                                <input class="form-control" type="text" placeholder="Address" name="address" [(ngModel)]="billingRequest.address" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div [hidden]="!step2">
+                                    <div style="text-align: left;margin-bottom:15px;">
+                                        <span style="font-size: 22px;">Your Location</span>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 col-md-12">
+                                            <div class="form-group">
+                                                <label style="text-align: left">Country</label>
+                                                <div style="text-align: left">
+                                                    <!-- <select [(ngModel)]="billingRequest.country" name="billingcountry" (change)="setCountry($event.target.value)" class="form-control" required> -->
+                                                    <span>
+                                                        United States
+                                                    </span>
+                                                    <!-- </select> -->
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div *ngIf="states" class="col-12 col-md-12">
+                                            <div class="form-group  animated fadeIn">
+                                                <label style="text-align: left">State</label>
+                                                <div>
+                                                    <select #categoriesCtrl (change)='setState(categoriesCtrl.value)' [(ngModel)]="billingRequest.state" name="billingstate" class="form-control" required>
+                                        <option *ngFor='let state of states' value="{{state.code}}">
+                                          {{state.name}}
+                                        </option>
+                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div *ngIf="cities" class="col-12 col-md-12">
+                                            <div class="form-group  animated fadeIn">
+                                                <label style="text-align: left">City</label>
+                                                <div>
+                                                    <select [(ngModel)]="billingRequest.city" name="billingcity" (change)="setCity($event.target.value)" class="form-control" required>
+                                        <option *ngFor='let city of cities' value="{{city.city_name}}">{{city.city_name}}</option>
+                                    </select>
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                        <div class="col-12 col-md-12" *ngIf="cities">
+                                            <div class="form-group  animated fadeIn">
+                                                <label style="text-align: left">City</label>
+                                                <input class="form-control" type="text" placeholder="City" name="city" [(ngModel)]="billingRequest.city" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-12">
+                                            <div class="form-group  animated fadeIn">
+                                                <label style="text-align: left">Zip Code</label>
+                                                <input class="form-control" type="text" placeholder="Zip Code" name="zipcode" [(ngModel)]="billingRequest.zipcode" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div style="text-align: center;">
+                                <span *ngIf="uncomplete" style="font-size: 18px;">Please complete all fields to continue</span>
+                            </div>
+
+                            <button [hidden]="step1" class="btn-component btn-myklovr" style="width: 49%;" type="button" (click)="toBack()"><span><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</span></button>
+
+                            <button [hidden]="step4" class="btn-component btn-myklovr" style="width:49%;" type="button" (click)="toNext()"><span>Next <i class="fa fa-chevron-right" aria-hidden="true"></i></span></button>
+
+                            <button [hidden]="!step4" class="btn-component btn-myklovr btn-5 btn-5a icon icon-credit-card" style="width: 49%;min-width: auto;height: 72px;" type="submit"><span>Purchase</span></button>
+
+                        </form>
+
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div *ngIf="finishOrder == true" class="login-box card animated fadeIn" style="width: max-content;">
+
+        <div class="card-body">
+
+            <div class="col-12">
+                <div class="row" style="text-align: center;">
+                    <div class="col-4"></div>
+                    <div class="col-4">
+                        <img src="assets/images/completeOrder/sign-check.png" alt="check">
+                    </div>
+                    <div class="col-4"></div>
+                </div>
+            </div>
+            <div class="row" style="text-align: center;">
+
+                <div class="col-12">
+                    <h1>Thank you for becoming a myKlovr Premium member</h1>
+
+                    <p> Now you have full access to all myKlovr tools.</p>
+                    <p> Use them to make your journey to college easier and increase your admission chances.</p>
+                    <p style="padding-bottom: 5px"> Payment Amount: {{price - discount | currency:'USD':true:'1.2-2'}} + Tax </p>
+                    <p style="font-size: small"> For more details consult in My Orders</p>
+
+                    <button class="btn btn-myklovr" [routerLink]="[('/dashboard/profile')]"> Go to My Profile</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <div *ngIf="finishOrder == false" class="login-box card animated fadeIn" style="width: max-content;">
+
+        <div class="card-body">
+            <div class="col-12">
+                <div class="row" style="text-align: center;">
+
+                    <div class="col-12">
+                        <h1>PAYMENT ERROR</h1>
+
+                        <p>
+                            We have had problems with your payment</p>
+
+
+                        <button class="btn btn-myklovr" (click)='toStep1();finishOrder = null;'> Back to Checkout</button>
+                        <button class="btn btn-myklovr " [routerLink]="[('/dashboard/profile')]"> Go to My Profile</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+</section>

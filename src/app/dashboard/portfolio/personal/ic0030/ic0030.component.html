@@ -1,0 +1,50 @@
+<div *ngIf='container' class="row portfolio-container-base">
+    <div class="col-md-12">      
+            <div>
+                <div class="title-section">
+                    <div class="row">
+                        <div class="col-sm-7 col-md-9 d-flex align-items-center" data-toggle="collapse" data-target="#ic0030" aria-expanded="false" aria-controls="ic0030">
+                            <span class="container-title">{{container_name}} </span><span class="fa fa-info-circle container-info-icon" data-container="body" data-toggle="tooltip" data-placement="bottom" title="{{container_tooltip}}"></span>
+                        </div>
+                        <!-- <div class="col-sm-5 col-md-3 text-right">
+                            <div style="display: inline-block;">
+                                <label class="switch">
+                                    <input type="checkbox" [checked]="value" (change)="value = !value">
+                                    <span class="slider round2"></span>
+                                </label>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        <hr class="separator">
+        <div id="ic0030" class="show">
+
+            <div class="row"  *ngIf='container'>
+                <div  class="col-12" *ngFor="let item of container.comment; let i=index;">
+                  <div id="achievements-{{i}}" class="card-body achievements-card">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="cardview-recommendation">
+                                <div class="row">
+                                    <img class="img-circle-sm float-left" [src]="item?.url_profile_image  || 'assets/images/home/icons6c.png'"/>
+                                    <div class="col-md-10 col-xs-12 float-left">
+                                        <p class="title-recommendation">{{item?.name || 'My Mentor'}} <small class="title2-recommendation">{{item?.role || 'Mentor'}}</small></p>
+                                        <p class="subtitle-recommendation">{{item?.date_of_creation  || '08-07-2017'}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p class="description-cardview">{{item?.description || ''}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>   
+            </div>
+
+        </div>
+    </div>
+</div>

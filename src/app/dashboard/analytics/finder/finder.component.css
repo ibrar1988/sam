@@ -1,0 +1,54 @@
+.filter-title{
+  background-color: #191332;
+  color: #FFFFFF;
+  font-size: 16px;
+  padding: 0 10px;
+}
+
+.card-shadow{
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
+  margin: 8px;
+}
+
+.card-content{
+  text-align: left;
+  padding-left: 10%;
+  padding-top: 5%;
+}
+
+.filter-container{
+  padding: 12px 12px;
+  min-height: 160px;
+}
+
+.filter-tag{
+  padding: 10px;
+  font-size: 1rem;
+}
+
+.filter-tag-container{
+  background-color: #eaeaea;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+.tab-image{
+  width: 150px !important;
+}
+
+.label-tag{
+  margin: 5px;
+  background: #eaeaea;
+  color: #191332;
+  font-weight: 500;
+}
+
+.content-compare-college {
+  border-top: 2px solid #facc0b;
+  padding: 4px 6px;
+  margin-bottom: 16px;
+}
+
+/deep/ .modal-lg{
+  max-width: 95% !important;
+}

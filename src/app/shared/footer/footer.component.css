@@ -1,0 +1,46 @@
+#footer {
+  background-color: #000;
+  padding: 25px 0;
+  color: #ffffff;
+  font-size: 16px;
+  position: relative;
+}
+
+#footer-section{
+  display: block;
+  background-color: #191919;
+  padding: 30px 0;
+}
+
+.footer-box{
+  font-size: 15px;
+  line-height: 1.7333333333em;
+  font-family: Roboto,sans-serif;
+}
+
+.footer-title{
+  color: #fff;
+  margin-top: 0;
+  margin-bottom: 32px;
+  font-size: 26px;
+}
+
+.footer-social{
+  padding-top: 25px;
+}
+
+.footer-location a{
+  color: #FFFFFF
+}
+
+.footer-description{
+  color: #eaeaea;
+  padding-top:10px;
+}
+
+.policy-container{
+  height: 520px;
+  overflow-y: scroll;
+  margin: 16px;
+  font-size: 12px;
+}

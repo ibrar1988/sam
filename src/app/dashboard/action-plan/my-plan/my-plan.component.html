@@ -1,0 +1,401 @@
+<ng-template #premium let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Become Premium</h4>
+        <button type="button" class="close" style="cursor:pointer" aria-label="Close" (click)="c('Close click')">
+<span aria-hidden="true">&times;</span>
+</button>
+    </div>
+    <div class="modal-body">
+        <div class="" style="text-align: center;">
+            <p>You need to be a Premium User to access this feature</p>
+            <br>
+            <button class="btn btn-myklovr" (click)="toOrder();c('Close click');" type="button">Get Premium</button>
+
+        </div>
+    </div>
+</ng-template>
+<div [hidden]="isMilestones" class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 d-flex justify-content-between align-items-center">
+                            <span style="font-size: 18px;">My Goals</span>
+                            <div class="d-flex align-items-center" style="width: 36%;">
+                                <i class="fa fa-refresh icon-responsive" (click)="getGoals()"></i>
+                                <input class="form-control" style="width: 100%" type="text" name="search" placeholder="Search your goal" [(ngModel)]="filter">
+                            </div>
+                        </div>
+                        <div style="border: 2px solid #FDCE0C;background: #FDCE0C;margin: 12px 15px;width:100%"></div>
+                    </div>
+
+                    <!-- <div class="row" style="padding:20px;">
+                        <div class="col-md-8">
+                        </div>
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input class="form-control" type="text" name="search" placeholder="Search your goal" [(ngModel)]="filter">
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+
+                    <div class="row">
+                        <div class="gallery col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top: 25px;">
+                            <div align="center">
+                                <button class="btn btn-default filter-button" data-filter="all">All</button>
+                                <button class="btn btn-default filter-button" data-filter="ACADEMIC">Academic</button>
+                                <button class="btn btn-default filter-button" data-filter="PERSONAL">Personal</button>
+                                <button class="btn btn-default filter-button" data-filter="PROFESSIONAL">Professional</button>
+                                <button class="btn btn-default filter-button" data-filter="COMPLETED">Completed</button>
+                            </div>
+                            <br/>
+
+                            <div class="row">
+                                <div class="col-12 text-center" style="margin-bottom: 26px;" [hidden]="isLoaded">
+                                    <md-spinner></md-spinner>
+                                </div>
+
+                                <ng-container *ngFor="let goal of goals_list | orderBy: key  | filter:filter | paginate: { itemsPerPage: 900, currentPage: p }; let i = index; let last=last">
+                                    <input #isGoalEdit [hidden]="true" type="text" name="" value="true">
+                                    <div *ngIf="goal.user_goals.status == 'INCOMPLETED'" class="gallery_product col-sm-6 col-sm-4 col-md-4 filter {{goal.type}}" style="padding:15px;" [isLast]="last" (lastDone)="stopLoading()">
+                                        <div class="column">
+                                            <div class="myklovr-content-block">
+                                                <div class="myklovr-goal-icon-container">
+                                                    <img class="myklovr-goal-icon" src="../../../../assets/images/actionPlan/myklovr3.png">
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="myklovr-content-meta">
+                                                    <i class="fa fa-window-close" [hidden]="isGoalEdit.value == 'true'" aria-hidden="true" (click)="isGoalEdit.value = getIsEdit(isGoalEdit.value);"></i>
+                                                    
+                                                            <button  [hidden]="isGoalEdit.value == 'false'" style="padding: 0;margin-left: 15px;" (click)="isGoalEdit.value = getIsEdit(isGoalEdit.value)" class="btn-component" ><i class="fa fa-pencil" aria-hidden="true"></i><small class="text-muted">Edit</small></button>
+                                                    
+                                                            <button [hidden]="isGoalEdit.value == 'true'" style="padding: 0;margin-left: 15px;" (click)="isGoalEdit.value = getIsEdit(isGoalEdit.value);updateGoal(goal.user_goals);" class="btn-component"><i class="fa fa-floppy-o" aria-hidden="true"></i><small class="text-muted" >Save Changes</small></button>
+
+                                                            <button [hidden]="isGoalEdit.value == 'true'" style="padding: 0;margin-left: 15px;" (click)="isGoalEdit.value = getIsEdit(isGoalEdit.value);deleteGoal(i);" class="btn-component"><i class="fa fa-trash" aria-hidden="true"></i><small class="text-muted" >Delete</small></button>
+
+                                                            <div (click)="toMilestones(goal.user_goals, premium)" [hidden]="isGoalEdit.value == 'false'">
+                                                                <div class="myklovr-goal-type">
+                                                                    {{goal.type}}
+                                                                </div>
+                                                                <div class="myklovr-goal-title">
+                                                                    {{goal.name}}
+                                                                </div>
+                                                                <div class="myklovr-content-actions-container">
+                                                                    <span *ngIf="goal.user_goals.status == 'COMPLETED'" class="icon icon-complete"></span>
+                                                                    <span *ngIf="goal.user_goals.status == 'INCOMPLETED'" class="icon icon-incomplete"></span>
+                                                                    <strong> {{goal.user_goals.completed_milestones_qty}}/{{goal.user_goals.milestones_qty}} Milestones</strong>
+                                                                    <p *ngIf="goal.user_goals.status == 'COMPLETED'">{{goal.user_goals.enddate}}</p>
+                                                                    <p *ngIf="goal.user_goals.status == 'INCOMPLETED'">Not yet completed</p>
+                                                                </div>
+                                                            </div>
+
+                                                            <div [hidden]="isGoalEdit.value == 'true'">
+                                                                <input style="margin-top: 10px;" class="form-control" type="text" name="name" [(ngModel)]="goal.name">
+                                                                <!-- textArea for Default description  -->
+                                                                <textarea rows='6' style="margin-top: 10px;" class="form-control" type="text" name="description" [(ngModel)]="goal.description"></textarea>
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+                                                    <!--<div class="col-1 myklover-achievement">-->
+                                                    <!--&lt;!&ndash;<img alt="Newbie" src="../../../../assets/images/actionPlan/myklovr_generic.png">&ndash;&gt;-->
+                                                    <!--</div>-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div *ngIf="goal.user_goals.status == 'COMPLETED'" class="gallery_product col-sm-6 col-sm-4 col-md-4 filter COMPLETED" style="padding:15px;" [isLast]="last" (lastDone)="stopLoading()">
+                                        <div class="column">
+                                            <div class="myklovr-content-block">
+                                                <div class="myklovr-goal-icon-container">
+                                                    <img class="myklovr-goal-icon" src="../../../../assets/images/actionPlan/myklovr3.png">
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="myklovr-content-meta">
+                                                    <i class="fa fa-window-close" [hidden]="isGoalEdit.value == 'true'" aria-hidden="true" (click)="isGoalEdit.value = getIsEdit(isGoalEdit.value);"></i>
+                                                           
+                                                            <button [hidden]="isGoalEdit.value == 'false'" style="padding: 0;margin-left: 15px;" (click)="isGoalEdit.value = getIsEdit(isGoalEdit.value)" class="btn-component"><i class="fa fa-pencil" aria-hidden="true"></i><small class="text-muted">Edit</small></button>
+                                                            
+                                                            <button [hidden]="isGoalEdit.value == 'true'" style="padding: 0;margin-left: 15px;" (click)="isGoalEdit.value = getIsEdit(isGoalEdit.value);updateGoal(goal.user_goals);" class="btn-component"><i class="fa fa-floppy-o" aria-hidden="true"></i><small class="text-muted" >Save Changes</small></button>
+
+                                                            <button [hidden]="isGoalEdit.value == 'true'" style="padding: 0;margin-left: 15px;" (click)="isGoalEdit.value = getIsEdit(isGoalEdit.value);deleteGoal(i);" class="btn-component"><i class="fa fa-trash" aria-hidden="true"></i><small class="text-muted" >Delete</small></button>
+
+                                                            <div (click)="toMilestones(goal.user_goals, premium)" [hidden]="isGoalEdit.value == 'false'">
+                                                                <div class="myklovr-goal-type">
+                                                                    {{goal.type}}
+                                                                </div>
+                                                                <div class="myklovr-goal-title">
+                                                                    {{goal.name}}
+                                                                </div>
+                                                                <div class="myklovr-content-actions-container">
+                                                                    <span *ngIf="goal.user_goals.status == 'COMPLETED'" class="icon icon-complete completed"></span>
+                                                                    <span *ngIf="goal.user_goals.status == 'INCOMPLETED'" class="icon icon-incomplete started"></span>
+                                                                    <strong> {{goal.user_goals.completed_milestones_qty}}/{{goal.user_goals.milestones_qty}} Milestones</strong>
+                                                                    <p *ngIf="goal.user_goals.status == 'COMPLETED'">{{goal.user_goals.enddate}}</p>
+                                                                    <p *ngIf="goal.user_goals.status == 'INCOMPLETED'">Not yet completed</p>
+                                                                </div>
+                                                            </div>
+
+                                                            <div [hidden]="isGoalEdit.value == 'true'">
+                                                                <input style="margin-top: 10px;" class="form-control" type="text" name="name" [(ngModel)]="goal.name">
+                                                                <!-- textArea for custom goals -->
+                                                                <textarea rows='6' style="margin-top: 10px;" class="form-control" type="text" name="description" [(ngModel)]="goal.description"></textarea>
+
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+                                                    <!--<div class="col-1 myklover-achievement">-->
+                                                    <!--&lt;!&ndash;<img alt="Newbie" src="../../../../assets/images/actionPlan/myklovr_generic.png">&ndash;&gt;-->
+                                                    <!--</div>-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </ng-container>
+
+
+                                <div class="gallery_product col-sm-6 col-sm-4 col-md-4" style="padding:15px;">
+                                    <div class="new-tag-lg">
+                                        <div class="d-flex justify-content-center align-items-center" style="height: 100%" (click)="open(content)">
+                                            <a class="btn btn-default btn-circle"><i class="fa fa-plus fa-silver"></i></a>
+                                        </div>
+                                    </div>
+
+                                    <!-- <div style="text-align: center;">
+                                        <button [hidden]='isNewGoal' style="padding: 15px;" (click)="isNewGoal = !isNewGoal;" class="btn btn-lg btn-default"><i class="fa fa-plus-circle" aria-hidden="true"></i><small class="text-muted"> Add Goal</small></button>
+                                        <button [hidden]='!isNewGoal' style="padding: 15px;" (click)="isNewGoal = !isNewGoal" class="btn btn-lg btn-default"><i class="fa fa-ban" aria-hidden="true"></i><small class="text-muted"> Cancel</small></button>
+                                    </div> -->
+                                </div>
+
+                                <ng-template #content let-c="close" let-d="dismiss">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Create Goal</h4>
+                                        <button type="button" class="close" style="cursor:pointer" aria-label="Close" (click)="c('Close click')">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row" style="cursor: pointer;">
+                                            <div class="col-md-12" style="margin-bottom: 0px;">
+                                                <div *ngIf="show_alert" class="alert alert-warning alert-dismissible fade show" role="alert">
+                                                    <strong>Alert!</strong> {{errorMessage}}
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="row">
+                                                    <div class="col-sm-2" style="margin-top: 10px; height: 100px;">
+                                                        <img class="card-img-left" src="assets/images/actionPlan/myklovr3.png" class="img-fluid" alt="Card image cap">
+                                                    </div>
+                                                    <div class="col-sm-10">
+                                                        <div>
+                                                            <input style="margin-top: 10px;" class="form-control" type="text" name="name" placeholder="Name of Goal" [(ngModel)]='newGoalName'>
+                                                            <textarea rows='6' style="margin-top: 10px;" class="form-control" type="text" placeholder="Description of Goal" name="description" [(ngModel)]='newGoalDescription'></textarea>
+                                                        </div>
+                                                        <div style="text-align: right;margin-top: 12px">
+                                                            <button (click)="createGoal() && c('Close click')" class="btn btn-default btn-myklovr">Save</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<pagination-controls (pageChange)="p = $event"></pagination-controls>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Milestones -->
+<div *ngIf="isMilestones" class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-12">
+                            <a (click)=toGoals()><span style="font-size: 18px;color :rgb(0, 0, 0);cursor: pointer;"><b> Goals</b></span></a>
+                            <span style="font-size: 18px;">/ Milestones {{onHide}}</span>
+                        </div>
+
+                        <div style="border: 2px solid #FDCE0C;background: #FDCE0C;margin: 12px 15px;width:100%"></div>
+                    </div>
+
+                    <div class="row" (window:resize)="onResize($event)" style="padding: 20px">
+                        <div class="col-sm-9">
+                            <!-- Start  -->
+                            <div *ngFor="let groups of milestones_group.groups; let j = index">
+                                <div class="row">
+                                    <div class="col-sm-11 col-11 offset-1">
+                                        <div>
+                                            <h3>{{groups.name}}</h3>
+                                            <p>{{groups.description}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-1 col-1">
+                                        <ol *ngIf='viewHeight!="0px"' class="list-group vertical-steps">
+                                            <li *ngFor="let group of groups.milestone_group" class="list-group-item" [ngClass]="{active : group.status === 'COMPLETED'}" [style.padding-bottom]="viewHeight" [style.border-left]="0"><span></span></li>
+                                        </ol>
+                                    </div>
+
+                                    <div class="col-sm-11 col-11">
+                                        <div *ngFor="let group of groups.milestone_group; let i = index" class="row" style="cursor: pointer;">
+                                            <div class="col-12">
+                                                <div class="card card-shadow" id='mainScreen' #mainScreen style="padding:15px;min-height: 250px;">
+                                                    <div class="card-block">
+                                                        <div class="row">
+                                                            <div class="col-sm-2">
+                                                                <img class="card-img-left" src="assets/images/actionPlan/myklovr3.png" class="img-fluid" alt="Card image cap">
+                                                            </div>
+                                                            <div class="col-sm-10">
+                                                                <input #isEdit [hidden]="true" type="text" name="" value="true">
+                                                                <div style="width: -webkit-fill-available;">
+                                                                    <span>{{group?.status | uppercase}}</span>
+                                                    <!-- <i class="fa fa-window-close" [hidden]="isGoalEdit.value == 'true'" aria-hidden="true" (click)="isGoalEdit.value = getIsEdit(isGoalEdit.value);"></i> -->
+                                                                    
+                                                                    <button [hidden]="isEdit.value == 'false' || require_confirmation" style="padding: 0;margin-left: 15px;" (click)="isEdit.value = getIsEdit(isEdit.value)" class="btn-component"><i class="fa fa-pencil" aria-hidden="true"></i><small class="text-muted">Edit</small></button>
+
+                                                                    <button [hidden]="isEdit.value == 'true' || require_confirmation" style="padding: 0;margin-left: 15px;" (click)="isEdit.value = getIsEdit(isEdit.value);updateMilestone(group,i);" class="btn-component"><i class="fa fa-floppy-o" aria-hidden="true"></i><small class="text-muted" >Save Changes</small></button>
+
+                                                                    <button [hidden]="isEdit.value == 'true' || require_confirmation" style="padding: 0;margin-left: 15px;" (click)="isEdit.value = getIsEdit(isEdit.value);deleteMilestone(i,j);" class="btn-component"><i class="fa fa-trash" aria-hidden="true"></i><small class="text-muted" >Delete</small></button>
+
+                                                                    <div *ngIf="!require_confirmation">
+                                                                        <button *ngIf="group.status == 'started'" style="float:right" (click)="group.status = setStatus(group.status); updateMilestone(group,i);" class="btn-component btn-5 btn-5a  icon icon-checkmark" style="color:#26A65B"><span >Check as Complete</span></button>
+                                                                        <button *ngIf="group.status == 'completed'" style="float:right" (click)="group.status = setStatus(group.status); updateMilestone(group,i);" class="btn-component btn-5 btn-5a icon icon-cross" style=""><span >Uncheck Complete</span></button>
+                                                                    </div>
+
+                                                                </div>
+
+                                                                <h3 class="card-title">
+                                                                    <span [hidden]="isEdit.value == 'false'">{{group?.name}}</span>
+                                                                </h3>
+
+                                                                <p class="card-text">
+                                                                    <span [hidden]="isEdit.value == 'false'">{{group?.description}}</span>
+                                                                </p>
+                                                                <div [hidden]="isEdit.value == 'true' || require_confirmation">
+                                                                    <input style="margin-top: 10px;" class="form-control" type="text" name="name" [(ngModel)]="group.name">                                                                  
+                                                                <textarea rows='6' style="margin-top: 10px;" class="form-control" type="text" name="description" [(ngModel)]="group.description"></textarea>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div style="text-align: center;">
+                                                    <button [hidden]='isNewMilestone || require_confirmation' style="padding: 15px;" (click)="isNewMilestone = !isNewMilestone;" class="btn btn-lg btn-default"><i class="fa fa-plus-circle" aria-hidden="true"></i><small class="text-muted"> Add Milestone</small></button>
+                                                    <button [hidden]='!isNewMilestone || require_confirmation' style="padding: 15px;" (click)="isNewMilestone = !isNewMilestone" class="btn btn-lg btn-default"><i class="fa fa-ban" aria-hidden="true"></i><small class="text-muted"> Cancel</small></button>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+
+
+                                        <div *ngIf="setHeight()"></div>
+                                    </div>
+                                </div>
+
+                                <div [hidden]="!isNewMilestone || !milestones_group.groups" class="row" style="cursor: pointer;">
+                                    <div class="col-12">
+                                        <div class="card card-shadow" id='mainScreen' #mainScreen style="padding:15px;min-height: 250px;">
+                                            <div class="card-block">
+                                                <div class="row">
+                                                    <div class="col-sm-2">
+                                                        <img class="card-img-left" src="assets/images/actionPlan/myklovr3.png" class="img-fluid" alt="Card image cap">
+                                                    </div>
+                                                    <div class="col-sm-10">
+
+                                                        <div style="width: -webkit-fill-available;">
+
+                                                            <button style="padding: 0;margin-left: 20px;" (click)="createMilestone(j);" class="btn-component"><i class="fa fa-floppy-o" aria-hidden="true"></i><small class="text-muted" >Save Milestone</small></button>
+
+
+                                                        </div>
+
+                                                        <div>
+                                                            <input style="margin-top: 10px;" class="form-control" type="text" name="name" placeholder="Name of Milestone" [(ngModel)]='newName'>
+
+                                                            <!-- New Goal -->
+                                                            <textarea rows='6' style="margin-top: 10px;" class="form-control" type="text" placeholder="Description of Milestone" name="description" [(ngModel)]='newDescription'></textarea>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div *ngIf="!milestones_group.groups">
+                                <div class="col-12">
+                                    <div class="card card-shadow" id='mainScreen' #mainScreen style="padding:15px;min-height: 250px;">
+                                        <div class="card-block">
+                                            <div class="row">
+
+                                                <div class="col-sm-12">
+                                                    <div style="width: -webkit-fill-available;">
+
+                                                        <h1> Actually you don't have Milestones </h1>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <!-- End -->
+
+                        <div class="col-sm-3">
+                            <div class="card card-mentor" style="padding:15px;">
+                                <img class="card-img-top" src="assets/images/actionPlan/myklovr2.png" alt="Card image cap">
+                                <div class="card-block text-center">
+                                    <br>
+                                    <h4 class="card-title">Milestones Complete
+                                    </h4>
+                                    <p class="card-text"><small class="text-muted">  {{finished}}/{{total}} ({{percent}}%)</small></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

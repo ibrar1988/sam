@@ -1,0 +1,45 @@
+<section>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="title-section">
+                <div class="row">
+                    <div class="col-sm-7 col-md-10 d-flex align-items-center" data-toggle="collapse" data-target="#ic0021" aria-expanded="true" aria-controls="ic0021">
+                        <span class="container-title">{{container_name}}  </span><span class="fa fa-info-circle container-info-icon" data-container="body" data-toggle="tooltip" data-placement="bottom" title="{{container_tooltip}}"></span>
+                    </div>
+                    <!-- <div class="col-sm-5 col-md-3 text-right">
+                        <div style="display: inline-block;">
+                            <label class="switch">
+                                <input type="checkbox" [checked]="value" (change)="value = !value">
+                                <span class="slider round2"></span>
+                            </label>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            <hr class="separator">
+        </div>
+    </div>
+    <div id="ic0021" class="collapse show">
+        <label class="subtitle">How do you rate you writing skills from 1 to 10</label>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- <ng-template #t let-fill="fill">
+                            <span class="star" *ngIf="fill === 0">&#9898;</span>
+                            <span class="star" *ngIf="fill === 100">&#9899;</span>
+                        </ng-template>
+                        <ngb-rating class="rate-lg" [starTemplate]="t" [(rate)]="currentRate" [(ngModel)]="rate" (rateChange)="rateChange(currentRate)" (click)="updateContainer()"></ngb-rating> -->
+
+                        <p-rating [style.font-size]='"xx-large"' [(ngModel)]="rate" stars="10" (onRate)="handleRate($event)" (onCancel)="handleCancel($event)"></p-rating>
+                    </div>
+                    <div class="col-md-12 text-center" style="margin-top:15px;">
+                        <!-- <p class="current-rate">{{currentRate}}</p> -->
+                        <p class="current-rate" *ngIf="rate!=='0'">{{rate}}</p>
+                        <p class="title-rate"><strong>Rate</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

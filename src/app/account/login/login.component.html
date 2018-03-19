@@ -1,0 +1,95 @@
+<!-- Facebook Pixel Code -->
+<script>
+    ! function(f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function() {
+            n.callMethod ?
+                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = '2.0';
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s)
+    }(window, document, 'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '282153252274340');
+    fbq('track', 'PageView');
+</script>
+<noscript>
+  <img height="1" width="1"
+       src="https://www.facebook.com/tr?id=282153252274340&ev=PageView
+&noscript=1"/>
+</noscript>
+<!-- End Facebook Pixel Code -->
+<section>
+    <div style="padding-top: 20px;">
+        <div class="login-box card animated fadeIn">
+            <div class="card-body">
+                <div class="col-12">
+                    <div class="row" style="text-align: center;">
+                        <div style="text-align: left;">
+                            <span style="font-size: 22px;">Sign In</span>
+                        </div>
+                        <div class="mkd-separator-fullw">
+                        </div>
+                        <div class="col-12">
+                            <div>
+                                <button class="btn-component bt-facebook btn-5 btn-5a icon icon-facebook" style="width: 100%" (click)="loginWithFacebook()"><span>Login with Facebook</span></button>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <span style="padding-top: 10px;display: block;font-family: 'Helvetica';font-size: 16px;color:#576271"><i class="fa fa-envelope m-r-5"></i> Login with email </span><br>
+                        </div>
+                        <div class="col-12">
+                            <form class="form-horizontal form-material" id="loginform" #f="ngForm" (submit)="login(f.form.valid)">
+                                <div class="form-group ">
+                                    <div class="col-12">
+                                        <input id="email" required [(ngModel)]="email" #contactemail="ngModel" email name="email" class="form-control" type="text" pattern="^\w+([\.+-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" placeholder="Email"></div>
+                                    <div class="md-errors-spacer animated fadeInUp" [hidden]="contactemail.valid || contactemail.untouched">
+                                        <div *ngIf="contactemail.errors && contactemail.errors.required" class="animated fadeIn">
+                                            <small class="form-control-feedback"> Email is required.</small>
+                                        </div>
+                                        <div *ngIf="contactemail.errors && contactemail.errors.pattern" class="animated fadeIn">
+                                            <small class="form-control-feedback"> Email is invalid.</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-12">
+                                        <input class="form-control" type="password" placeholder="Password" name="password" id="password" password [(ngModel)]="password" required></div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <div class="checkbox checkbox-primary pull-left p-t-0">
+                                            <input [checked]="rememberme" (change)="rememberme = !rememberme" id="checkbox-signup" type="checkbox">
+                                            <label for="checkbox-signup"> Remember me </label>
+                                        </div>
+
+                                        <a [routerLink]="['/account/emailRecoverPassword']" id="to-recover" class="text-dark pull-right"><i class="fa fa-lock m-r-5"></i> Forgot password?</a></div>
+                                </div>
+                                <div class="form-group text-center">
+                                    <button class="btn-component btn-myklovr btn-5 btn-5a icon icon-happy" style="width: 100%;" type="submit"><span>Login</span></button>
+                                </div>
+                                <div class="form-group m-b-0">
+                                    <div class="col-sm-12 text-center">
+                                        <p>Don't have an account? <a [routerLink]="['/account/signup/role']" class="text-info m-l-5"><b>Sign Up</b></a></p>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</section>

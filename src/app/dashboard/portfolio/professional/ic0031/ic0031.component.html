@@ -1,0 +1,100 @@
+<section>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="title-section">
+                <div class="row">
+                    <div class="col-sm-7 col-md-9 d-flex align-items-center" data-toggle="collapse" data-target="#ic0031" aria-expanded="true" aria-controls="ic0031">
+                        <span class="container-title">{{container_name}}  </span><span class="fa fa-info-circle container-info-icon" data-container="body" data-toggle="tooltip" data-placement="bottom" title="{{container_tooltip}}"></span>
+                    </div>
+                    <!-- <div class="col-sm-5 col-md-3 text-right">
+                        <div style="display: inline-block;">
+                            <label class="switch">
+                                <input type="checkbox" [checked]="value" (change)="value = !value">
+                                <span class="slider round2"></span>
+                            </label>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            <hr class="separator">
+        </div>
+    </div>
+<div id="ic0031" class="collapse show">
+    <div class="row">
+        <div *ngFor="let carrerInterest of container?.career_interests; let i = index" class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+            <div class="row tag" id="c-tag-{{i}}">
+                <div class="tag-icons">
+                    <a (click)="removeItem(i)"><i class="fa fa-remove fa-black"></i></a>
+                </div>
+                <div class="col-lg-4 col-md-3 col-sm-3 viewport-img-sm">
+                    <img class="img-circle-sm" src={{carrerInterest?.url_image||professionImageDefault}} />
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 viewport-text-sm" (click)="open(false,i,content)">
+                    <p class="title-tag">{{ carrerInterest?.title || "Profession" }}</p>
+                    <!-- <p class="description-tag">{{ carrerInterest?.speciality || "Speciality" }}</p> -->
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+            <div class="row new-tag align-items-center text-center">
+                <div class="col-md-12" (click)="open(true,-1,content)">
+                    <a class="btn btn-default btn-circle"><i class="fa fa-plus fa-silver"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+    <ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-header">
+            <h4 class="modal-title">{{title_modal}}</h4>
+            <button type="button" class="close" style="cursor:pointer" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-row">
+                <div class="form-group col-md-12" style="margin-bottom: 0px;">
+                    <div *ngIf="show_alert" class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Alert!</strong> {{errorMessage}}
+                    </div>
+                </div>
+                <div class="form-group col-md-12 d-flex justify-content-center align-items-center flex-column">
+                    <!-- <input type="text" class="form-control" [(ngModel)] = "url_image" placeholder="Image Url"> -->
+                    <!-- <image-upload [extensions]="['jpeg','png']" [url]="'http://104.154.184.72:8080/myklovr-webapi/rest/storage/upload/PERSONAL'" [headers]="header" [buttonCaption]="'Upload your Photo'" [dropBoxMessage]="'Drop your Photo here'" (onFileUploadFinish)="onUploadFinished($event)" (onRemove)="onRemoved($event)">
+                    </image-upload> -->
+                    <img [hidden]='file' class="img-rounded" style="margin-top: 8px; width: 200px; height: 200px;" src={{url_image||professionImageDefault}}/>
+                    <div style="text-align: center;"> 
+                        <img-cropper [hidden]='!file' #cropper [image]="data" [settings]="cropperSettings"></img-cropper>
+                        <br>
+                        <div class="file-upload">
+                            <div class="input-file-container">
+                                <input [hidden]='file' class="input-file" id="my-file0031" type="file" (change)="fileChangeListener($event, cropper)">
+                                <label [hidden]='file' tabindex="0" for="my-file0031" class="input-file-trigger" style="border-radius: 6px; padding: 10px 30px !important;">Select a file...</label>
+                                <input [hidden]='!file' class="input-file" id="my-file00312" type="button" (click)="fileChange()" style="visibility: hidden;">
+                                <label [hidden]='!file' tabindex="1" for="my-file00312" class="input-file-trigger" style="width: 100%; border-radius: 6px;">Upload</label>
+                                <button [hidden]='!file' class="btn" type="button" (click)="clearImage()" style="width: 100%">Clear</button>
+                            </div>
+                            <p class="file-return"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-12">
+                    <label class="col-form-label">Profession</label>
+                    <input type="text" class="form-control" [(ngModel)] = "profession" placeholder="Profession">
+                </div>
+                <!-- div class="form-group col-md-12">
+                    <label class="col-form-label">Speciality</label>
+                    <input type="text" class="form-control" [(ngModel)] = "speciality" placeholder="Speciality">
+                </div -->
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-myklovr" (click)="saveProfession(content) && c('Close click')">Save</button>
+        </div>
+    </ng-template>
+
+</section>

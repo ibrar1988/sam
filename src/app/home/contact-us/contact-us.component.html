@@ -1,0 +1,80 @@
+<section>
+    <div class="google-maps">
+        <agm-map [latitude]="lat" [longitude]="lng" [zoom] = "20">
+            <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+        </agm-map>
+    </div>
+
+    <div class="default-background">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="contact-detail">
+                    <p class="title-contact">Contact Us</p>
+                    <p class="subtitle-contact">Thank you for your interest in myKlovr, you are one step closer to your college adventure. If you need any additional information about the myKlovr platform, marketplace, company benefits or any other; please fill in the attached form. One of our representatives will get back to you in less than 24 hours.</p>
+                    <p class="title-contact">Main Contact</p>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="m-b-10">
+                                <md-icon fontSet="fontawesome" fontIcon="fa-map-marker" class="font-icon"></md-icon>
+                              1350 Avenue of the Americas, 2nd Floor
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="m-b-10">
+                                <md-icon fontSet="fontawesome" fontIcon="fa-envelope-open" class="font-icon"></md-icon>
+                                info@myklovr.com
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 b-white">
+                <div class="contact-form">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <md-form-field>
+                                <input mdInput placeholder="First Name" [ngModel] = "first_name" (ngModelChange) = "first_name = $event">
+                            </md-form-field>
+                        </div>
+
+                        <div class="col-md-12">
+                            <md-form-field>
+                                <input mdInput placeholder="Last Name" [ngModel] = "last_name" (ngModelChange) = "last_name = $event">
+                            </md-form-field>
+                        </div>
+
+                        <div class="col-md-12">
+                            <md-select placeholder="Select the option that best fits you" class="select-contact" [ngModel] = "select_option" (ngModelChange) = "select_option = $event">
+                                <md-option value="student">Student</md-option>
+                                <md-option value="parent">Parent</md-option>
+                                <md-option value="faculty-tutor">Faculty/Tutor</md-option>
+                                <md-option value="school-college">School/College</md-option>
+                                <md-option value="company">Company</md-option>
+                                <md-option value="vendor">Vendor</md-option>
+                                <md-option value="other">Other</md-option>
+                            </md-select>
+                        </div>
+
+                        <div class="col-md-12">
+                            <md-form-field>
+                                <input mdInput placeholder="Email" [ngModel] = "email" (ngModelChange) = "email = $event">
+                            </md-form-field>
+                        </div>
+
+                        <div class="col-md-12">
+                            <md-form-field>
+                                <textarea mdInput placeholder="Message" [ngModel] = "message" (ngModelChange) = "message = $event"></textarea>
+                            </md-form-field>
+                        </div>
+
+                        <div class="col-md-12 text-center">
+                            <button type="button" class="btn btn-myklovr w-100" (click) = "sendContactInformation()">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,129 @@
+.p-t-50{
+    padding-top: 50px;
+}
+
+.pp-schools{
+    padding-top:100px;
+    padding-bottom:60px;
+}
+
+.light-container{
+    background: #eee;
+    padding: 45px 20px 10px 20px;
+}
+
+.header-title{
+    font-size: 30px;
+    text-align: center;
+    color: rgb(65, 65, 100);
+}
+
+.header-subtitle{
+    font-size: 20px;
+    text-align: center;
+    margin: 0px 16px 10px 16px;
+}
+
+.header-description{
+    text-align: justify;
+    font-size: 15px;    
+    margin-top: 35px;
+}
+
+.p-image{
+    padding: 40px 20px 40px 30px;
+}
+
+@media (max-width: 991px){
+    .p-image{
+        padding: 20px 80px 30px 80px;
+    }
+
+    .description-parallax{
+        padding: 10px 0px !important;
+    }
+}
+
+@media (max-width: 456px){
+    .p-image{
+        padding: 0px 30px 30px 30px;
+    } 
+}
+
+.letters-section {
+    margin-top: 40px;
+    margin-bottom: 30px;
+}
+
+.btn-rounded{
+    border-radius: 30px;
+    margin: 16px;
+    color: rgba(17, 9, 49, 0.7) !important;
+    font-size: 16px;
+    padding: 16px 30px;
+    font-weight: 500;
+}
+
+.p-20{
+    padding: 40px 20px 20px 20px;
+}
+
+.p-25{
+    padding: 0px 25px;
+}
+
+.header-section{
+    margin: 6px 6px 15px 55px;
+    display: inline-block;
+}
+
+.font-icon{
+    font-size: 35px;
+    position: absolute;
+    margin-top: 4px;
+}
+
+.header-title-3{
+    font-size: 22px;
+    margin-bottom: 0px;
+    color: #333;
+}
+
+.header-description-3{
+    text-align: justify;
+    font-size: 14px;
+    margin-top: 15px;
+    margin-right: 20px;
+    color:rgba(51, 51, 51, 0.7);
+}
+
+.container-parallax{
+    background-image: url("../../../../assets/images/home/public-private-schools/bg_data.jpg");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-bottom: 80px;
+    padding-top: 100px;
+}
+
+.title-parallax{
+    font-size: 50px;
+    color: white;
+    font-weight: 300;
+}
+
+.btn-rounded{
+    border-radius: 30px;
+    margin: 30px;
+    color: rgba(17, 9, 49, 0.7) !important;
+    font-size: 16px;
+    padding: 16px 30px;
+    font-weight: 500;
+}
+
+.description-parallax {
+    padding: 10px 120px;
+    margin-bottom: 0px;
+    color: white;
+}

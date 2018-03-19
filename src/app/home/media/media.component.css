@@ -1,0 +1,147 @@
+.student {
+    padding-top: 100px;
+    padding-bottom: 60px;
+}
+
+.light-container {
+    background: #eee;
+    padding: 45px 20px 10px 20px;
+}
+
+.header-title {
+    font-size: 30px;
+    text-align: center;
+    color: rgb(65, 65, 100);
+}
+
+.header-subtitle {
+    font-size: 20px;
+    text-align: center;
+    margin: 0px 16px 10px 16px;
+}
+
+.header-description {
+    text-align: justify;
+    font-size: 15px;
+    margin: 35px 16px;
+}
+
+.p-image {
+    padding: 40px 20px 40px 30px;
+}
+
+.letters-section {
+    margin-top: 40px;
+    margin-bottom: 30px;
+}
+
+.container-parallax {
+    background-image: url("../../../assets/images/home/college-student/job.jpg");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-bottom: 90px;
+    padding-top: 110px;
+}
+
+.title-parallax {
+    font-size: 50px;
+    color: white;
+    font-weight: 300;
+}
+
+.btn-rounded {
+    border-radius: 30px;
+    margin: 30px;
+    color: rgba(17, 9, 49, 0.7) !important;
+    font-size: 16px;
+    padding: 16px 30px;
+    font-weight: 500;
+}
+
+.description-parallax {
+    padding: 10px 120px;
+    margin-bottom: 0px;
+    color: white;
+}
+
+@media (max-width: 991px) {
+    .p-image {
+        padding: 20px 80px 30px 80px;
+    }
+    .description-parallax {
+        padding: 10px 0px !important;
+    }
+}
+
+@media (max-width: 456px) {
+    .p-image {
+        padding: 0px 30px 30px 30px;
+    }
+}
+
+.separator {
+    width: 270px;
+    border-bottom-width: 3px;
+    /* margin-top: 30px; */
+    margin-bottom: 60px;
+}
+
+.bg-media{
+    background: #eee;
+    min-height: 205px;
+    background-image: url(http://www.housingeurope.eu/site/theme/_assets/img/type-article.png);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.box-title{
+    padding: 10px;
+    background: #ddd;
+    font-size: 16px;
+    letter-spacing: 0;
+    text-align: center;
+    color: white;
+    background: #413a5a;
+    height: 50px;
+    line-height: 1;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.el-overlay{
+    position: absolute;
+    overflow: hidden;
+    width: 100%;
+    height: 0%;
+    margin-top: 80.4%;
+    /* background: rgba(51, 51, 51, 0.85); */
+    background: rgba(0, 0, 0, 0.6);
+    transition: 0.6s ease-in-out;
+}
+
+.el-card-item {
+    cursor: pointer;
+}
+
+.el-card-item:hover .el-overlay{
+    height: 80.4%;
+    margin-top: 0%;
+}
+
+.font-icon {
+    font-size: 35px;
+    color: #424242;
+    background: #face0b;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    padding-top: 15px;
+    padding-left: 4px;
+}
+
+.el-card-content{
+    display: table;
+    width: 100%;
+}

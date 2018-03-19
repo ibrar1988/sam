@@ -1,0 +1,153 @@
+<div *ngIf="showspin">
+<div align="center">
+<md-spinner></md-spinner>
+</div>
+</div>
+
+<div id="portfolio-my-story-modal-md" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myLargeModalLabel">Add Your Description</h4>
+               
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="updateItem()">&times;</button>
+            </div>
+            <div class="modal-body">                    
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="col-md-12">Title</label>
+                        <div class="col-md-12">
+                            <input type="text"  [(ngModel)]="newItem.title" class="form-control form-control-line">
+                        </div>
+                    </div>                    
+                </div>
+                <div class="row">
+                    <div class="form-group col-12">
+                        <label class="col-md-12">Description</label>
+                        <div class="col-md-12">
+                                <textarea rows="4" cols="50" [(ngModel)]="newItem.description"  class="form-control form-control-line mydatepicker"></textarea>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" (click)="addDescription()" class="btn btn-myklovr" data-dismiss="modal">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="portfolio-ms-video-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myLargeModalLabel">Add Your Story Video</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="updateItem()">&times;</button>
+                </div>
+                <div class="modal-body">                    
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label class="col-md-12">Video Url (YouTube) <span class="fa fa-info-circle container-info-icon" data-container="body" data-toggle="tooltip" data-placement="bottom" title="{{youtube_tooltip}}"></span></label>
+                            <div class="col-md-12">
+                                <input type="text" [(ngModel)]="newItem.url" class="form-control form-control-line">
+                            </div>
+                        </div>                        
+                </div>
+                <div class="modal-footer">
+                    <button type="button" (click)="addVideo()" class="btn btn-myklovr" data-dismiss="modal">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf='container' class="portfolio-container-base">
+  <div class="row ">
+    <div class="col-md-12">        
+        <div>
+            <div class="title-section">
+                <div class="row">
+                    <div class="col-sm-7 col-md-9 d-flex align-items-center" data-toggle="collapse" data-target="#ic0001" aria-expanded="false" aria-controls="ic0001">
+                        <span class="container-title">{{container_name}} </span><span class="fa fa-info-circle container-info-icon" data-container="body" data-toggle="tooltip" data-placement="bottom" title="{{container_tooltip}}"></span>
+                    </div>
+                    <!-- <div class="col-sm-5 col-md-3 text-right">
+                        <div style="display: inline-block;">
+                            <label class="switch">
+                                <input type="checkbox" [checked]="value" (change)="value = !value">
+                                <span class="slider round2"></span>
+                            </label>
+                        </div>
+                        <div style="display: inline-block;">
+                            <span style="margin-left: 5px;">{{value ? 'Private' : 'Public'}}</span>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+      <hr class="separator">
+      <div id="ic0001" class="show">
+
+        <div class="row" >         
+            <div class="col-md-6">
+                <div class="col-12" *ngIf=" container && container.type === 'Video' && container.url !== ''">
+                    <div class="card">
+                        <div class="card-body">
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" [src]="youtubeEmbedUrl(container?.url || 'https://www.youtube.com/watch?v=EFAZzIIyRmI')| safe" allowfullscreen></iframe>
+                        </div>
+                        <div data-toggle="modal" data-target="#portfolio-ms-video-modal" style="float: right;font-size: 12px;cursor:pointer;" >Edit Video Url <a class="edit m-r-10" ><i class="fa fa-pencil fa-black"></i></a> </div>                    
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12" [hidden]=" container && container.url !== ''">
+                    <div class="row text-center card-body new-story-card" data-toggle="modal" data-target="#portfolio-ms-video-modal"> 
+                        <div class="col-md-12 d-flex justify-content-center align-items-center">
+                            <a class="btn btn-default btn-circle"><i class="fa fa-plus fa-silver"></i></a>
+                        </div>
+                    </div>                
+                </div>
+                <div class="col-12 text-center"  [hidden]=" container && container.url !== ''">
+                    <span style="text-align:center">Add Your Story Video</span>
+                </div>
+                
+            </div>
+            <div class="col-md-6">   
+                <div class="col-12" *ngIf=" container && container.title === '' && container.description === ''">
+                    <div class="row text-center card-body new-story-card" data-toggle="modal" data-target="#portfolio-my-story-modal-md"> 
+                            <div class="col-md-12 d-flex justify-content-center align-items-center">
+                                <a class="btn btn-default btn-circle"><i class="fa fa-plus fa-silver"></i></a>
+                            </div>
+                    </div>
+                </div>  
+                     
+                <div class="col-12" *ngIf=" container && container.type === 'Video' && container.title !== '' && container.description !== ''" data-toggle="modal" data-target="#portfolio-my-story-modal-md">
+                    <div class="card ">
+                        <div class="card-body">
+                            <div class="card-body my-story-card pointer">
+                                <form class="form-horizontal form-material">                                
+                                    <div class="card-content-actions">
+                                        <div class="row float-right">
+                                            <!-- <a class="m-r-10"><i class="fa fa-pencil fa-black"></i></a> -->
+                                            <!-- <a class="edit m-r-10" (click)="editGeneralInformation()"><i class="fa fa-pencil fa-black"></i></a> -->
+                                        </div>
+                                    </div>   
+                                    <div class="row">
+                                        <div class="form-group col">
+                                            <label style="color: #54667a; font-weight: bold; padding: 0;" class="col-md-12">{{container.title}}</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-12">
+                                            <label class="col-md-12" style="white-space: pre-line; padding: 0;">{{container.description}}</label>                                        
+                                        </div>
+                                    </div>               
+                                </form>
+                            </div>
+                        </div>
+                    </div>                
+                </div>
+                <div class="col-12 text-center"><span style="text-align:center" *ngIf=" container && container.title === '' && container.description === ''">Add Your Description</span></div>
+            </div> 
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

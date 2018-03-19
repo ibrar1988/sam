@@ -1,0 +1,171 @@
+.p-t-50{
+    padding-top: 50px;
+}
+.gdolfino{
+    background-image: url("../../../../assets/images/home/our-team/gustavo_dolfino.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 700px;
+    height: 700px;
+}
+
+.perfil-section{
+    padding: 80px;
+}
+
+.jbowman{
+    background-image: url("../../../../assets/images/home/our-team/jason_bowman.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 700px;
+    height: 700px;
+}
+
+.hwen{
+    background-image: url("../../../../assets/images/home/our-team/hui-wen_wang.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 700px;
+    height: 700px;
+}
+
+.pjurjewicz{
+    background-image: url("../../../../assets/images/home/our-team/piotr_jurjewicz.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 700px;
+    height: 700px;
+}
+
+.drips{
+    background-image: url("../../../../assets/images/home/our-team/david_rips.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 700px;
+    height: 700px;
+}
+
+.broder{
+  background-image: url("../../../../assets/images/home/our-team/broder.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 700px;
+  height: 700px;
+}
+
+.alec{
+  background-image: url("../../../../assets/images/home/our-team/alec.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 700px;
+  height: 700px;
+}
+.abrams{
+  background-image: url("../../../../assets/images/home/our-team/steve_abrams.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 700px;
+  height: 700px;
+}
+
+.fheneine{
+    background-image: url("../../../../assets/images/home/our-team/fanny_heneine.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 700px;
+    height: 700px;
+}
+
+.kunli{
+  background-image: url("../../../../assets/images/home/our-team/kunli.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 700px;
+  height: 700px;
+}
+
+.pveintimilla{
+    background-image: url("../../../../assets/images/home/our-team/pedro_veintimilla.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 700px;
+    height: 700px;
+}
+
+.dlopez{
+    background-image: url("../../../../assets/images/home/our-team/daniel_lopez.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 700px;
+    height: 700px;
+}
+
+.aliang{
+  background-image: url("../../../../assets/images/home/our-team/alex_liang.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 700px;
+  height: 700px;
+}
+
+.kshaffer{
+    background-image: url("../../../../assets/images/home/our-team/kshaffer.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 700px;
+    height: 700px;
+}
+
+.linkedin-icon{
+    margin: 20px 0px
+}
+
+.bg-lki-icon{
+    margin: 0px;
+    padding: 12px 0px 6px 0px;
+    line-height: 40px;
+    background-color: rgb(65, 65, 100);
+    border-radius: 2px;
+}
+
+.bg-lki-icon:hover{
+    background-color: rgb(253, 206, 12);
+}
+
+.cl-lki-icon{
+    color: rgb(253, 206, 12);
+    font-size: 25px;
+}
+
+.bg-lki-icon:hover .cl-lki-icon{
+    color: rgb(65, 65, 100);
+}
+
+.our-team{
+    /* padding-top:90px;
+    padding-bottom:90px; */
+    padding: 90px 60px;
+}
+
+.box-title{
+    border-radius: 0px 0px 4px 4px;
+    padding: 10px 8px;
+    background: #413a5a;
+    font-size: 18px;
+    color: #ffffff;
+    letter-spacing: 0;
+}

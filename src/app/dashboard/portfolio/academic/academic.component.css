@@ -1,0 +1,67 @@
+.container-title {    
+  font-size: 18px;
+}
+
+.filter-title{
+  background-color: #191332;
+  color: #FFFFFF;
+  font-size: 16px;
+  padding: 10px;
+}
+
+.card-shadow{
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
+  margin: 8px;
+}
+
+.card-content{
+  text-align: left;
+  padding-left: 10%;
+  padding-top: 5%;
+}
+
+.filter-container{
+  padding: 10px 30px;
+}
+
+.filter-tag{
+  padding: 10px;
+  font-size: 1rem;
+}
+
+.filter-tag-container{
+  background-color: #eaeaea;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+.title-section{
+  background: #FFFFFF;
+  margin-bottom: -8px;
+  padding-bottom: 6px;
+  padding-top: 6px;
+  padding-left: 6px;
+  padding-right: 6px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.title-section:hover{
+  background:rgba(253, 206, 12, 0.05);
+  box-shadow: inset 0 -16px 20px -2px rgba(253, 216, 63, 0.6);
+}
+
+.separator{
+border: 2px solid #FDCE0C;
+background: #FDCE0C;
+margin-top: 8px;
+}
+
+.collapsing {
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.container-info-icon{
+  margin-left: 5px;
+}

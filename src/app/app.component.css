@@ -1,0 +1,13 @@
+.toast {
+    color: black;
+    background: white;
+}
+
+:host-context(.simple-notification.alert) {
+    background: black;
+}
+
+:host(.simple-notification.alert) {
+    background: black;
+}
+

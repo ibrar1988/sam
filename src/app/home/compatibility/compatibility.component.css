@@ -1,0 +1,10 @@
+.compatibility{
+    position: absolute;
+    padding-top:160px;
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    background-color: rgba(237, 237, 237, 0.90);
+    width: 100%;
+}

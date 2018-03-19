@@ -1,0 +1,57 @@
+
+<div id="portfolio-cross-cultural-modal-sm" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog modal-md">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title" id="myLargeModalLabel">Add Cross-Cultural Experience</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          </div>
+          <div class="modal-body">
+              <div class="row">
+                  <div class="form-group col-12">
+                      <label class="col-md-12"></label>
+                      <div class="col-md-12">
+                          <input type="text" [(ngModel)]="newItem" class="form-control form-control-line">
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" (click)="addItem()" class="btn btn-myklovr btn-default" data-dismiss="modal">Save</button>
+          </div>
+      </div>
+  </div>
+</div>
+<div *ngIf='container' class="row portfolio-container-base">
+      <div class="col-md-12">      
+            <div>
+                <div class="title-section">
+                    <div class="row">
+                        <div class="col-sm-7 col-md-9 d-flex align-items-center" data-toggle="collapse" data-target="#ic0024" aria-expanded="false" aria-controls="ic0024">
+                            <span class="container-title">{{container_name}} </span><span class="fa fa-info-circle container-info-icon" data-container="body" data-toggle="tooltip" data-placement="bottom" title="{{container_tooltip}}"></span>
+                        </div>
+                        <!-- <div class="col-sm-5 col-md-3 text-right">
+                            <div style="display: inline-block;">
+                                <label class="switch">
+                                    <input type="checkbox" [checked]="value" (change)="value = !value">
+                                    <span class="slider round2"></span>
+                                </label>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+          <hr class="separator">
+          <div id="ic0024" class="show">
+            <div class="row"  *ngIf='container'>
+                <div class="col-12" >
+                  <span id="cross-cultural-tag-{{i}}" *ngFor='let tag of container.cross_cultural; let i = index;'>
+                      <span  style=" margin: 0px 5px 5px 5px;" class="tag label cross-cultural-label filter-tag">{{tag}} <span style="cursor: pointer" (click)="removeItem(i)" data-role="remove"><i class="fa fa-remove"></i></span></span>
+                  </span>
+                    <a  data-toggle="modal" data-target="#portfolio-cross-cultural-modal-sm" style=" margin: 0px 5px 5px 5px;" (click)="popUpModal()" class="tag text-center add-cross-cultural-tag label filter-tag"><i class="fa fa-plus fa-silver"></i></a>
+                  </div>
+            </div>
+
+          </div>
+      </div>
+  </div>

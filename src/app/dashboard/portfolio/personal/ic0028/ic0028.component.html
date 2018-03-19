@@ -1,0 +1,219 @@
+<!-- <div id="portfolio-cross-cultural-modal-sm" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog modal-md">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title" id="myLargeModalLabel">Add Cross-cultural Experience</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          </div>
+          <div class="modal-body">
+              <div class="row">
+                  <div class="form-group col-12">
+                      <label class="col-md-12"></label>
+                      <div class="col-md-12">
+                          <input type="text" [(ngModel)]="newItem" class="form-control form-control-line">
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button"  class="btn btn-secondary waves-effect text-left" data-dismiss="modal">Close</button>
+              <button type="button" (click)="addItem()" class="btn btn-myklovr btn-default" data-dismiss="modal">Save</button>
+          </div>
+      </div>
+  </div>
+</div> -->
+<div *ngIf='container' class="row portfolio-container-base">
+    <div class="col-md-12">      
+          <div>
+              <div class="title-section">
+                  <div class="row">
+                      <div class="col-sm-7 col-md-9 d-flex align-items-center" data-toggle="collapse" data-target="#ic0028" aria-expanded="false" aria-controls="ic0028">
+                          <span class="container-title">{{container_name}} </span><span class="fa fa-info-circle container-info-icon" data-container="body" data-toggle="tooltip" data-placement="bottom" title="{{container_tooltip}}"></span>
+                      </div>
+                      <!-- <div class="col-sm-5 col-md-3 text-right">
+                          <div style="display: inline-block;">
+                              <label class="switch">
+                                  <input type="checkbox" [checked]="value" (change)="value = !value">
+                                  <span class="slider round2"></span>
+                              </label>
+                          </div>
+                      </div> -->
+                  </div>
+              </div>
+          </div>
+        <hr class="separator">
+        <div id="ic0028" class="show">
+
+          <div *ngIf="container">
+            
+             <div class="row">     
+               <div class="col-md-1"></div>  
+               <div class="col-md-4">
+                 <div class="el-card-content">
+                   <div class="form-group">
+                     <h5>Open Mindedness: <span >{{container.open_mindedness}}</span></h5>
+                     <div class="form-group">
+                       <!-- <input [(ngModel)]="searchRankOverall" (ngModelChange)="onChangeRange(0, $event,14,'Overall Ranking')" type="range" class="form-control" id="range14" max="800"> -->
+                       <md-slider [(ngModel)]="container.open_mindedness" min="0" max="10" step="1" value="0" thumbLabel></md-slider>
+                     </div>
+                   </div>
+                 </div>
+               </div>       
+               <div class="col-md-2"></div>  
+               <div class="col-md-4">
+                 <div class="el-card-content">
+                   <div class="form-group">
+                     <h5>Enthusiasm: <span >{{container.enthusiasm}}</span></h5>
+                     <div class="form-group">
+                       <!-- <input [(ngModel)]="searchRankOverall" (ngModelChange)="onChangeRange(0, $event,14,'Overall Ranking')" type="range" class="form-control" id="range14" max="800"> -->
+                       <md-slider [(ngModel)]="container.enthusiasm" min="0" max="10" step="1" value="0" thumbLabel></md-slider>
+                     </div>
+                   </div>
+                 </div>
+               </div>     
+             </div>
+   
+             <div class="row">      
+                 <div class="col-md-1"></div>   
+                 <div class="col-md-4">
+                   <div class="el-card-content">
+                     <div class="form-group">
+                       <h5>Strong Communication Skills: <span >{{container.strong_communication_skills}}</span></h5>
+                       <div class="form-group">
+                         <!-- <input [(ngModel)]="searchRankOverall" (ngModelChange)="onChangeRange(0, $event,14,'Overall Ranking')" type="range" class="form-control" id="range14" max="800"> -->
+                         <md-slider [(ngModel)]="container.strong_communication_skills" min="0" max="10" step="1" value="0" thumbLabel></md-slider>
+                       </div>
+                     </div>
+                   </div>
+                 </div>       
+                 <div class="col-md-2"></div>  
+                 <div class="col-md-4">
+                     <div class="el-card-content">
+                       <div class="form-group">
+                         <h5>Intellectual Curiosity: <span >{{container.intellectual_curiosity}}</span></h5>
+                         <div class="form-group">
+                           <!-- <input [(ngModel)]="searchRankOverall" (ngModelChange)="onChangeRange(0, $event,14,'Overall Ranking')" type="range" class="form-control" id="range14" max="800"> -->
+                           <md-slider [(ngModel)]="container.intellectual_curiosity" min="0" max="10" step="1" value="0" thumbLabel></md-slider>
+                         </div>
+                       </div>
+                     </div>
+                   </div>     
+             </div>
+
+             <div class="row">       
+                 <div class="col-md-1"></div>  
+                 <div class="col-md-4">
+                   <div class="el-card-content">
+                     <div class="form-group">
+                       <h5>Collaboration: <span >{{container.collaboration}}</span></h5>
+                       <div class="form-group">
+                         <!-- <input [(ngModel)]="searchRankOverall" (ngModelChange)="onChangeRange(0, $event,14,'Overall Ranking')" type="range" class="form-control" id="range14" max="800"> -->
+                         <md-slider [(ngModel)]="container.collaboration" min="0" max="10" step="1" value="0" thumbLabel></md-slider>
+                       </div>
+                     </div>
+                   </div>
+                 </div>       
+                 <div class="col-md-2"></div>  
+                 <div class="col-md-4">
+                     <div class="el-card-content">
+                       <div class="form-group">
+                         <h5>Critical Thinking: <span >{{container.critical_thinking}}</span></h5>
+                         <div class="form-group">
+                           <!-- <input [(ngModel)]="searchRankOverall" (ngModelChange)="onChangeRange(0, $event,14,'Overall Ranking')" type="range" class="form-control" id="range14" max="800"> -->
+                           <md-slider [(ngModel)]="container.critical_thinking" min="0" max="10" step="1" value="0" thumbLabel></md-slider>
+                         </div>
+                       </div>
+                     </div>
+                   </div>     
+             </div>
+   
+             <div class="row">       
+                 <div class="col-md-1"></div>  
+                 <div class="col-md-4">
+                   <div class="el-card-content">
+                     <div class="form-group">
+                       <h5>Leadership: <span >{{container.leadership}}</span></h5>
+                       <div class="form-group">
+                         <!-- <input [(ngModel)]="searchRankOverall" (ngModelChange)="onChangeRange(0, $event,14,'Overall Ranking')" type="range" class="form-control" id="range14" max="800"> -->
+                         <md-slider [(ngModel)]="container.leadership" min="0" max="10" step="1" value="0" thumbLabel></md-slider>
+                       </div>
+                     </div>
+                   </div>
+                 </div>       
+                 <div class="col-md-2"></div>  
+                 <div class="col-md-4">
+                     <div class="el-card-content">
+                       <div class="form-group">
+                         <h5>Perseverance: <span >{{container.perseverance}}</span></h5>
+                         <div class="form-group">
+                           <!-- <input [(ngModel)]="searchRankOverall" (ngModelChange)="onChangeRange(0, $event,14,'Overall Ranking')" type="range" class="form-control" id="range14" max="800"> -->
+                           <md-slider [(ngModel)]="container.perseverance" min="0" max="10" step="1" value="0" thumbLabel></md-slider>
+                         </div>
+                       </div>
+                     </div>
+                   </div>     
+             </div>
+   
+             <div class="row">       
+                 <div class="col-md-1"></div>  
+                 <div class="col-md-4">
+                   <div class="el-card-content">
+                     <div class="form-group">
+                       <h5>Empathy Caring: <span >{{container.empathy_caring}}</span></h5>
+                       <div class="form-group">
+                         <!-- <input [(ngModel)]="searchRankOverall" (ngModelChange)="onChangeRange(0, $event,14,'Overall Ranking')" type="range" class="form-control" id="range14" max="800"> -->
+                         <md-slider [(ngModel)]="container.empathy_caring" min="0" max="10" step="1" value="0" thumbLabel></md-slider>
+                       </div>
+                     </div>
+                   </div>
+                 </div>       
+                 <div class="col-md-2"></div>  
+                 <div class="col-md-4">
+                     <div class="el-card-content">
+                       <div class="form-group">
+                         <h5>Problem Solving: <span >{{container.problem_solving}}</span></h5>
+                         <div class="form-group">
+                           <!-- <input [(ngModel)]="searchRankOverall" (ngModelChange)="onChangeRange(0, $event,14,'Overall Ranking')" type="range" class="form-control" id="range14" max="800"> -->
+                           <md-slider [(ngModel)]="container.problem_solving" min="0" max="10" step="1" value="0" thumbLabel></md-slider>
+                         </div>
+                       </div>
+                     </div>
+                   </div>     
+             </div>
+   
+             <div class="row">       
+                 <div class="col-md-1"></div>  
+                 <div class="col-md-4">
+                   <div class="el-card-content">
+                     <div class="form-group">
+                       <h5>Humility: <span >{{container.humility}}</span></h5>
+                       <div class="form-group">
+                         <!-- <input [(ngModel)]="searchRankOverall" (ngModelChange)="onChangeRange(0, $event,14,'Overall Ranking')" type="range" class="form-control" id="range14" max="800"> -->
+                         <md-slider [(ngModel)]="container.humility" min="0" max="10" step="1" value="0" thumbLabel></md-slider>
+                       </div>
+                     </div>
+                   </div>
+                 </div>       
+                 <div class="col-md-2"></div>  
+                 <div class="col-md-4">
+                     <div class="el-card-content">
+                       <div class="form-group">
+                         <h5>Strong Work Ethic: <span >{{container.strong_work_ethic}}</span></h5>
+                         <div class="form-group">
+                           <!-- <input [(ngModel)]="searchRankOverall" (ngModelChange)="onChangeRange(0, $event,14,'Overall Ranking')" type="range" class="form-control" id="range14" max="800"> -->
+                           <md-slider [(ngModel)]="container.strong_work_ethic" min="0" max="10" step="1" value="0" thumbLabel></md-slider>
+                         </div>
+                       </div>
+                     </div>
+                   </div>     
+             </div>
+   
+             <div class="row">
+               <div class="col-12 text-center">
+                <button class="btn btn-myklovr" style="width: 120px; font-size: 18px;" (click)="updateContainer()"> Save </button>
+               </div>
+             </div>
+           </div>
+        </div>
+    </div>
+</div>

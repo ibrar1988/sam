@@ -1,0 +1,14 @@
+.center {
+    text-align: center !important;
+}
+
+.purpleTag {
+    background: rgba(17, 9, 49, 0.8) !important;
+}
+
+.header-pricing-table{
+    text-align: center;
+    font-size: 20px;
+    background: rgba(27, 19, 57, 0.95);
+    color: #fccf0b;
+}

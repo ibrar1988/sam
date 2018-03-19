@@ -1,0 +1,61 @@
+.companies{
+    padding-top:100px;
+    padding-bottom:60px;
+}
+
+.light-container{
+    background: #eee;
+    padding: 45px 20px 10px 20px;
+}
+
+.p-image{
+    padding: 40px 20px 40px 30px;
+}
+
+.header-title{
+    font-size: 30px;
+    text-align: center;
+    color: rgb(65, 65, 100);
+}
+
+.header-subtitle{
+    font-size: 20px;
+    text-align: center;
+    margin: 0px 16px 10px 16px;
+}
+
+.header-description{
+    text-align: justify;
+    font-size: 15px;
+    margin: 10px 30px 25px 10px;
+}
+
+@media (max-width: 991px){
+    .p-image{
+        padding: 20px 40px;
+    }
+
+    .description-parallax{
+        padding: 10px 0px !important;
+    }
+}
+
+@media (max-width: 456px){
+    .p-image{
+        padding: 0px 30px 30px 30px;
+    } 
+}
+
+.image-parallax{
+    height: 620px;
+    width: auto;
+}
+
+.letters-section {
+    margin-top: 70px;
+    margin-bottom: 30px;
+}
+
+.p-25{
+    padding: 0px 25px;
+}

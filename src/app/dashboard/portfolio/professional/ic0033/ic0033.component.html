@@ -1,0 +1,112 @@
+<section>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="title-section">
+                <div class="row">
+                    <div class="col-sm-7 col-md-9 d-flex align-items-center" data-toggle="collapse" data-target="#ic0033" aria-expanded="true" aria-controls="ic0033">
+                        <span class="container-title">{{container_name}}  </span><span class="fa fa-info-circle container-info-icon" data-container="body" data-toggle="tooltip" data-placement="bottom" title="{{container_tooltip}}"></span>
+                    </div>
+                    <!-- <div class="col-sm-5 col-md-3 text-right">
+                        <div style="display: inline-block;">
+                            <label class="switch">
+                                <input type="checkbox" [checked]="value" (change)="value = !value">
+                                <span class="slider round2"></span>
+                            </label>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            <hr class="separator">
+        </div>
+    </div>
+<div id="ic0033" class="collapse show">
+
+    <div class="row">
+        <ng-container *ngFor="let internship of container?.internships; let i = index">
+            <div *ngIf="internship.Role != ''" class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                <div class="row tag-lg" id="i-tag-{{i}}">
+                    <div class="tag-icons">
+                        <a (click)="removeItem(i)"><i class="fa fa-remove fa-black"></i></a>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-xs-12 min-height-tag-body" (click)="open(false,i,content)">
+                        <p class="sm-title-tag-lg">{{internship?.role || "Job Position"}}</p>
+                        <p class="lg-title-tag-lg">{{internship?.institution_Company || "Institution/Company"}}</p>
+                        <p class="sm-title-tag-lg">Date ({{DateFormatToString(internship?.from_date, internship.in_progress) || max_date}} - {{DateFormatToString(internship?.to_date, internship.in_progress) || max_date}})</p>
+                        <p class="md-title-tag-lg"><i class="fa fa-map-marker icon-tag-lg"></i> {{internship?.location || "location"}}</p>
+                        <p class="sm-title-tag-lg">{{internship?.description || "Description"}}</p>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+
+        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+            <div class="row new-tag-lg align-items-center text-center">
+                <div class="col-md-12" (click)="open(true,-1,content)">
+                    <a class="btn btn-default btn-circle"><i class="fa fa-plus fa-silver"></i></a>
+                </div>
+            </div>
+        </div>
+
+
+        <ng-template #content let-c="close" let-d="dismiss">
+            <div class="modal-header">
+                <h4 class="modal-title">{{title_modal}}</h4>
+                <button type="button" class="close" style="cursor:pointer" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-row">
+                    <div class="form-group col-md-12" style="margin-bottom: 0px;">
+                        <div *ngIf="show_alert" class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong>Alert!</strong> {{errorMessage}}
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label class="col-form-label">Job Position</label>
+                        <input type="text" class="form-control" [(ngModel)] = "role" placeholder="Job Position">
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label class="col-form-label">Institution/Company</label>
+                        <input type="text" class="form-control" [(ngModel)] = "institution_Company" placeholder="Institution/Company">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="col-form-label">From Date:</label>
+                        <div class="input-group">
+                            <input mdInput placeholder="mm/dd/yyyy" [mdDatepicker]="picker1" [ngModel]="from_date" (ngModelChange)="from_date = $event" [max]="max_date" style="width: 100%">
+                            <md-datepicker-toggle mdSuffix [for]="picker1" style="margin-left:-40px;"></md-datepicker-toggle>
+                            <md-datepicker #picker1></md-datepicker>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="col-form-label">To Date:</label>
+                        <div class="input-group">
+                            <input mdInput placeholder="mm/dd/yyyy" [mdDatepicker]="picker2" [ngModel]="to_date" (ngModelChange)="to_date = $event" [max]="max_date" style="width: 100%" [disabled]="in_progress">
+                            <md-datepicker-toggle mdSuffix [for]="picker2" [disabled]="in_progress" style="margin-left:-40px;"></md-datepicker-toggle>
+                            <md-datepicker #picker2></md-datepicker>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="col-12 label-title">In Progress:</label>
+                        <md-slide-toggle class="slide-style" [(ngModel)]="in_progress"></md-slide-toggle>
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <label class="col-form-label">Location</label>
+                        <input type="text" class="form-control" [(ngModel)] = "location" placeholder="Location">
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label class="col-form-label">Description</label>
+                        <input type="text" class="form-control" [(ngModel)] = "description" placeholder="Description">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-myklovr" (click)="saveInternship(content) && c('Close click')">Save</button>
+            </div>
+        </ng-template>
+    </div>
+
+</div>
+</section>

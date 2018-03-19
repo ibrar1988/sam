@@ -1,0 +1,39 @@
+.upload {
+    width: -webkit-fill-available;
+    font-size: inherit;
+}
+
+:host-context(.simple-notification.alert) {
+    background: black;
+}
+
+:host(.simple-notification.alert) {
+    background: black;
+}
+
+::ng-deep .simple-notification.alert {
+    background: black;
+}
+
+.simple-notification-wrapper simple-notification .simple-notification {
+    background: black !important;
+    color: black;
+}
+
+.card-shadow {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12);
+    margin: 8px;
+}
+
+canvas {
+    width: 100%;
+}
+
+.input-file-container {
+    position: relative;
+    width: 225px;
+}
+
+label.input-file-trigger {
+    margin: 10px;
+}

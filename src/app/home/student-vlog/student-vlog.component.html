@@ -1,0 +1,75 @@
+<section class="bg-white">
+    <div class="container student">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-9 col-lg-10 text-center">
+                <div class="mkd-st-title-holder">
+                    <h2 class="mkd-st-title" style="color: rgb(65, 65, 100);">
+                        <span> Student's Vlog </span>
+                    </h2>
+                </div>
+
+                <div class="mkd-separator-holder clearfix  mkd-separator-center">
+                    <div class="mkd-separator" style="width: 53px;border-bottom-width: 3px;margin-top: 0px;margin-bottom: 30px"></div>
+                </div>
+
+                <div class="mkd-st-text-holder">
+                    <span class="mkd-st-text-text">
+                        Hi, my name is Alec Jones, a creator of Christopher Bot which is an awesome tool that keeps track of students' homework and helps them prepare for every class. Pretty cool, right? Other than that, I'm just a 14-year-old high school student from Victoria, BC Canada. 
+                    </span>
+                </div>
+
+                <br>
+
+                <div class="mkd-st-text-holder">
+                    <span class="mkd-st-text-text">
+                        As a 10th grader, having bad hair days or recurring nightmares about showing up to an exam I didn’t study for are just some of the high school problems that I face every day. But the biggest challenge of all is that I have to start thinking about getting to college! I'm beginning to ask myself questions like: ‘which college should I choose?’, ‘what are my chances of getting into college?’, ‘what should I do to get into the college of my dreams?’, ‘how will I be able to afford to pay for college?’ If you are in high school too, I'm sure you can relate to these concerns.
+                    </span>
+                </div>
+
+                <br>
+
+                <div class="mkd-st-text-holder">
+                    <span class="mkd-st-text-text">                        
+                        So, I thought I'd document my day to day life as a high school student and share my journey to college with you guys. Here are some of my vlogs. Thanks for watching.
+                    </span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row b-b" style="margin-top: 50px;">
+            <ng-container *ngFor="let video of content?.studentVLogs">
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" [src]="video.url | safe" allowfullscreen></iframe>
+                        </div>
+                        <div class="card-block" style="padding:16px 10px;">
+                            <h4 class="card-title">{{video.title}}</h4>
+                            <p class="card-text">{{video.description}}</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="col-sm-6">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item" [src]="video.url | safe" allowfullscreen></iframe>
+                    </div>
+                    <br>
+                </div>
+                <div class="col-sm-6">
+                    <div class="container">
+                        <h2 class="mkd-st-title">{{video.title}}</h2>
+                        <div class="mkd-separator-holder clearfix  mkd-separator-center">
+                            <div class="mkd-separator" style="width: 53px;border-bottom-width: 3px;margin-top: 0px;margin-bottom: 30px"></div>
+                        </div>
+                        <div class="mkd-st-text-holder">
+                            <h4 class="mkd-st-text-text">
+                                {{video.description}}
+                            </h4>
+                        </div>
+                    </div>
+                </div> -->
+            
+            </ng-container>
+        </div>
+    </div>
+</section>

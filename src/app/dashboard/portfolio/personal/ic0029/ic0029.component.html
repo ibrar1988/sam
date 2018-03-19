@@ -1,0 +1,143 @@
+
+<ng-template #content let-c="close" let-d="dismiss" id="portfolio-achievements-modal-sm" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+    <div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myLargeModalLabel">Add Achievement &amp; Award</h4>
+                <button type="button" class="close" (click)="c('Close click')">&times;</button>
+            </div>
+            <div class="modal-body">                    
+                <div class="row">
+                    <div class="form-group col-md-12" style="margin-bottom: 0px;">
+                        <div *ngIf="show_alert" class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong>Alert!</strong> {{errorMessage}}
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <div class="col-md-12 d-flex justify-content-center align-items-center flex-column">
+                            <!-- <input type="text" [(ngModel)]="newItem.url_image"  class="form-control form-control-line mydatepicker"> -->
+                            <!-- <image-upload [extensions]="['jpeg','png']" [url]="uploadUrl" [headers]="header" [buttonCaption]="'Upload your Photo'" [dropBoxMessage]="'Drop your Photo here'" (onFileUploadFinish)="onUploadFinished($event)" (onRemove)="onRemoved($event)">
+                            </image-upload> -->
+                            <img [hidden]='file' class="img-rounded" style="margin-top: 8px; width: 200px; height: 200px;" src={{newItem.url_image||awards_image_default}}/>
+                            <div style="text-align: center;"> 
+                                <img-cropper [hidden]='!file' #cropper [image]="data" [settings]="cropperSettings"></img-cropper>
+                                <br>
+                                <div class="file-upload">
+                                    <div class="input-file-container">
+                                        <input [hidden]='file' class="input-file" id="my-file0029" type="file" (change)="fileChangeListener($event, cropper)">
+                                        <label [hidden]='file' tabindex="0" for="my-file0029" class="input-file-trigger" style="border-radius: 6px; padding: 10px 30px !important;">Select a file...</label>
+                                        <input [hidden]='!file' class="input-file" id="my-file00292" type="button" (click)="fileChange()" style="visibility: hidden;">
+                                        <label [hidden]='!file' tabindex="1" for="my-file00292" class="input-file-trigger" style="width: 100%; border-radius: 6px;">Upload</label>
+                                        <button [hidden]='!file' class="btn" type="button" (click)="clearImage()" style="width: 100%">Clear</button>
+                                    </div>
+                                    <p class="file-return"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="col-md-12">Category</label>
+                        <div class="col-md-12">
+                            <input type="text" [(ngModel)]="newItem.category" class="form-control form-control-line">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="col-md-12">Date</label>
+                        <div class="input-group">
+                            <!-- <input class="form-control" placeholder="mm-dd-yyyy"
+                                    name="dp" [(ngModel)]="newItem.date" ngbDatepicker #d1="ngbDatepicker">
+                            <button class="input-group-addon" (click)="d1.toggle()" type="button">
+                                <i class="fa fa-calendar"></i>
+                            </button> -->
+                            <input mdInput placeholder="mm/dd/yyyy" [mdDatepicker]="picker1" [ngModel]="date" (ngModelChange)="date = $event" [max]="max_date" style="margin-left:16px;width:190px;">
+                            <md-datepicker-toggle mdSuffix [for]="picker1" style="margin-left:-40px;"></md-datepicker-toggle>
+                            <md-datepicker #picker1></md-datepicker>
+                        </div>
+                    </div> 
+                    <!-- div class="form-group col-md-6">
+                        <label class="col-md-12">Reference</label>
+                        <div class="col-md-12">
+                            <input type="text" [(ngModel)]="newItem.reference" class="form-control form-control-line">
+                        </div>
+                    </div-->
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-12">Description</label>
+                        <div class="col-md-12">
+                            <input type="text" [(ngModel)]="newItem.description" class="form-control form-control-line">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-myklovr" (click)="addItem() && c('Close click')">Save</button>
+            </div>
+        </div>
+    </div>
+  </ng-template>
+  <div *ngIf='container' class="row portfolio-container-base">
+      <div class="col-md-12">          
+            <div>
+                <div class="title-section">
+                    <div class="row">
+                        <div class="col-sm-7 col-md-9 d-flex align-items-center" data-toggle="collapse" data-target="#ic0029" aria-expanded="false" aria-controls="ic0029">
+                            <span class="container-title">{{container_name}} </span><span class="fa fa-info-circle container-info-icon" data-container="body" data-toggle="tooltip" data-placement="bottom" title="{{container_tooltip}}"></span>
+                        </div>
+                        <!-- <div class="col-sm-5 col-md-3 text-right">
+                            <div style="display: inline-block;">
+                                <label class="switch">
+                                    <input type="checkbox" [checked]="value" (change)="value = !value">
+                                    <span class="slider round2"></span>
+                                </label>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+          <hr class="separator">
+          <div id="ic0029" class="show">
+
+            <div class="row" *ngIf='container'>
+                <div  class="col-md-6 " *ngFor="let item of container.achievements_awards; let i=index;">
+                  <div id="achievements-{{i}}" class="card-body achievements-card">
+                    <div class="achievements-card-content-actions">
+                            <div class="row float-right">
+                                <!-- <a class="m-r-10"><i class="fa fa-pencil fa-black"></i></a> -->
+                                <a class="m-r-10" style="cursor: pointer;" (click)="removeItem(i)"><i class="fa fa-remove fa-black"></i></a>
+                            </div>
+                        </div>   
+                    <div class="row">  
+                          <div class="col-sm-5 text-center">
+                              <img class = "achievements-card-image" [src]="item?.url_image  || 'assets/images/home/achievementsawards.png'" max-width="220px" max-height="220px">
+                          </div>
+                          <div class="col-sm-7">
+                              <div class="row">
+                                  <div class="col-md-12 cardview-content" (click)="open(false,i,content)">
+                                      <div class="description-cardview">
+                                          <span class="achievements-card-titles">Category</span><span class="achievements-card-contents"> {{item?.category || 'Category'}}</span> <br>
+                                          <span class="achievements-card-titles">Refence</span><span class="achievements-card-contents"> {{item?.reference || 'Reference'}}</span> <br>
+                                          <span class="achievements-card-titles">Date</span><span class="achievements-card-contents"> {{DateFormatToString(item.date)}}</span> <br>
+                                          <span class="achievements-card-titles">Description</span> <br>
+                                          <span class="achievements-card-description">{{item?.description || 'Description'}}</span>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>            
+                      </div> 
+                  </div>
+                </div>            
+                <div class="col-md-6">
+                    <div class="row text-center card-body new-achievements-card" (click)="open(true,-1,content)"> 
+                            <div class="col-md-12 d-flex justify-content-center align-items-center">
+                                <a class="btn btn-default btn-circle"><i class="fa fa-plus fa-silver"></i></a>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+          </div>
+      </div>
+  </div>

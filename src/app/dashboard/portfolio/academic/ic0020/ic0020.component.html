@@ -1,0 +1,114 @@
+<section>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="title-section">
+                <div class="row">
+                    <div class="col-sm-7 col-md-10 d-flex align-items-center" data-toggle="collapse" data-target="#ic0020" aria-expanded="true" aria-controls="ic0020">
+                        <span class="container-title">{{container_name}}  </span><span class="fa fa-info-circle container-info-icon" data-container="body" data-toggle="tooltip" data-placement="bottom" title="{{container_tooltip}}"></span>
+                    </div>
+                    <!-- <div class="col-sm-5 col-md-3 text-right">
+                        <div style="display: inline-block;">
+                            <label class="switch">
+                                <input type="checkbox" [checked]="value" (change)="value = !value">
+                                <span class="slider round2"></span>
+                            </label>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            <hr class="separator">
+        </div>
+    </div>
+    <div id="ic0020" class="collapse show">
+
+
+        <div class="row">
+            <div class="col-md-12" *ngFor="let language of container?.languages; let i = index;">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th class="width-30">Languages</th>
+                                <th class="width-30">Proficiency</th>
+                                <th class="width-10"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let property of language?.properties; let j = index">
+                                <td>{{property.language}}</td>
+                                <td>{{property.proficiency}}</td>
+                                <td class="text-nowrap text-center">
+                                    <a (click)="open(false,i,j,content)"> <i class="fa fa-pencil text-inverse m-r-10 pointer"></i> </a>
+                                    <a (click)="remove_languages(i,j)"> <i class="fa fa-close text-inverse pointer"></i> </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="5" class="no-padding">
+                                    <div class="row new-tag d-flex align-items-center text-center">
+                                        <div class="col-md-12" (click)="open(true,i,j,content)">
+                                            <a class="btn btn-default btn-circle"><i class="fa fa-plus fa-silver"></i></a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- <ngb-tabset class="customtab" justify='end'>
+                    <ngb-tab *ngFor="let language of container?.languages; let i = index">
+                        <ng-template ngbTabTitle><b>{{honor.honors}}</b></ng-template>
+                        <ng-template ngbTabContent>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    
+                                </div>
+                            </div>
+                        </ng-template>
+                    </ngb-tab>
+                </ngb-tabset> -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">{{title_modal}}</h4>
+        <button type="button" class="close" style="cursor:pointer" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-row">
+            <div class="form-group col-md-12" style="margin-bottom: 0px;">
+                <div *ngIf="show_alert" class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Alert!</strong> {{errorMessage}}
+                </div>
+            </div>
+            <div class="form-group col-md-12">
+                <!-- <label class="col-form-label">Language</label>
+                <input type="text" class="form-control" [(ngModel)] = "language" placeholder="Language"> -->
+                <md-select placeholder="Language" [(ngModel)]="language" [style.width]="'100%'" (ngModelChange)="updateLang($event)">
+                    <md-option *ngFor="let language of catalog?.languages" [value]="language.description"  >
+                        {{language.description}}
+                    </md-option>
+                </md-select>
+            </div>
+            <div class="form-group col-md-12" *ngIf="!hideProf">
+                <!-- <label class="col-form-label">Profiency</label>
+                <input type="text" class="form-control" [(ngModel)] = "proficiency" placeholder="Profiency"> -->
+                <md-select placeholder="Proficiency" [(ngModel)]="proficiency" [style.width]="'100%'">
+                    <md-option *ngFor="let proficiency of catalog?.languages_proficiency" [value]="proficiency.description">
+                        {{proficiency.description}}
+                    </md-option>
+                </md-select>
+            </div>
+            <div class="form-group col-md-12" *ngIf="hideProf">
+                <input [(ngModel)]="proficiency" [style.width]="'100%'" class="form-control form-control-line " type="text" placeholder="Specify your other language context">
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-myklovr" (click)="save_languages(content) && c('Close click')">Save</button>
+    </div>
+</ng-template>

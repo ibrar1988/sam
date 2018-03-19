@@ -1,0 +1,143 @@
+.portfolio-container-base{
+    margin-bottom: 20px;
+}
+.removed-item {
+    animation: removed-item-animation .6s cubic-bezier(.55,-0.04,.91,.94) forwards;
+}
+ 
+@keyframes removed-item-animation {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+ 
+    to {
+        opacity: 0;
+        transform: scale(0);
+    }
+}
+
+.restored-item {
+    animation: 
+        /*make sure to open space up before bringing the item into position*/
+        openspace .3s ease forwards, 
+        restored-item-animation .3s .3s cubic-bezier(0,.8,.32,1.07) forwards;
+}
+ 
+@keyframes openspace {
+    to {
+        height: auto;
+    }
+}
+ 
+@keyframes restored-item-animation {
+    from {
+        opacity: 0;
+        transform: scale(0);
+    }
+ 
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.separator{
+    border: 2px solid #FDCE0C;
+    background: #FDCE0C;
+    margin-top: 8px;
+}
+.title-section{
+    background: #FFFFFF;
+    margin-bottom: -8px;
+    padding-bottom: 6px;
+    padding-top: 6px;
+    padding-left: 6px;
+    padding-right: 6px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+.container-title {    
+    font-size: 18px;
+}
+.container-info-icon {    
+    margin-left: 5px;
+}
+.title-section:hover {
+    background:rgba(253, 206, 12, 0.05);
+    box-shadow: inset 0 -16px 20px -2px rgba(253, 216, 63, 0.6);
+}
+.refresh-container-btn{
+    margin-top: -30px;
+    background: #FDCE0C;
+    color: #191332;
+    font-size: 16px;
+    font-weight: 500;
+}
+.center-vertically{       
+    display: table-cell;
+    vertical-align: middle;
+}
+/*TOGGLE BUTTON*/
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    margin-bottom: 0px;
+  }
+  
+  .switch input {display:none;}
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 24px;
+    width: 24px;
+    left: 5px;
+    bottom: 5px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #FDCE0C;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #FDCE0C;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round2 {
+    border-radius: 34px;
+  }
+  
+  .slider.round2:before {
+    border-radius: 50%;
+  }
+/*SPECIFIC CSS*/
+
+.collapsing {
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+}

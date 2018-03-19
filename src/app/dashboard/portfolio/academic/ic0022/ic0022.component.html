@@ -1,0 +1,118 @@
+<section>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="title-section">
+                <div class="row">
+                    <div class="col-sm-7 col-md-10 d-flex align-items-center" data-toggle="collapse" data-target="#ic0022" aria-expanded="true" aria-controls="ic0022">
+                        <span class="container-title">{{container_name}}  </span><span class="fa fa-info-circle container-info-icon" data-container="body" data-toggle="tooltip" data-placement="bottom" title="{{container_tooltip}}"></span>
+                    </div>
+                    <!-- <div class="col-sm-5 col-md-3 text-right">
+                        <div style="display: inline-block;">
+                            <label class="switch">
+                                <input type="checkbox" [checked]="value" (change)="value = !value">
+                                <span class="slider round2"></span>
+                            </label>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            <hr class="separator">
+        </div>
+    </div>
+    <div id="ic0022" class="collapse show">
+        <div class="row">
+            <div *ngFor="let achievement_award of container?.achievements_awards; let i = index" class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="row tag-lg" id="aa-tag-{{i}}">
+                    <div class="tag-icons">
+                        <a (click)="removeItem(i)"><i class="fa fa-remove fa-black"></i></a>
+                    </div>
+                    <div class="col-lg-5 col-md-12 col-sm-12 col-12 text-center" style="padding: 10px 0px;">
+                        <img class="img-rounded" style="width: 90%" src="{{achievement_award?.url_image||awards_image_default}}" />
+                    </div>
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-12 d-flex justify-content-top align-items-start flex-column" style="padding-top: 10px; padding-bottom: 10px;" (click)="open(false,i,content)">
+                        <p class="lg-title-tag-lg">{{achievement_award?.category || "Enter a category"}}</p>
+                        <p class="md-title-tag-lg">{{achievement_award?.award_name || "Enter an award name"}}</p>
+                        <p class="md-title-tag-lg">Date: {{DateFormatToString(achievement_award.date)}}</p>
+                        <p class="md-title-tag-lg">Description</p>
+                        <p class="md-title-tag-lg">{{achievement_award?.description || "Enter a description"}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="new-tag-lg">
+                    <div class="d-flex justify-content-center align-items-center" style="height: 100%" (click)="open(true,-1,content)">
+                        <a class="btn btn-default btn-circle"><i class="fa fa-plus fa-silver"></i></a>
+                    </div>
+                </div>
+            </div>
+
+
+            <ng-template #content let-c="close" let-d="dismiss">
+                <div class="modal-header">
+                    <h4 class="modal-title">{{title_modal}}</h4>
+                    <button type="button" class="close" style="cursor:pointer" aria-label="Close" (click)="c('Close click')">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-12" style="margin-bottom: 0px;">
+                            <div *ngIf="show_alert" class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <strong>Alert!</strong> {{errorMessage}}
+                            </div>
+                        </div>
+                        <div class="form-group col-md-12 d-flex justify-content-center align-items-center flex-column">
+                            <!-- <input type="text" class="form-control" [(ngModel)] = "url_image" placeholder="Image Url"> -->
+                            <!-- <image-upload [extensions]="['jpeg','png']" [url]="uploadUrl" [headers]="header" [buttonCaption]="'Upload your Photo'" [dropBoxMessage]="'Drop your Photo here'" (onFileUploadFinish)="onUploadFinished($event)" (onRemove)="onRemoved($event)">
+                            </image-upload> -->
+                            <img [hidden]='file' class="img-rounded" style="margin-top: 8px; width: 200px; height: 200px;" src={{url_image||awards_image_default}}/>
+                            <div style="text-align: center;"> 
+                                <img-cropper [hidden]='!file' #cropper [image]="data" [settings]="cropperSettings"></img-cropper>
+                                <br>
+                                <div class="file-upload">
+                                    <div class="input-file-container">
+                                        <input [hidden]='file' class="input-file" id="my-file0022" type="file" (change)="fileChangeListener0022($event, cropper)">
+                                        <label [hidden]='file' tabindex="0" for="my-file0022" class="input-file-trigger" style="border-radius: 6px; padding: 10px 30px !important;">Select a file...</label>
+                                        <input [hidden]='!file' class="input-file" id="my-file00222" type="button" (click)="fileChange0022()" style="visibility: hidden;">
+                                        <label [hidden]='!file' tabindex="1" for="my-file00222" class="input-file-trigger" style="width: 100%; border-radius: 6px;">Upload</label>
+                                        <button [hidden]='!file' class="btn" type="button" (click)="clearImage0022()" style="width: 100%">Clear</button>
+                                    </div>
+                                    <p class="file-return"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label class="col-form-label">Category:</label>
+                            <input type="text" class="form-control" [(ngModel)]="category" placeholder="Category">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label class="col-form-label">Name:</label>
+                            <input type="text" class="form-control" [(ngModel)]="award_name" placeholder="Name">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="col-form-label">Date:</label>
+                            <div class="input-group">
+                                <!-- <input class="form-control" placeholder="yyyy-mm-dd"
+                                    name="dp" [(ngModel)]="date" ngbDatepicker #d="ngbDatepicker">
+                            <button class="input-group-addon" (click)="d.toggle()" type="button">
+                                <i class="fa fa-calendar"></i>
+                            </button> -->
+                                <input mdInput placeholder="mm/dd/yyyy" [mdDatepicker]="picker1" [ngModel]="date" (ngModelChange)="date = $event" [max]="max_date">
+                                <md-datepicker-toggle mdSuffix [for]="picker1" style="margin-left:-40px;"></md-datepicker-toggle>
+                                <md-datepicker #picker1></md-datepicker>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label class="col-form-label">Description:</label>
+                            <input type="text" class="form-control" [(ngModel)]="description" placeholder="Description">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-myklovr" (click)="saveAchievementAward(content) && c('Close click')">Save</button>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</section>

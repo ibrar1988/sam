@@ -1,0 +1,14 @@
+.student{
+    padding-top:100px;
+    padding-bottom:60px;
+}
+
+.hidden-sm{
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .hidden-sm{
+        display: none;
+    }
+}

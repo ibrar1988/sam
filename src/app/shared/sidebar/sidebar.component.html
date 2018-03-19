@@ -1,0 +1,119 @@
+<!-- ============================================================== -->
+<!-- Left Sidebar - style you can find in sidebar.scss  -->
+<!-- ============================================================== -->
+<div [hidden]="setTheme(getBarColor())"></div>
+<aside class="left-sidebar" [ngClass]="{'theme-black': isBlack, 'theme-blue': isBlue, 'theme-red': isRed, 'theme-purple': isPurple, 'theme-green': isGreen, 'theme-default': isDefault
+, 'theme-1': isTheme1, 'theme-2': isTheme2, 'theme-3': isTheme3, 'theme-4': isTheme4}">
+    <!-- Sidebar scroll-->
+
+    <div class="scroll-sidebar">
+        <!-- User profile -->
+        <div class="user-profile">
+            <!-- User profile image -->
+            <div class="profile-img"><img src="assets/images/dashboard/badge.png" /></div>
+            <!-- User profile text-->
+            <!-- <div class="profile-text"><a href="#" class="dropdown-toggle link u-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"><span class="caret"></span></a>
+                <div class="dropdown-menu animated flipInY">
+                    <a href="javascript:void(0)" class="dropdown-item"><i class="ti-user"></i> My Profile</a>
+                    <a href="javascript:void(0)" class="dropdown-item"><i class="ti-wallet"></i> My Balance</a>
+                    <a href="javascript:void(0)" class="dropdown-item"><i class="ti-email"></i> Inbox</a>
+                    <div class="dropdown-divider"></div>
+                    <a href="javascript:void(0)" class="dropdown-item"><i class="ti-settings"></i> Account Setting</a>
+                    <div class="dropdown-divider"></div>
+                    <a href="javascript:void(0)" class="dropdown-item"><i class="fa fa-power-off"></i> Logout</a>
+                </div>
+            </div> -->
+        </div>
+        <!-- End User profile text-->
+        <!-- Sidebar navigation-->
+        <nav class="sidebar-nav">
+            <ul id="sidebarnav">
+                <!--<li class="nav-small-cap">PERSONAL</li>-->
+                <!-- .mini-sidebar .sidebar-nav #sidebarnav>li:hover>a -->
+               <!-- <li>
+                    <a [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active"><i  class="mdi mdi-elevation-rise coming-soon"></i><span class="hide-menu coming-soon">Dashboard</span></a>
+                </li> -->
+                <!-- <li>
+                    <a aria-expanded="false"><i class="mdi mdi-play coming-soon"></i><span class="hide-menu coming-soon">Action Plan</span></a>
+                </li> -->
+                <li [hidden]="!is_student()">
+                    <!-- <a class="has-arrow" aria-expanded="false"><i class="mdi mdi-account"></i><span class="hide-menu">Student Portfolio</span></a> -->
+                    <a [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" [routerLink]="['/dashboard/portfolio/about-me']"><i class="mdi mdi-account"></i><span class="hide-menu">Student Portfolio</span></a>
+                    <!-- <ul aria-expanded="false" class="collapse">
+                        <li><a [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" [routerLink]="['/dashboard/portfolio/about-me']">About Me</a></li>
+                        <li><a [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" [routerLink]="['/dashboard/portfolio/academic']">Academic</a></li>
+                        <li><a [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" [routerLink]="['/dashboard/portfolio/personal']">Personal</a></li>
+                        <li><a [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" [routerLink]="['/dashboard/portfolio/professional']">Professional</a></li>
+                    </ul> -->
+                </li>
+                <!-- <li>
+                    <a [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" class="coming-soon" [routerLink]="['/dashboard/mentors']"><i class="mdi mdi-account-multiple"></i><span class="hide-menu">My Mentors</span></a>
+                </li> -->
+                <li [hidden]="!is_student()">
+                    <a class="has-arrow" aria-expanded="false"><i class="mdi mdi-play"></i><span class="hide-menu">Action Plan</span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <!-- <li><a [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" [routerLink]="['/dashboard/action-plan/myPlan']" (click)="setHide()">My Plan</a></li> -->
+                        <li><a [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" [routerLink]="['/dashboard/action-plan/myPlan']">My Plan</a></li>
+                        <li><a [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" [routerLink]="['/dashboard/action-plan/recommendations']">Goal Recommendations</a></li>
+                        <!-- <li><a [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" [routerLink]="['/dashboard/action-plan/achievementHistory']">Goal Achievement History</a></li> -->
+
+                    </ul>
+                </li>
+                <li [hidden]="!check_premium()">
+                    <a [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active"><i class="mdi mdi-chart-line"></i><span class="hide-menu">College Analytics</span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li><a [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" [routerLink]="['/dashboard/analytics/finder']">College Finder</a></li>
+                        <!-- <li><a [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" class="coming-soon">Recommendations</a></li> -->
+                        <!-- <li><a [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" class="coming-soon">My Interests</a></li> -->
+                    </ul>
+                </li>
+                <li [hidden]="check_premium()">
+                    <a [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active"><i class="mdi mdi-chart-line"></i><span class="hide-menu">College Analytics</span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li><a [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" [routerLink]="['/dashboard/analytics/finder']">College Finder</a></li>
+                        <!-- <li><a [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" class="coming-soon">Recommendations</a></li> -->
+                        <!-- <li><a [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" class="coming-soon">My Interests</a></li> -->
+                    </ul>
+                </li>
+                <!-- <li [hidden]="check_premium()">
+                    <a [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" (click)="open2(premium)"><i class="mdi mdi-chart-line"></i><span class="hide-menu">College Analytics</span></a>
+
+                </li> -->
+                <li>
+                    <a [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" [routerLink]="['/dashboard/profile']"><i class="mdi mdi-settings"></i><span class="hide-menu">Account Settings</span></a>
+                </li>
+            </ul>
+        </nav>
+        <!-- End Sidebar navigation -->
+    </div>
+    <!-- End Sidebar scroll-->
+    <!-- Bottom points-->
+    <!--<div class="sidebar-footer">-->
+    <!--&lt;!&ndash; item&ndash;&gt;-->
+    <!--<a href="" class="link" data-toggle="tooltip" title="Settings"><i class="ti-settings"></i></a>-->
+    <!--&lt;!&ndash; item&ndash;&gt;-->
+    <!--<a href="" class="link" data-toggle="tooltip" title="Email"><i class="mdi mdi-gmail"></i></a>-->
+    <!--&lt;!&ndash; item&ndash;&gt;-->
+    <!--<a href="" class="link" data-toggle="tooltip" title="Logout"><i class="mdi mdi-power"></i></a>-->
+    <!--</div>-->
+    <!-- End Bottom points-->
+</aside>
+<ng-template #premium let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Become Premium</h4>
+        <button type="button" class="close" style="cursor:pointer" aria-label="Close" (click)="c('Close click')">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+    <div class="modal-body">
+        <div class="" style="text-align: center;">
+            <p>You need to be a Premium User to access this feature</p>
+            <br>
+            <button class="btn btn-myklovr" (click)="toOrder();c('Close click');" type="button">Get Premium</button>
+
+        </div>
+    </div>
+</ng-template>
+<!-- ============================================================== -->
+<!-- End Left Sidebar - style you can find in sidebar.scss  -->
+<!-- ============================================================== -->

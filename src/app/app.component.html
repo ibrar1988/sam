@@ -1,0 +1,10 @@
+<div [hidden]="setBackground(getBackground())"></div>
+<div style="min-height: 1066px" class="custom-background" [ngClass]="{'bg-default': isDefault,
+'custom-bg-1': isBackground1, 'custom-bg-2': isBackground2, 'custom-bg-3': isBackground3,
+'custom-bg-4': isBackground4, 'custom-bg-5': isBackground5,
+'custom-bg-6': isBackground6, 'custom-bg-7': isBackground7, 'custom-bg-8': isBackground8}">
+    <ma-navigation *ngIf="compatibility" class="fixing"></ma-navigation>
+    <router-outlet></router-outlet>
+    <simple-notifications *ngIf="compatibility" [options]="options"></simple-notifications>
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+</div>

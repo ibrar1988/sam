@@ -1,0 +1,136 @@
+/*TOGGLE BUTTON*/
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    margin-bottom: 0px;
+  }
+  
+  .switch input {display:none;}
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 24px;
+    width: 24px;
+    left: 5px;
+    bottom: 5px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #FDCE0C;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #FDCE0C;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round2 {
+    border-radius: 34px;
+  }
+  
+  .slider.round2:before {
+    border-radius: 50%;
+  }
+  
+.tag-sat{
+    margin: 10px;
+    padding: 15px;
+    min-height: 75px;
+    border-radius: 8px;
+    /* background: #ddd; */
+    background: #f7f7f7;
+    transition: 1s;
+    border: 1px solid #ddd;
+}
+
+.tag-sat:hover{
+    background: #ddd;
+    border-color: rgba(103, 101, 101, 0.7);
+}
+
+.pointer{
+    cursor: pointer;
+    margin-left: 0px;
+    width: 100%;
+}
+
+.tag-icons{
+    margin-top: -10px;
+    margin-left: 99%;
+    margin-bottom: -24px;
+    z-index: 10;
+}
+
+.b-r{
+    border-right:1px solid rgb(255, 255, 255);
+}
+
+.round-kpi{
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    background: white;
+    border: 1px solid #b7b4b4;
+    text-align: center;
+    padding-top: 25px;
+    font-size: 20px;
+    float: left;
+}
+
+.kpi-label{
+    margin: 32px;
+    margin-right: 4px;
+    padding-left: 60px;
+    font-size: 12px;
+}
+
+.title-sat{
+    font-size: 16px;
+    margin-bottom: 0px;
+    color: #333;
+}
+
+.header-title{
+    margin-left: 10px;
+}
+
+.margin-t-b{
+    margin-bottom: 6px;
+    margin-top: 6px;
+}
+
+.margin-l{
+    margin-left: 20px;
+}
+
+.input-test{
+    width: 85%;
+}
+
+.fz-14{
+    font-size: 14px;
+}

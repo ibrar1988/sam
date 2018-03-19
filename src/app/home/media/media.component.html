@@ -1,0 +1,108 @@
+<section class="bg-white">
+    <!-- Page Content -->
+    <div class="container student" style="background: white;">
+
+        <!-- Page Heading -->
+        <h1 class="my-4">Media
+            <small>/ Articles</small>
+        </h1>
+        <!-- <div class="mkd-separator-holder clearfix  mkd-separator-center">
+            <div class="mkd-separator" style="width: 53px;border-bottom-width: 3px;margin-top: 30px;margin-bottom: 30px"></div>
+        </div> -->
+
+        <div class="row">
+            <div *ngFor="let article of articles" class="col-lg-3 col-md-6">
+                <div class="card item">
+                    <div class="el-card-item">
+                        <div class="el-card-avatar el-overlay-1 bg-media">
+                            <div class="el-overlay text-center">
+                                <p style="padding: 16px; color: white; margin: 0px;">{{article.Title}}</p>
+                                <a [href]='article.URL' target="_blank"><md-icon fontSet="fontawesome" fontIcon="fa-external-link" class="font-icon"></md-icon></a>
+                            </div>
+                        </div>
+                        <div class="el-card-content">
+                            <h3 class="box-title">{{article.Publication}}</h3> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div *ngFor="let article of articles" class="col-lg-3 col-md-4 col-sm-6 portfolio-item" style="margin-bottom:30px;">
+                <div class="card h-100" style="background: ghostwhite;padding: 15px;">
+                    <a [href]='article.URL'><img style="width: 25%" class="card-img-top" [src]='"http://www.housingeurope.eu/site/theme/_assets/img/type-article.png"' alt=""></a>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a style="color: black;" [href]='article.URL'>{{article.Title}}</a>
+                        </h4>
+                        <p class="card-text">{{article.Publication}}</p>
+                    </div>
+                </div>
+            </div> -->
+
+        </div>
+        <h1 class="my-4">Media
+            <small>/ Others</small>
+        </h1>
+        <!-- <div class="mkd-separator-holder clearfix  mkd-separator-center">
+            <div class="separator"></div>
+        </div> -->
+        <div class="row">
+            <div *ngFor="let article of articles2" class="col-lg-3 col-md-6">
+                <div class="card item">
+                    <div class="el-card-item">
+                        <div class="el-card-avatar el-overlay-1 bg-media">
+                            <div class="el-overlay text-center">
+                                <p style="padding: 16px; color: white; margin: 0px;">{{article.Title}}</p>
+                                <a [href]='article.URL' target="_blank"><md-icon fontSet="fontawesome" fontIcon="fa-external-link" class="font-icon"></md-icon></a>
+                            </div>
+                        </div>
+                        <div class="el-card-content">
+                            <h3 class="box-title">{{article.Publication}}</h3> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div *ngFor="let article of articles2" class="col-lg-3 col-md-4 col-sm-6 portfolio-item" style="margin-bottom:30px;">
+                <div class="card h-100" style="background: ghostwhite;padding: 15px;">
+                    <a [href]='article.URL'><img style="width: 25%" class="card-img-top" [src]='"http://www.housingeurope.eu/site/theme/_assets/img/type-article.png"' alt=""></a>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a style="color: black;" [href]='article.URL'>{{article.Title}}</a>
+                        </h4>
+                        <p class="card-text">{{article.Publication}}</p>
+                    </div>
+                </div>
+            </div> -->
+
+        </div>
+        <!-- /.row -->
+
+        <!-- Pagination -->
+        <!-- <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                </a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">1</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">2</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">3</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </li>
+        </ul> -->
+
+    </div>
+
+</section>

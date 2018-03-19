@@ -1,0 +1,58 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title"></h4>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="row header-portfolio">
+                                    <div class="col-sm-12 col-md-9 d-flex portfolio-image-section" style="padding: 15px;">
+                                        <img class="rounded-circle profile-photo" src="{{url_image_profile}}">
+                                        <div class="d-flex align-self-center flex-column">
+                                            <div class="p-1" style="font-size: 22px;margin-left: 2px;">{{first_name}}</div>
+                                            <div class="p-1" style="font-size: 40px;margin-top: -14px;">{{last_name}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-3 d-flex justify-content-end portfolio-grade-section" style="color: #120930;">
+                                        <div class="d-flex d-flex align-self-center align-items-center flex-column content-grade">
+                                            <div class="p-1" style="font-size: 32px; font-weight: 500;">{{grade}}<small>th</small></div>
+                                            <div class="p-1" style="margin-top: -15px;"><small style="font-weight: bold">grade</small></div>
+                                        </div>
+                                    </div>
+
+                                    <md-tab-group class="tab-full-width"> <!-- (selectChange) = "TabChange($event)" -->
+                                        <div class="row" style="margin:8px -15px">
+                                            <div class="col-12 text-right">
+                                                <button class="btn btn-primary btn-myklovr" data-toggle="collapse"
+                                                data-target="#ic0001,#ic0002,#ic0003,#ic0008,#ic0036,#ic0016,#ic0037,#ic0020,#ic0021,#ic0022,#ic0023,#ic0024,#ic0025,#ic0026,#ic0027,#ic0028,#ic0029,#ic0031,#ic0033,#ic0034,#ic0035"
+                                                aria-expanded="false">
+                                                    Expand/Collapse All
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <md-tab label="About me">
+                                            <app-aboutme></app-aboutme>
+                                        </md-tab>
+                                        <md-tab label="Academic">
+                                            <app-academic (EventOutput)="onEvent($event)"></app-academic>
+                                        </md-tab>
+                                        <md-tab label="Personal">
+                                            <app-personal></app-personal>
+                                        </md-tab>
+                                        <md-tab label="Professional">
+                                            <app-professional></app-professional>
+                                        </md-tab>
+                                    </md-tab-group>
+                                </div>
+                                <!-- <router-outlet></router-outlet> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

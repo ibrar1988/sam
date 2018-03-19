@@ -1,0 +1,90 @@
+<div class="container" style="background:white;padding-top:20px;">
+
+    <div class="row" (window:resize)="onResize($event)">
+
+        <div class="col-sm-9">
+
+            <!-- Start  -->
+            <div *ngFor="let groups of milestonesGroups.groups">
+                <div class="row">
+                    <div class="col-sm-11 col-11 offset-1">
+                        <div>
+                            <h3>Milestone Group Title {{groups.name}}</h3>
+                            <p>Description {{groups.description}}</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+
+                    <div class="col-sm-1 col-1">
+
+                        <!-- <ol  class="list-group vertical-steps">
+              <div *ngFor="let group of groups.milestones">
+                       <li *ngIf="!group.req_prev"  class="list-group-item" [style.padding-bottom]="viewHeight"><span></span></li>
+              </div>
+            </ol> -->
+
+                        <ol class="list-group vertical-steps">
+
+                            <li *ngFor="let group of groups.milestones" class="list-group-item" [style.padding-bottom]="viewHeight" [style.border-left]="0"><span></span></li>
+
+                        </ol>
+
+
+                    </div>
+
+                    <div class="col-sm-11 col-11">
+
+                        <div *ngFor="let group of groups.milestones" class="row">
+
+                            <div class="card card-shadow" #mainScreen style="padding:15px;">
+                                <div class="card-block">
+
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <img class="card-img-left" src="https://www.codeschool.com/assets/paths/badge-html-css-min-a6acee226fc4253bc3d56bf8873eca2731005113a7291a094c656845d6c65c30.svg" alt="Card image cap">
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <span class="card-text"><small class="text-muted">Milestone {{group.name}}</small></span>
+                                            <h3 class="card-title">Familiarize yourself with the myKlovr platform {{group.description}}
+
+                                            </h3>
+                                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                            <a href="#" class="btn btn-primary">Go somewhere</a>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+        <!-- End -->
+
+
+        <div class="col-sm-3">
+
+            <div class="card card-mentor" style="padding:15px;">
+                <img class="card-img-top" src="https://www.codeschool.com/assets/paths/badge-html-css-fd1a39218a3c09d5ca957b0a3e48f1cc4ae24ab8c5be51467b353d8515e77db0.svg" alt="Card image cap">
+                <div class="card-block text-center">
+                    <br>
+                    <h4 class="card-title">Milestones Complete
+                    </h4>
+                    <p class="card-text"><small class="text-muted">  {{finished}}/{{total}} ({{percent}}%)</small></p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

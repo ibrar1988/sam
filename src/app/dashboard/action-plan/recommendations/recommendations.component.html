@@ -1,0 +1,307 @@
+<ng-template #premium let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Become Premium</h4>
+        <button type="button" class="close" style="cursor:pointer" aria-label="Close" (click)="c('Close click')">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+    <div class="modal-body">
+        <div class="" style="text-align: center;">
+            <p>You need to be a Premium User to access this feature</p>
+            <br>
+            <button class="btn btn-myklovr" (click)="toOrder();c('Close click');" type="button">Get Premium</button>
+
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #goalreplicated let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Goal Recommended (Replicated)</h4>
+        <button type="button" class="close" style="cursor:pointer" aria-label="Close" (click)="c('Close click')">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+    <div class="modal-body">
+        <div class="row" style="padding: 4px 10px;">
+            <div class="col-12">
+                <md-form-field>
+                    <input mdInput placeholder="Title" class="input-sm" [ngModel]="currentGoalReplicated.name" (ngModelChange)="currentGoalReplicated.name = $event">
+                </md-form-field>
+            </div>
+            <div class="col-12">
+                <md-form-field>
+                    <input mdInput placeholder="Description" class="input-sm" [ngModel]="currentGoalReplicated.description" (ngModelChange)="currentGoalReplicated.description = $event">
+                </md-form-field>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-12 text-center">
+                <p style="font-size: 22px; font-weight: 500; margin-bottom: 4px;">Milestones</p>
+            </div>
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-block">
+                        <!-- Contenedor master -->
+                        <!-- <div> -->
+                            <!-- Contenedor records -->
+                            <div class="row" style="margin: 3px; padding-top: 6px">
+                                <ng-container *ngFor="let group of milestonesGroupReplicated.groups; let i = index;">
+                                    <div class="col-lg-6 col-12" *ngFor="let milestone of group.milestone_group; let j = index;">
+                                        <div class="milestone-container">
+                                            <i class="fa fa-remove icon-remove" (click)="RemoveMilestone(i,j)"></i>
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <md-form-field>
+                                                        <input mdInput placeholder="Title" class="input-sm" [ngModel]="milestone.name" (ngModelChange)="milestone.name = $event">
+                                                    </md-form-field>
+                                                </div>
+                                                <div class="col-12">
+                                                    <md-form-field>
+                                                        <input mdInput placeholder="Description" class="input-sm" [ngModel]="milestone.description" (ngModelChange)="milestone.description = $event">
+                                                    </md-form-field>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                                <div class="col-lg-6 col-12">
+                                    <div class="buttons" (click)="AddMilestone()">
+                                        <i class="fa fa-plus" style="color: #949494"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        <!-- </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 text-center">
+                <button class="btn btn-myklovr btn-add" (click)="AddMyPlan() && c('Close click')">Add to my plan</button>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<div [hidden]="isMilestones" class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-12 d-flex justify-content-between align-items-center">
+                            <span style="font-size: 18px;">Goals Recommendations</span>
+                            <input class="form-control" style="width: 30%" type="text" name="search" placeholder="Search your goal" [(ngModel)]="filter">
+                        </div>
+                        <div style="border: 2px solid #FDCE0C;background: #FDCE0C;margin: 12px 15px;width:100%"></div>
+                    </div>
+
+                    <!-- <div class="row">
+                        <div class="col-md-8">
+
+                        </div>
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+
+                    <div class="row">
+                        <div class="gallery col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top: 25px;">
+                            <div align="center">
+                                <button class="btn btn-default filter-button" data-filter="all">All</button>
+                                <button class="btn btn-default filter-button" data-filter="ACADEMIC">Academic</button>
+                                <button class="btn btn-default filter-button" data-filter="PERSONAL">Personal</button>
+                                <button class="btn btn-default filter-button" data-filter="PROFESSIONAL">Professional</button>
+                                <button class="btn btn-default filter-button" data-filter="DECLINED">Declined</button>
+                            </div>
+                            <br/>
+
+                            <div class="row">
+                                <div class="col-12 text-center" style="margin-bottom: 26px;" [hidden]="isLoaded || have_goals">
+                                    <md-spinner></md-spinner>
+                                </div>
+
+                                <ng-container *ngFor="let goal of goals_list | orderBy: key : reverse | filter:filter | paginate: { itemsPerPage: 900, currentPage: p }; let i = index; let last=last;">
+                                    <div [hidden]="goal.user_goal_recommended.status != 'RECOMMENDED'" class="gallery_product col-sm-12 col-md-4 col-lg-3 filter {{goal.type}}" style="padding:15px;" [isLast]="last" (lastDone)="stopLoading()">
+                                        <div class="column">
+                                            <div class="myklovr-content-block">
+                                                <div class="myklovr-goal-icon-container">
+                                                    <img class="myklovr-goal-icon" src="../../../../assets/images/actionPlan/myklovr3.png">
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="myklovr-content-meta d-flex align-items-start flex-column">
+                                                            <div class="header-section" (click)="toMilestones(goal,premium)">
+                                                                <div class="myklovr-goal-type">
+                                                                    {{goal.type}}
+                                                                </div>
+                                                                <div class="myklovr-goal-title">
+                                                                    {{(goal.name.length>60)? (goal.name | slice:0:60)+'..':(goal.name)}}
+                                                                </div>
+                                                                <div class="myklovr-goal-description">
+                                                                    <div style="height: 70px; overflow: auto;">
+                                                                        <p>{{goal.description}}</p>
+                                                                    </div>
+                                                                    <strong> {{goal.user_goal_recommended.milestones_qty}} milestones</strong>
+                                                                </div>
+                                                            </div>
+                                                            <div class="button-section mt-auto">
+                                                                <button class="btn btn-myklovr text-uppercase" type="submit" (click)="AcceptGoal(goal)" style="width: 100%; margin-top: 5px;">Add to My Plan</button>
+                                                                <button style="width: 100%; margin-top: 5px; background-color: #9a9a9a !important; color: white;" class="btn text-uppercase" type="submit" (click)="DeclineGoal(goal)">Decline</button>
+                                                                <button style="width: 100%; margin-top: 5px; background-color: #e0e0e0 !important;" class="btn text-uppercase" type="submit" (click)="CloneGoal(goal, premium, goalreplicated)">Replicate</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-container>
+
+                                <ng-container *ngFor="let goal of goals_list | orderBy: key : reverse | filter:filter | paginate: { itemsPerPage: 300, currentPage: p }; let i = index; let last=last">
+                                    <div [hidden]="goal.user_goal_recommended.status == 'RECOMMENDED' || goal.user_goal_recommended.status == 'ACCEPTED'" class="gallery_product col-sm-12 col-md-4 col-lg-3 filter DECLINED" style="padding:15px;" [isLast]="last" (lastDone)="stopLoading()">
+                                        <div class="column">
+                                            <div class="myklovr-content-block" (click)="toMilestones(goal,premium)">
+                                                <div class="myklovr-goal-icon-container">
+                                                    <img class="myklovr-goal-icon" src="../../../../assets/images/actionPlan/myklovr3.png">
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="myklovr-content-meta d-flex align-items-start flex-column">
+                                                            <div class="header-section" (click)="toMilestones(goal,premium)">
+                                                                <div class="myklovr-goal-type">
+                                                                    {{goal.type}}
+                                                                </div>
+                                                                <div class="myklovr-goal-title">
+                                                                    {{(goal.name.length>60)? (goal.name | slice:0:60)+"..":(goal.name)}}
+                                                                </div>
+                                                                <div class="myklovr-goal-description">
+                                                                    <p>{{goal.description}}</p>
+                                                                    <strong> {{goal.user_goal_recommended.milestones_qty}} milestones</strong>
+                                                                </div>
+                                                            </div>
+                                                            <div class="button-section mt-auto">
+                                                                <button class="btn btn-myklovr text-uppercase" type="submit" (click)="AcceptGoal(goal)" style="width: 100%; margin-top: 5px;">Add to My Plan</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-container>
+
+                                <div class="col-12 text-center p-25" *ngIf="count==0" >
+                                    <h3 style="color:#130b31">You don't have new recommended goals yet.</h3>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- <pagination-controls (pageChange)="p = $event" *ngIf="!have_goals"></pagination-controls> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Milestones -->
+<div *ngIf="isMilestones" class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-12">
+                            <a (click)=toRecommendedGoals()><span style="font-size: 18px;color :#6BB9FA;cursor: pointer;">My Recommended Goals</span></a>
+                            <span style="font-size: 18px;">/ Milestones</span>
+                        </div>
+
+                        <div style="border: 2px solid #FDCE0C;background: #FDCE0C;margin: 12px 15px;width:100%"></div>
+                    </div>
+
+                    <div class="row" (window:resize)="onResize($event)" style="padding: 20px">
+                        <div class="col-sm-9">
+                            <!-- Start  -->
+                            <div style="margin-bottom: 15px">
+                                <h3>{{currentGoalName}}</h3>
+                            </div>
+                            <div class="">
+                                <button class="btn btn-myklovr text-uppercase" type="submit" (click)="AcceptGoal()">Add to My Plan</button> or <button style="background-color: #f1f1f1 !important" class="btn text-uppercase" type="submit" (click)="DeclineGoal()">Decline</button>
+                            </div>
+                            <div *ngFor="let groups of milestones_group.groups">
+                                <div class="row">
+                                    <div class="col-sm-11 col-11 offset-1">
+                                        <div>
+                                            <h3>{{groups.name}}</h3>
+                                            <p>{{groups.description}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <!-- <div class="col-sm-1 col-1">
+                                        <ol *ngIf='viewHeight!="0px"' class="list-group vertical-steps">
+                                            <li *ngFor="let group of groups.milestone_group" class="list-group-item" [style.padding-bottom]="viewHeight" [style.border-left]="0"><span></span></li>
+                                        </ol>
+                                    </div> -->
+
+                                    <div class="col-sm-12 col-12">
+                                        <div *ngFor="let group of groups.milestone_group" class="row">
+                                            <div class="card card-shadow" id='mainScreen' #mainScreen style="padding:15px; width: 100%">
+                                                <div class="card-block">
+                                                    <div class="row">
+                                                        <div class="col-sm-2">
+                                                            <img class="card-img-left" src="assets/images/actionPlan/myklovr3.png" class="img-fluid" alt="Card image cap">
+                                                        </div>
+                                                        <div class="col-sm-10">
+                                                            <!-- <span class="card-text"><small class="text-muted">{{group.status | uppercase}}</small></span> -->
+                                                            <h3 class="card-title">{{group.name}}
+
+                                                            </h3>
+                                                            <p class="card-text">{{group.description}}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--<div *ngIf="setHeight()"></div>-->
+                                        <div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End -->
+
+                        <div class="col-sm-3">
+                            <div class="card card-mentor" style="padding:15px;">
+                                <img class="card-img-top" src="assets/images/actionPlan/myklovr2.png" alt="Card image cap">
+                                <div class="card-block text-center">
+                                    <br>
+                                    <h4 class="card-title">Milestones Complete
+                                    </h4>
+                                    <p class="card-text"><small class="text-muted">  {{finished}}/{{total}} ({{percent}}%)</small></p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

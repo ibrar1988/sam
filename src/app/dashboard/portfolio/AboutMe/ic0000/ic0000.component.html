@@ -1,0 +1,116 @@
+<div *ngIf='container' class="portfolio-container-base">
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+                <div class="title-section">
+                    <div class="row">
+                        <div class="col-sm-7 col-md-9 d-flex align-items-center" data-toggle="collapse" data-target="#ic0000" aria-expanded="false" aria-controls="ic0000">
+                            <span class="container-title">{{container_name}} </span><span class="fa fa-info-circle container-info-icon" data-container="body" data-toggle="tooltip" data-placement="bottom" title="{{container_tooltip}}"></span>
+                        </div>
+                        <!-- <div class="col-sm-5 col-md-3 text-right">
+                            <div style="display: inline-block;">
+                                <label class="switch">
+                                    <input type="checkbox" [checked]="value" (change)="value = !value">
+                                    <span class="slider round2"></span>
+                                </label>
+                            </div>
+                            <div style="display: inline-block;">
+                                <span style="margin-left: 5px;">{{value ? 'Private' : 'Public'}}</span>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+            <hr class="separator">
+            <div id="ic0000">
+                <div class="row" *ngIf='container'>
+                    <div class="col-12">
+                        <div class="card general-info-card">
+                            <div class="card-body">
+                                <div class="card-body card-shadow-1">
+                                    <div class="form-horizontal form-material">                                
+                                        <div class="card-content-actions">
+                                            <div class="row float-right">
+                                                <!-- <a class="m-r-10"><i class="fa fa-pencil fa-black"></i></a> -->
+                                                <!-- <a class="edit m-r-10" (click)="editGeneralInformation()"><i class="fa fa-pencil fa-black"></i></a> -->
+                                            </div>
+                                        </div>   
+                                        <div class="row">
+                                            <div class="form-group col">
+                                                <label class="col-md-12">Email</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" [value]="container.email" [(ngModel)] = "container.email" class="form-control form-control-line">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-md-6">
+                                                <label class="col-md-12">State</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" [value]="container.state" [(ngModel)] = "container.state" class="form-control form-control-line">
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                    <label class="col-md-12">City</label>
+                                                    <div class="col-md-12">
+                                                        <input type="text" [value]="container.city" [(ngModel)] = "container.city" class="form-control form-control-line">
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-md-6">
+                                                <label class="col-md-12">Country</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" [value]="container.country" [(ngModel)] = "container.country"  class="form-control form-control-line">
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                    <label class="col-md-12">Date of Birth</label>
+                                                    <div class="col-md-12">
+                                                        <input type="date" [value]="container.date_of_birth" [(ngModel)] = "container.date_of_birth" class="form-control form-control-line">
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-md-6">
+                                                <label class="col-md-12">Facebook</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" [value]="container.url_facebook" [(ngModel)] = "container.url_facebook" class="form-control form-control-line">
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                    <label class="col-md-12">Instagram</label>
+                                                    <div class="col-md-12">
+                                                        <input type="text" [value]="container.url_instagram" [(ngModel)] = "container.url_instagram" class="form-control form-control-line">
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-md-6">
+                                                <label class="col-md-12">Twitter</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" [value]="container.url_twitter" [(ngModel)] = "container.url_twitter" class="form-control form-control-line">
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                    <label class="col-md-12">LinkedIn</label>
+                                                    <div class="col-md-12">
+                                                        <input type="text" [value]="container.url_linkedin" [(ngModel)] = "container.url_linkedin" class="form-control form-control-line">
+                                                    </div>
+                                                </div>
+                                        </div>  
+                                        <div class="row">
+                                            <div class="col-12 text-center m-t-10">
+                                                <button type="button" class="btn btn-default refresh-container-btn float-right" (click)="updateContainer()">Save</button>
+                                            </div>
+                                        </div>                  
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

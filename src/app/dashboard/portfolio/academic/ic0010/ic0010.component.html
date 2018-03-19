@@ -1,0 +1,120 @@
+<section>
+    <h4 class="header-title">PSAT 10</h4>
+    <div class="row">
+        <div *ngFor ="let psat_10 of container?.psat_10; let i = index" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="row tag-sat" id="psat_10-{{i}}">
+                <!-- <div class="tag-icons">
+                    <a (click)="removeItem(i)"><i class="fa fa-remove fa-black"></i></a>
+                </div> -->
+                <div class="row pointer" (click)="open(false,i,content)">
+                    <div class="col-lg-12">
+                        <div class="row margin-t-b">
+                            <div class="col-lg-12 d-flex align-items-center">
+                                <label class="title-sat"></label>
+                            </div>
+                            <div class="col-lg-4 b-r margin-t-b">
+                                <div class="round-kpi">
+                                    <span>{{psat_10?.evidence_based || "0"}}</span>
+                                </div>
+                                <div class="kpi-label">
+                                    <span>Evidence-Based Reading and Writing</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 margin-t-b">
+                                <div class="round-kpi">
+                                    <span>{{psat_10?.reading || "0"}}</span>
+                                </div>
+                                <div class="kpi-label">
+                                    <span>Reading</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 margin-t-b">
+                                <div class="round-kpi">
+                                    <span>{{psat_10?.writing_language || "0"}}</span>
+                                </div>
+                                <div class="kpi-label">
+                                    <span>Writing and Language</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row margin-t-b">
+                            <div class="col-lg-12 d-flex align-items-center">
+                                <label class="title-sat"></label>
+                            </div>
+                            <div class="col-lg-4 b-r margin-t-b">
+                                <div class="round-kpi">
+                                    <span>{{psat_10?.math || "0"}}</span>
+                                </div>
+                                <div class="kpi-label">
+                                    <span>Math</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-header">
+            <h4 class="modal-title">{{title_modal}}</h4>
+            <button type="button" class="close" style="cursor:pointer" aria-label="Close" (click)="c('Cross click')">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-row">
+                <div class="form-group col-md-12" style="margin-bottom: 0px;">
+                    <div *ngIf="show_alert" class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Alert!</strong> {{errorMessage}}
+                    </div>
+                </div>
+                <div class="form-group col-md-7">
+                    <label class="col-form-label fz-14">Evidence-Based Reading and Writing:</label>
+                    <!-- <input type="text" class="form-control" [(ngModel)] = "evidence_based" placeholder="Value"> -->
+                    <div class="input-test">
+                        <md-form-field>
+                            <input mdInput type="number" min="160" max="760" step="1" [ngModel]="evidence_based" (ngModelChange)="evidence_based = $event">
+                            <md-hint align="end">Range: 160 - 760</md-hint>
+                        </md-form-field>
+                    </div>
+                </div>
+                <div class="form-group col-md-5 fz-14">
+                    <label class="col-form-label">Reading:</label>
+                    <!-- <input type="text" class="form-control" [(ngModel)] = "reading" placeholder="Value"> -->
+                    <div class="input-test">
+                        <md-form-field>
+                            <input mdInput type="number" min="8" max="38" step="1" [ngModel]="reading" (ngModelChange)="reading = $event">
+                            <md-hint align="end">Range: 8 - 38</md-hint>
+                        </md-form-field>
+                    </div>
+                </div>
+                <div class="form-group col-md-7 fz-14">
+                    <label class="col-form-label">Writing Language:</label>
+                    <!-- <input type="text" class="form-control" [(ngModel)] = "writing_language" placeholder="Value"> -->
+                    <div class="input-test">
+                        <md-form-field>
+                            <input mdInput type="number" min="8" max="38" step="1" [ngModel]="writing_language" (ngModelChange)="writing_language = $event">
+                            <md-hint align="end">Range: 8 - 38</md-hint>
+                        </md-form-field>
+                    </div>
+                </div>
+                <div class="form-group col-md-5 fz-14">
+                    <label class="col-form-label">Math:</label>
+                    <!-- <input type="text" class="form-control" [(ngModel)] = "math" placeholder="Value"> -->
+                    <div class="input-test">
+                        <md-form-field>
+                            <input mdInput type="number" min="160" max="760" step="1" [ngModel]="math" (ngModelChange)="math = $event">
+                            <md-hint align="end">Range: 160 - 760</md-hint>
+                        </md-form-field>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-myklovr" (click)="save_psat_10(content) && c('Close click')">Save</button>
+        </div>
+    </ng-template>
+</section>

@@ -1,0 +1,89 @@
+.avatar-border {
+    border: 2px solid #fccf0b;
+}
+
+.btn-menu {
+    margin: 18px;
+    padding: 0px;
+    cursor: pointer;
+    border: none;
+}
+
+.btn-menu:hover {
+    color: #fccf0b;
+    background: none;
+}
+
+.metro-menu {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    background: rgba(244, 244, 244, 0.94);
+    transition: 1s;
+    border: 1px solid #eee;
+}
+
+.w-hover {
+    color: #090227 !important;
+    font-weight: 300;
+    font-size: 14px !important;
+}
+
+.w-hover:hover {
+    color: #090227 !important;
+    font-weight: 300;
+}
+
+.divisor-menu {
+    margin-top: 8px;
+    border-color: #fbcf0b;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.m-t-md {
+    margin-top: 0px;
+}
+
+@media (max-width: 991px) {
+    .m-t-md {
+        margin-top: 25px;
+    }
+}
+
+.bg-menu-movil {
+    background: rgba(238, 238, 238, 0.9);
+}
+
+.menu-center {
+    text-align: center;
+    width: 100% !important;
+    cursor: pointer;
+}
+
+.sub-menu-center {
+    text-align: center;
+    width: 100% !important;
+    cursor: pointer;
+}
+
+.menu-option {
+    font-weight: 500;
+    background: rgba(238, 238, 238, 0.75) !important;
+}
+
+.scrollview {
+    height: 500px;
+    overflow-y: auto;
+}
+
+
+/* .menu-option:hover{
+  background: rgba(238, 238, 238, 0.75) !important;
+} */
+
+li {
+    cursor: pointer;
+}

@@ -1,0 +1,62 @@
+.p-t-50{
+    padding-top: 50px;
+}
+
+agm-map {
+    height: 400px;
+    width: 100%;
+}
+
+.google-maps{
+    padding-top: 50px;
+    background: #eee;
+}
+
+.contact-detail{
+    padding: 75px 106px 75px 106px;
+}
+
+.contact-form{
+    padding: 75px 106px 75px 106px;
+}
+
+.default-background{
+    background: #eee;
+}
+
+.b-white{
+    background: #F4F4F4; 
+}
+
+.title-contact{
+    font-size: 26px;
+    color: #3f3652;
+    font-weight: 500;
+}
+
+.subtitle-contact{
+    text-align: justify;
+    font-size: 15px;
+    margin-bottom: 30px;
+}
+
+.m-b-10{
+    margin-bottom: 10px;
+}
+
+.font-icon{
+    font-size: 24px;
+    margin: 4px 10px;
+    text-align: center;
+}
+
+.w-100{
+    width: 120px !important;
+    margin-top: 25px;
+}
+
+.select-contact{
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}

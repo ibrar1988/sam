@@ -1,0 +1,141 @@
+<section>
+    <hr class="separator-1">
+    <div class="row">
+        <div class="col-md-12">
+            <ngb-tabset class="customtab" justify='end'>
+                <ngb-tab *ngFor="let honor of container?.honors; let i = index">
+                    <ng-template ngbTabTitle><b class="text-capitalize">{{honor.honors}}</b></ng-template>
+                    <ng-template ngbTabContent>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th class="width-30">Honors</th>
+                                                <th class="width-30">School Year Ending</th>
+                                                <th class="width-15">Grade</th>
+                                                <th class="width-15">Score</th>
+                                                <th class="width-10"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let property of honor?.properties; let j = index">
+                                                <td>{{property.ap_classes}}</td>
+                                                <td>{{property.school_year}}</td>
+                                                <td>{{property.grade}}</td>
+                                                <td>{{property.score}}</td>
+                                                <td class="text-nowrap text-center">
+                                                    <a (click)="open(false,i,j,content)"> <i class="fa fa-pencil text-inverse m-r-10 pointer"></i> </a>
+                                                    <a (click)="remove_honors(i,j)"> <i class="fa fa-close text-inverse pointer"></i> </a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="5" class="no-padding">
+                                                    <div class="row new-tag d-flex align-items-center text-center">
+                                                        <div class="col-md-12" (click)="open(true,i,j,content)">
+                                                            <a class="btn btn-default btn-circle"><i class="fa fa-plus fa-silver"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </ngb-tab>
+            </ngb-tabset>
+        </div>
+    </div>
+</section>
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">{{title_modal}}</h4>
+        <button type="button" class="close" style="cursor:pointer" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-row">
+            <div class="form-group col-md-12" style="margin-bottom: 0px;">
+                <div *ngIf="show_alert" class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Alert!</strong> {{errorMessage}}
+                </div>
+            </div>
+
+            <div class="form-group col-md-12">
+                <!-- <input type="text" class="form-control" [(ngModel)]="honor_classes" placeholder="Honor Classes"> -->
+
+                <div style="margin: 25px 0">
+                    <label class="col-form-label">Subject</label>
+                    <md-select [(ngModel)]="subject" style="width: 100%">
+                        <md-option *ngFor="let subject of subjects" [value]="subject">
+                            {{subject.description}}
+                        </md-option>
+                    </md-select>
+                </div>
+
+                <div style="margin: 25px 0">
+                    <label class="col-form-label">Course</label>
+                    <md-select [(ngModel)]="honor_classes" style="width: 100%">
+                        <md-option *ngFor="let course of subject?.courses" [value]="course.description">
+                            {{course.description}}
+                        </md-option>
+                    </md-select>
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label class="col-form-label">School Year Ending</label>
+                <!-- <input type="text" class="form-control" [(ngModel)]="school_year" placeholder="School Year"> -->
+                <md-select [(ngModel)]="school_year" [style.width]="'100%'">
+                    <md-option *ngFor="let school_year_end of school_years_ending" [value]="school_year_end">
+                        {{school_year_end}}
+                    </md-option>
+                </md-select>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label class="col-form-label">Grade</label>
+                <md-select [(ngModel)]="grade" [style.width]="'100%'">
+                    <md-option *ngFor="let grade of catalog?.grades" [value]="grade.description">
+                        {{grade.description}}
+                    </md-option>
+                </md-select>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label class="col-form-label">Scale Type</label>
+                <!-- <input type="text" class="form-control" [(ngModel)] = "course" placeholder="Course"> -->
+                <md-select [style.width]="'100%'" [(ngModel)]="scale_type" (change)="getPrefix()" class="select-scale">
+                    <md-option *ngFor="let scale of scales" [value]="scale.code">
+                        {{scale.description}}
+                    </md-option>
+                </md-select>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label class="col-form-label">Score</label>
+                <!-- <input type="text" class="form-control" [(ngModel)] = "score" placeholder="Score"> -->
+                <md-form-field [style.width]="'100%'" [hidden]="isGrades" class="input-score">
+                    <input mdInput type="number" min="0" max="{{max}}" step="0.1" [ngModel]="score" (ngModelChange)="score = $event">
+                    <span mdSuffix>{{prefix}}</span>
+                </md-form-field>
+
+                <md-select [style.width]="'100%'" [hidden]="!isGrades" [(ngModel)]="sgrade" class="select-scale">
+                    <md-option *ngFor="let sgrade of sgrades" (change)="changeGrade(sgrade.code)" [value]="sgrade.code">
+                        {{sgrade.description}}
+                    </md-option>
+                </md-select>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-myklovr" (click)="save_honors(content) && c('Close click')">Save</button>
+    </div>
+</ng-template>

@@ -1,0 +1,109 @@
+<!-- Facebook Pixel Code -->
+<!-- <script>
+    ! function(f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function() {
+            n.callMethod ?
+                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = '2.0';
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s)
+    }(window, document, 'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '282153252274340');
+    fbq('track', 'PageView');
+    fbq('track', 'CompleteRegistration');
+</script>
+<noscript>
+  <img height="1" width="1"
+       src="https://www.facebook.com/tr?id=282153252274340&ev=PageView
+&noscript=1"/>
+</noscript> -->
+<!-- End Facebook Pixel Code -->
+  
+
+<section>
+    <div style="padding-top: 20px;">
+        <div class='login-box card animated fadeIn'>
+            <div class='card-body'>
+                <div class='col-12'>
+                    <div class='row' style='text-align: center;'>
+                        <div class='col-12'>
+                            <div *ngIf='emailconfirmation_ok' style='text-align: center;'>
+                                <div *ngIf='emailconfirmation_ok' style='text-align: center;'>
+                                    <span><h4>Welcome to myKlovr!</h4></span>
+                                </div>
+                                <div *ngIf='!emailconfirmation_ok' style='text-align: center;'>
+                                    <span><h4>Activation Error</h4></span>
+                                </div>
+                            </div>
+                            <div *ngIf='with_session' style='text-align: center;'>
+                                <div *ngIf='show_email' style='text-align: center;'>
+                                    <span><h4>Activate Account!</h4></span>
+                                </div>
+                                <div *ngIf='!show_email' style='text-align: center;'>
+                                    <span><h4>Activation Error</h4></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='mkd-separator-fullw'>
+                        </div>
+
+                        <div *ngIf='emailconfirmation_ok && !with_session' class='col-12'>
+                            <span> Thanks for activating your account.</span>
+                        </div>
+                        <div *ngIf='emailconfirmation_ok && !with_session' class='col-12'>
+                            <div class='form-group text-center'>
+                                <button class='btn-component btn-myklovr btn-5 btn-5a icon icon-happy' style='width: 100%;' type='submit' (click)='toProfile()'><span>Go to My Account</span></button>
+                            </div>
+                        </div>
+
+
+                        <!-- <div *ngIf='!emailconfirmation_ok && !with_session' class='col-12'>
+                            <span> The email link is invalid!, please login to your account </span>
+                        </div>
+                        <div *ngIf='!emailconfirmation_ok && !with_session' class='col-12'>
+                            <div class='form-group text-center'>
+                                <button class='btn-component btn-myklovr btn-5 btn-5a icon icon-happy' style='width: 100%;' type='submit' (click)='toLogin()'><span>Login</span></button>
+                            </div>
+                        </div> -->
+
+
+
+
+                        <div *ngIf='with_session && show_email' class='col-12'>
+                            <span>We sent an activation email to your email account {{email}} </span>
+                        </div>
+                        <div *ngIf='with_session && show_email' class='col-12'>
+                            <span>If you don't receive the email please, click the button bellow. </span>
+                        </div>
+                        <div *ngIf='with_session && show_email' class='col-12'>
+                            <button class='btn-component btn-black btn-5 btn-5a icon icon-envelop' style='width: 100%' (click)='resend()'><span>Resend E-mail Confirmation</span></button>
+                        </div>
+
+
+
+                        <div *ngIf='with_session && !show_email' class='col-12'>
+                            <span>We sent an activation email to your email account. check your email or login to your acount. </span>
+                        </div>
+                        <div *ngIf='with_session && !show_email' class='col-12'>
+                            <div class='form-group text-center'>
+                                <button class='btn-component btn-myklovr btn-5 btn-5a icon icon-happy' style='width: 100%;' type='submit' (click)='toLogin()'><span>Login</span></button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

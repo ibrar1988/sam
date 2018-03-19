@@ -1,0 +1,231 @@
+.school{
+    padding-top:100px;
+    padding-bottom:60px;
+}
+
+.light-container{
+    background: #eee;
+    padding: 45px 20px 10px 20px;
+}
+
+.header-title{
+    font-size: 30px;
+    text-align: center;
+    color: rgb(65, 65, 100);
+}
+
+.header-subtitle{
+    font-size: 22px;
+    text-align: center;
+    margin: 0px 16px 10px 16px;
+}
+
+.header-description{
+    text-align: justify;
+    font-size: 15px;    
+    margin-top: 35px;
+}
+
+.p-image{
+    padding: 40px 20px 40px 30px;
+}
+
+@media (max-width: 991px){
+    .p-image{
+        padding: 20px 80px 30px 80px;
+    } 
+    
+    .header-subtitle-2{
+        margin-left: 20px !important;
+        margin-right: 20px !important;
+    }
+
+    .mkd-intro-bottom{
+        height: 460px !important;
+    }
+
+    .description-sign-up{
+        padding: 10px 0px !important;
+    }
+}
+
+@media (max-width: 640px){
+    .mkd-intro-bottom{
+        height: 650px !important;
+    }
+}
+
+@media (max-width: 456px){
+    .p-image{
+        padding: 0px 30px 30px 30px;
+    } 
+
+    .header-subtitle-2{
+        margin-left: 20px !important;
+        margin-right: 20px !important;
+    }
+
+    .mkd-intro-bottom{
+        height: 1030px !important;
+    }
+}
+
+.yellow-container{
+    background: #fcce0c;    
+    padding: 45px 20px 10px 20px;
+}
+
+.p-20{
+    padding: 40px 20px 20px 20px;
+}
+
+.m-b-10{
+    margin-bottom: 10px;
+}
+
+.progress-header{
+    display: inline-block;
+}
+
+.progress-title{
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.progress-percent {
+    left: 89%;
+    margin-top: -25px;
+    position: absolute;
+    color: #fbce0b;
+    font-weight: 500;
+}
+
+.mkd-additional-image-3{
+    background-image: url("../../../../assets/images/home/school-student/screen_01-1.jpg");
+    width: 180px !important;
+    height: 180px !important;
+    border-radius: 50%;
+    background-size: cover;
+}
+
+.mkd-additional-image-1{
+    background-image: url("../../../../assets/images/home/school-student/screen_04.jpg");
+    width: 180px !important;
+    height: 180px !important;
+    border-radius: 50%;
+    background-size: cover;
+}
+
+.mkd-intro-hero{
+    background-image: url("../../../../assets/images/home/school-student/screen_05.jpg");
+    width: 180px !important;
+    height: 180px !important;
+    border-radius: 50%;
+    background-size: cover;
+}
+
+.mkd-additional-image-2{
+    background-image: url("../../../../assets/images/home/school-student/screen_03.jpg");
+    width: 180px !important;
+    height: 180px !important;
+    border-radius: 50%;
+    background-size: cover;
+}
+
+.mkd-additional-image-4{
+    background-image: url("../../../../assets/images/home/school-student/screen_02-1.jpg");
+    width: 180px !important;
+    height: 180px !important;
+    border-radius: 50%;
+    background-size: cover;
+}
+
+.header-title-2{
+    font-size: 30px;
+    text-align: center;
+    color: #333;
+}
+
+.header-subtitle-2{
+    font-size: 18px;
+    margin-left: 80px;
+    margin-right: 80px;
+    color: rgba(51, 51, 51, 0.74);
+    font-weight: 400;
+    text-align: center;
+}
+
+.mkd-intro-bottom{
+    height: 320px;
+    width: 100%;
+    padding: 40px 18px 40px 18px;
+    display: inline-block;
+    text-align: center;
+}
+
+.style_prevu_kit
+{
+    display:inline-block;
+    border:0;
+    position: relative;
+    -webkit-transition: all 200ms ease-in;
+    -webkit-transform: scale(1); 
+    -ms-transition: all 200ms ease-in;
+    -ms-transform: scale(1); 
+    -moz-transition: all 200ms ease-in;
+    -moz-transform: scale(1);
+    transition: all 200ms ease-in;
+    transform: scale(1);   
+
+}
+.style_prevu_kit:hover
+{
+    box-shadow: 0px 0px 16px 4px rgba(51, 51, 51, 0.4);
+    z-index: 2;
+    -webkit-transition: all 200ms ease-in;
+    -webkit-transform: scale(1.5);
+    -ms-transition: all 200ms ease-in;
+    -ms-transform: scale(1.5);   
+    -moz-transition: all 200ms ease-in;
+    -moz-transform: scale(1.5);
+    transition: all 200ms ease-in;
+    transform: scale(1.5);
+    border-radius: 3% !important;
+    height:180px !important;
+}
+
+.letters-section {
+    margin-top: 40px;
+    margin-bottom: 30px;
+}
+
+.container-sign-up{
+    background-image: url("../../../../assets/images/home/school-student/sign-up-parallax.jpg");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-bottom: 80px;
+    padding-top: 100px;
+}
+
+.title-sign-up{
+    font-size: 50px;
+    color: white;
+    font-weight: 300;
+}
+
+.btn-rounded{
+    border-radius: 30px;
+    margin: 30px;
+    color: rgba(17, 9, 49, 0.7) !important;
+    font-size: 16px;
+    padding: 16px 30px;
+    font-weight: 500;
+}
+
+.description-sign-up {
+    padding: 10px 120px;
+    margin-bottom: 0px;
+    color: white;
+}

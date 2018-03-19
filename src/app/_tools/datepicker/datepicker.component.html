@@ -1,0 +1,39 @@
+<div class="row">
+
+    <div class="col-12 col-md-4">
+        <input type="text" class="form-control form-control-line" placeholder="MM" name="_month" [(ngModel)]="datetimePicker._month" #contactmonth="ngModel" id="_month" pattern="^(0?[1-9]|1[012])$" required minlength="1" maxlength="2" />
+        <div class="md-errors-spacer animated fadeInUp" [hidden]="contactmonth.valid || contactmonth.untouched">
+            <div *ngIf="contactmonth.errors && contactmonth.errors.required" class="animated fadeIn">
+                <small class="form-control-feedback">Month is required.</small>
+            </div>
+            <div *ngIf="contactmonth.errors && contactmonth.errors.pattern" class="animated fadeIn">
+                <small class="form-control-feedback">Month is invalid.</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-md-4">
+
+        <input type="text" class="form-control form-control-line" placeholder="DD" name="_day" [(ngModel)]="datetimePicker._day" #contactday="ngModel" id="_day" pattern="^((0?[1-9]|[12]\d|3[01]))$" required minlength="1" maxlength="2" />
+        <div class="md-errors-spacer animated fadeInUp" [hidden]="contactday.valid || contactday.untouched">
+            <div *ngIf="contactday.errors && contactday.errors.required" class="animated fadeIn">
+                <small class="form-control-feedback">Day is required.</small>
+            </div>
+            <div *ngIf="contactday.errors && contactday.errors.pattern" class="animated fadeIn">
+                <small class="form-control-feedback">Day is invalid.</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-md-4">
+        <input type="text" class="form-control form-control-line" placeholder="YYYY" name="_year" [(ngModel)]="datetimePicker._year" #contactyear="ngModel" id="_year" pattern="^(19|20)\d{2}$" required minlength="4" maxlength="4" />
+        <div class="md-errors-spacer animated fadeInUp" [hidden]="contactyear.valid || contactyear.untouched">
+            <div *ngIf="contactyear.errors && contactyear.errors.required" class="animated fadeIn">
+                <small class="form-control-feedback">Year is required.</small>
+            </div>
+            <div *ngIf="contactyear.errors && contactyear.errors.pattern" class="animated fadeIn">
+                <small class="form-control-feedback">Year is invalid.</small>
+            </div>
+        </div>
+    </div>
+</div>

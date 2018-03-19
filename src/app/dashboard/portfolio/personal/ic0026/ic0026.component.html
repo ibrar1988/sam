@@ -1,0 +1,184 @@
+
+<ng-template #content let-c="close" let-d="dismiss"  id="portfolio-volunteering-modal-lg" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+  <div class="">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title" id="myLargeModalLabel">Add Volunteering &amp; Community Service Experience</h4>
+              <button type="button" class="close"  (click)="c('Close click')">&times;</button>
+          </div>
+          <div class="modal-body">
+              <div class="row">
+                <div class="form-group col-md-12" style="margin-bottom: 0px;">
+                    <div *ngIf="show_alert" class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Alert!</strong> {{errorMessage}}
+                    </div>
+                </div>
+                    <div class="form-group col-md-12">
+                        <div class="col-md-12 d-flex justify-content-center align-items-center flex-column">
+                            <!-- <input type="text" [(ngModel)]="newItem.url_image"  class="form-control form-control-line mydatepicker"> -->
+                            <!-- <image-upload [extensions]="['jpeg','png']" [url]="uploadUrl" [headers]="header" [buttonCaption]="'Upload your Photo'" [dropBoxMessage]="'Drop your Photo here'" (onFileUploadFinish)="onUploadFinished($event)" (onRemove)="onRemoved($event)">
+                            </image-upload> -->
+                            <img [hidden]='file' class="img-rounded" style="margin-top: 8px; width: 200px; height: 200px;" src={{newItem.url_image||volunteering_image_default}}/>
+                            <div style="text-align: center;"> 
+                                <img-cropper [hidden]='!file' #cropper [image]="data" [settings]="cropperSettings"></img-cropper>
+                                <br>
+                                <div class="file-upload">
+                                    <div class="input-file-container">
+                                        <input [hidden]='file' class="input-file" id="my-file0026" type="file" (change)="fileChangeListener($event, cropper)">
+                                        <label [hidden]='file' tabindex="0" for="my-file0026" class="input-file-trigger" style="border-radius: 6px; padding: 10px 30px !important;">Select a file...</label>
+                                        <input [hidden]='!file' class="input-file" id="my-file00262" type="button" (click)="fileChange()" style="visibility: hidden;">
+                                        <label [hidden]='!file' tabindex="1" for="my-file00262" class="input-file-trigger" style="width: 100%; border-radius: 6px;">Upload</label>
+                                        <button [hidden]='!file' class="btn" type="button" (click)="clearImage()" style="width: 100%">Clear</button>
+                                    </div>
+                                    <p class="file-return"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  <div class="form-group col-md-6">
+                      <label class="col-md-12">Category Name</label>
+                      <div class="col-md-12">
+                          <input type="text" [(ngModel)]="newItem.category_name" class="form-control form-control-line">
+                      </div>
+                  </div>
+                  <div class="form-group col-md-6">
+                      <label class="col-md-12">Award</label>
+                      <div class="col-md-12">
+                          <input type="text" [(ngModel)]="newItem.award" class="form-control form-control-line">
+                      </div>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="form-group col-md-6">
+                      <label class="col-md-12">From</label>
+                      <div class="input-group">
+                        <!-- <input class="form-control" placeholder="mm-dd-yyyy"
+                                name="dp" [(ngModel)]="newItem.from_date" ngbDatepicker #d1="ngbDatepicker">
+                        <button class="input-group-addon" (click)="d1.toggle()" type="button">
+                            <i class="fa fa-calendar"></i>
+                        </button> -->
+                        <input mdInput placeholder="mm/dd/yyyy" [mdDatepicker]="picker1" [ngModel]="from_date" (ngModelChange)="from_date = $event" [max]="max_date" style="margin-left:16px;width: 190px;">
+                        <md-datepicker-toggle mdSuffix [for]="picker1" style="margin-left:-40px;"></md-datepicker-toggle>
+                        <md-datepicker #picker1></md-datepicker>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-6">
+                      <label class="col-md-12">To</label>
+                      <div class="input-group">
+                        <!-- <input class="form-control" placeholder="mm-dd-yyyy"
+                                name="dp" [(ngModel)]="newItem.to_date" ngbDatepicker #d2="ngbDatepicker">
+                        <button class="input-group-addon" (click)="d2.toggle()" type="button">
+                            <i class="fa fa-calendar"></i>
+                        </button> -->
+                        <input mdInput placeholder="mm/dd/yyyy" [mdDatepicker]="picker2" [ngModel]="to_date" (ngModelChange)="to_date = $event" [max]="max_date" style="margin-left:16px;width: 190px;" [disabled]="newItem.in_progress">
+                        <md-datepicker-toggle mdSuffix [for]="picker2" [disabled]="newItem.in_progress" style="margin-left:-40px;"></md-datepicker-toggle>
+                        <md-datepicker #picker2></md-datepicker>
+                    </div>
+                  </div>
+
+                  <div class="form-group col-md-6">
+                    <label class="col-12 label-title">In Progress:</label>
+                    <md-slide-toggle class="slide-style" [(ngModel)]="newItem.in_progress"></md-slide-toggle>
+                  </div>
+
+                  <div class="form-group col-md-6">
+                        <label class="col-12 label-title">Leadership:</label>
+                        <md-slide-toggle class="slide-style" [(ngModel)]="newItem.leadership"></md-slide-toggle>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="form-group col-md-6">
+                      <label class="col-md-12">Position</label>
+                      <div class="col-md-12">
+                          <input type="text" [(ngModel)]="newItem.position"  class="form-control form-control-line mydatepicker">
+                      </div>
+                  </div>
+                  <div class="form-group col-md-6">
+                      <label class="col-md-12">Total Hours</label>
+                      <div class="col-md-12">
+                          <input type="number" [(ngModel)]="newItem.total_hours" class="form-control form-control-line mydatepicker">
+                      </div>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="form-group col-md-12">
+                      <label class="col-md-12">Description</label>
+                      <div class="col-md-12">
+                          <input type="text" [(ngModel)]="newItem.description" class="form-control form-control-line">
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-default btn-myklovr" (click)="addItem() && c('Close click')">Save</button>
+          </div>
+      </div>
+  </div>
+</ng-template>
+<div *ngIf='container' class="row portfolio-container-base">
+    <div class="col-md-12">      
+            <div>
+                <div class="title-section">
+                    <div class="row">
+                        <div class="col-sm-7 col-md-9 d-flex align-items-center" data-toggle="collapse" data-target="#ic0026" aria-expanded="false" aria-controls="ic0026">
+                            <span class="container-title">{{container_name}} </span><span class="fa fa-info-circle container-info-icon" data-container="body" data-toggle="tooltip" data-placement="bottom" title="{{container_tooltip}}"></span>
+                        </div>
+                        <!-- <div class="col-sm-5 col-md-3 text-right">
+                            <div style="display: inline-block;">
+                                <label class="switch">
+                                    <input type="checkbox" [checked]="value" (change)="value = !value">
+                                    <span class="slider round2"></span>
+                                </label>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        <hr class="separator">
+        <div id="ic0026" class="show">
+
+
+            <div class="row"  *ngIf='container'>
+                <div  class="col-md-6 restored-item" *ngFor="let item of container.volunteering_service; let i=index;">
+                  <div id="volunteering-{{i}}" class="card-body volunteering-card">
+                    <div class="volunteering-card-content-actions">
+                            <div class="row float-right tag-icon">
+                                <!-- <a class="m-r-10"><i class="fa fa-pencil fa-black"></i></a> -->
+                                <a class="m-r-10" style="cursor: pointer;" (click)="removeItem(i)"><i class="fa fa-remove fa-black"></i></a>
+                            </div>
+                        </div>   
+                    <div class="row">  
+                          <div class="col-sm-5 text-center">
+                              <img class = "volunteering-card-image" [src]="item?.url_image  || 'assets/images/home/volunteeringcommunityservice.png'">
+                          </div>
+                          <div class="col-sm-7">
+                              <div class="row">
+                                  <div class="col-md-12 cardview-content" (click)="open(false,i,content)">
+                                      <div class="description-cardview">
+                                          <span class="volunteering-card-titles">Category</span><span class="volunteering-card-contents"> {{item?.category_name || 'Category'}}</span> <br>
+                                          <span class="volunteering-card-titles">Award</span><span class="volunteering-card-contents"> {{item?.award || 'Award'}}</span> <br>
+                                          <span class="volunteering-card-titles">Position</span><span class="volunteering-card-contents"> {{item?.position || '1st'}}</span> <br>
+                                          <span class="volunteering-card-titles">Total Hours</span><span class="volunteering-card-contents"> {{item?.total_hours || 0}}h</span> <br>
+                                          <span class="volunteering-card-date">{{DateFormatToString(item.from_date, item.in_progress)}} - {{DateFormatToString(item.to_date, item.in_progress)}}</span> <br>
+                                          <span class="volunteering-card-titles">Description</span> <br>
+                                          <span class="volunteering-card-description">{{item?.description || 'Description'}}</span> <br>
+                                          <span *ngIf="!item.leadership" class="volunteering-card-titles">Team Member</span>
+                                          <span *ngIf="item.leadership" class="volunteering-card-titles">Leader</span>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>            
+                      </div> 
+                  </div>
+                </div>            
+                <div class="col-md-6">
+                    <div class="row text-center card-body new-volunteering-card" (click)="open(true,-1,content)"> 
+                            <div class="col-md-12 d-flex justify-content-center align-items-center">
+                                <a class="btn btn-default btn-circle"><i class="fa fa-plus fa-silver"></i></a>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

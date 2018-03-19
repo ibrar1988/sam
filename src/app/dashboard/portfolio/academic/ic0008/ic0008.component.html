@@ -1,0 +1,267 @@
+<section>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="title-section">
+                <div class="row">
+                    <div class="col-sm-7 col-md-10 d-flex align-items-center" data-toggle="collapse" data-target="#ic0008" aria-expanded="false" aria-controls="ic0008">
+                        <span class="container-title">{{container_name}}  </span><span class="fa fa-info-circle container-info-icon" data-container="body" data-toggle="tooltip" data-placement="bottom" title="{{container_tooltip}}"></span>
+                    </div>
+                    <!-- <div class="col-sm-5 col-md-3 text-right">
+                        <div style="display: inline-block;">
+                            <label class="switch">
+                                <input type="checkbox" [checked]="value" (change)="value = !value">
+                                <span class="slider round2"></span>
+                            </label>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            <hr class="separator">
+        </div>
+    </div>
+    <div id="ic0008" class="show">
+        <div class="row tag-school">
+            <!-- <div class="col-lg-12" (click)="open(content)"> -->
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-lg-3 col-md-5 no-padding-top text-center d-flex justify-content-center align-items-center flex-column">
+                        <img [hidden]='file' class="img-rounded" style="margin-top: 8px; width: 90%; height: 90%;" src={{container?.url_image||schoolImageDefault}}/>
+                        <div style="text-align: center;"> 
+                            <img-cropper [hidden]='!file' #cropper [image]="data" [settings]="cropperSettings"></img-cropper>
+                            <br>
+                            <div class="file-upload">
+                                <div class="input-file-container">
+                                    <input [hidden]='file' class="input-file" id="my-file" type="file" (change)="fileChangeListener($event)">
+                                    <label [hidden]='file' tabindex="0" for="my-file" class="input-file-trigger" style="border-radius: 6px; padding: 10px 30px !important;">Select a file...</label>
+                                    <input [hidden]='!file' class="input-file" id="my-file2" type="button" (click)="fileChange()" style="visibility: hidden;">
+                                    <label [hidden]='!file' tabindex="1" for="my-file2" class="input-file-trigger" style="width: 100%; border-radius: 6px;">Upload</label>
+                                    <button [hidden]='!file' class="btn" type="button" (click)="clearImage()" style="width: 100%">Clear</button>
+                                </div>
+                                <p class="file-return"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-7 header-school">
+                        <!-- <p class="school-name-title">{{container?.school_name || "Hight School Name"}}</p>
+                    <p class="district-title">{{container?.district || "District Name"}}</p>
+                    <p class="school-type">{{container?.school_type || "School Type" }}</p>
+                    <span class="social-icons">
+                        <a href="{{container?.instagram_url}}"><i class="fa fa-instagram"></i></a>
+                        <a href="{{container?.linkedin_url}}"><i class="fa fa-linkedin-square"></i></a>
+                        <a href="{{container?.twitter_url}}"><i class="fa fa-twitter-square"></i></a>
+                        <a href="{{container?.facebook_url}}"><i class="fa fa-facebook-square"></i></a>
+                    </span> -->
+                        <div class="row">
+                            <div class="col-md-10">
+                                <md-form-field>
+                                    <input mdInput placeholder="School Name" class="input-sm" [ngModel]="container?.school_name" (ngModelChange)="container.school_name = $event">
+                                </md-form-field>
+                            </div>
+                            <!--div class="col-md-10">
+                                <md-form-field>
+                                    <input mdInput placeholder="District" class="input-sm" [ngModel]="container?.district" (ngModelChange)="container.district = $event">
+                                </md-form-field>
+                            </div -->
+                            <div class="col-md-10">
+                                <md-radio-group [ngModel]="container?.school_type" (ngModelChange)="container.school_type = $event">
+                                    <md-radio-button value="public" class="rb-sm">Public School</md-radio-button>
+                                    <md-radio-button value="private" class="rb-sm">Private School</md-radio-button>
+                                </md-radio-group>
+                            </div>
+                            <!-- <div class="col-md-12">
+                            <span class="social-icons">
+                                <a href="{{container?.instagram_url || instagram_url_default}}" target="_blank"><i class="fa fa-instagram"></i></a>
+                                <a href="{{container?.linkedin_url || linkedin_url_default}}" target="_blank"><i class="fa fa-linkedin-square"></i></a>
+                                <a href="{{container?.twitter_url || twitter_url_default}}" target="_blank"><i class="fa fa-twitter-square"></i></a>
+                                <a href="{{container?.facebook_url || facebook_url_default}}" target="_blank"><i class="fa fa-facebook-square"></i></a>
+                            </span>
+                        </div> -->
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-12 section-edit" (click)="open(contentGPA)">
+                        <div class="col b-l" style="background: #fdce0c;">
+                            <h2 class="font-light">{{container?.overall_gpa || "0"}}</h2>
+                            <h6 class="font-subtitle">Overall GPA</h6>
+                        </div>
+                        <div class="col b-l" style="background: #fdce0c;">
+                            <h2 class="font-light">{{container?.academic_gpa || "0"}}</h2>
+                            <h6 class="font-subtitle">Academic GPA</h6>
+                        </div>
+                        <!-- div class="col b-l" style="background: #fdce0c;">
+                            <h2 class="font-light">Top {{container?.class_rank || "0"}} / 100%</h2>
+                            <h6 class="font-subtitle">Class Rank</h6>
+                        </div -->
+                    </div>
+                </div>
+                <div>
+                    <hr/>
+                </div>
+                <div class="form-row">
+                    <div class="col-lg-3 col-md-6 col-sm-6 padding-6" style="margin-top: 2px">
+                        <!-- <label class="col-12 label-title">Grade:</label> -->
+                        <!-- <label class="col-12 form-label">{{container?.grade || " - "}}</label> -->
+                        <!-- <md-form-field>
+                        <input mdInput placeholder="Grade" [ngModel]="container?.grade" (ngModelChange)="container.grade = $event">
+                    </md-form-field> -->
+                        <md-select placeholder="Choose a Grade" [ngModel]="container?.grade" (ngModelChange)="container.grade = $event" [style.width]="'100%'">
+                            <md-option *ngFor="let grade of catalog?.grades" [value]="grade.grade_code">
+                                {{grade.description}}
+                            </md-option>
+                        </md-select>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 col-sm-6 padding-6">
+                        <!-- <label class="col-12 label-title">Start Date:</label>
+                    <label class="col-12 form-label">{{container?.start_date || " - "}}</label> -->
+                        <md-form-field>
+                            <input mdInput [mdDatepicker]="picker1" placeholder="Start Date" [ngModel]="container?.start_date" (ngModelChange)="container.start_date = $event" [max]="MaxDate" [min]="MinDate">
+                            <md-datepicker-toggle mdSuffix [for]="picker1"></md-datepicker-toggle>
+                            <md-datepicker #picker1></md-datepicker>
+                        </md-form-field>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 col-sm-6 padding-6">
+                        <!-- <label class="col-12 label-title">End Date:</label>
+                    <label class="col-12 form-label">{{container?.end_date || " - "}}</label> -->
+                        <md-form-field>
+                            <input mdInput [mdDatepicker]="picker2" placeholder="End Date" [ngModel]="container?.end_date" (ngModelChange)="container.end_date = $event" [disabled]="in_progress_change"  [max]="MaxDate" [min]="MinDate" >
+                            <md-datepicker-toggle mdSuffix [for]="picker2" [disabled]="in_progress_change"></md-datepicker-toggle>
+                            <md-datepicker #picker2></md-datepicker>
+                        </md-form-field>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 col-sm-6 padding-6">
+                        <label class="col-12 label-title">In Progress:</label>
+                        <!-- <label class="col-12 form-label">{{container?.in_progress}}</label> -->
+                        <md-slide-toggle class="slide-style" [ngModel]="container?.in_progress" (ngModelChange)="container.in_progress = $event" (change)="onChangeInProgress($event)"></md-slide-toggle>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-right">
+                        <button type="button" class="btn btn-myklovr" (click)="save_school()">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-header">
+            <h4 class="modal-title">{{title_modal}}</h4>
+            <button type="button" class="close" style="cursor:pointer" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <!-- <input type="text" class="form-control" [(ngModel)]="url_image" placeholder="Image Url"> -->
+                    <image-upload [extensions]="['jpeg','png']" [url]="uploadUrl" [headers]="header" [buttonCaption]="'Upload your Photo'" [dropBoxMessage]="'Drop your Photo here'" (onFileUploadFinish)="onUploadFinished($event)" (onRemove)="onRemoved($event)">
+                    </image-upload>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-myklovr" (click)="set_url_image_school() && c('Close click')">Set</button>
+        </div>
+    </ng-template>
+
+    <ng-template #contentGPA let-c="close" let-d="dismiss">
+        <div class="modal-header">
+            <h4 class="modal-title">GPA Scores / Class Rank</h4>
+            <button type="button" class="close" style="cursor:pointer" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-row">
+                <!-- <div class="col-md-12 padding-6">
+                    <label class="col-md-12 no-padding">Scale Type:</label>
+          
+                    <md-select [(ngModel)]="scale_type" class="select-range">
+                        <md-option value="4-Scale" selected>4,0 Scale</md-option>
+                    </md-select>
+                </div> -->
+                <div class="form-group col-md-12" style="margin-bottom: 0px;">
+                    <div *ngIf="show_alert" class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Alert!</strong> {{errorMessage}}
+                    </div>
+                </div>
+
+                <div class="col-md-12 padding-6">
+                    <label class="col-md-6 no-padding input-right">Scale Type</label>
+                    <!-- <input type="text" class="form-control" [(ngModel)]="course" placeholder="Course"> -->
+                    <md-select [(ngModel)]="scale_type" placeholder="{{scales[0].description}}" floatPlaceholder="never" (change)="getPrefix()" class="select-scale">
+                        <md-option *ngFor="let scale of scales" [value]="scale.code">
+                            {{scale.description}}
+                        </md-option>
+                    </md-select>
+                </div>
+
+
+                <div class="col-md-12 padding-6">
+                    <label class="col-md-6 no-padding input-right">Overall GPA:</label>
+                    <!-- <label class="col-12 form-label">{{container?.overall_gpa || " - "}}</label> -->
+                    <md-form-field [hidden]="isGrades" class="input-gpa">
+                        <input mdInput type="number" min="0" max="{{max}}" step="0.1" [ngModel]="container?.overall_gpa" (ngModelChange)="container.overall_gpa = $event">
+                        <span mdSuffix>{{prefix}}</span>
+                    </md-form-field>
+
+                    <md-select [hidden]="!isGrades" [(ngModel)]="container.overall_gpa" class="select-scale">
+                        <md-option *ngFor="let sgrade of sgrades" (change)="changeGrade(sgrade.code)" [value]="sgrade.code">
+                            {{sgrade.description}}
+                        </md-option>
+                    </md-select>
+                </div>
+
+                <div class="col-md-12 padding-6">
+                    <label class="col-md-6 no-padding input-right">Core Academic GPA:</label>
+                    <!-- <label class="col-12 form-label">{{container?.academic_gpa || " - "}}</label> -->
+                    <md-form-field [hidden]="isGrades" class="input-gpa">
+                        <input mdInput [ngModel]="container?.academic_gpa" type="number" min="0" max="{{max}}" step="0.1" (ngModelChange)="container.academic_gpa = $event">
+                        <span mdSuffix>{{prefix}}</span>
+                    </md-form-field>
+
+                    <md-select [hidden]="!isGrades" [(ngModel)]="container.academic_gpa" class="select-scale">
+                        <md-option *ngFor="let sgrade of sgrades" (change)="changeGrade(sgrade.code)" [value]="sgrade.code">
+                            {{sgrade.description}}
+                        </md-option>
+                    </md-select>
+                </div>
+
+                <div class="col-md-12 padding-6">
+                    <!-- label class="col-md-6 no-padding input-right">Class Rank:</label -->
+                    <!-- <label class="col-12 form-label">{{container?.class_rank || " - "}}</label> -->
+                    <!--md-form-field class="input-gpa">
+                        <input mdInput [ngModel]="container?.class_rank" type="number" min="1" max="100" step="1" (ngModelChange)="container.class_rank = $event">
+                        <span mdSuffix>/ 100%</span>
+                    </md-form-field -->
+                </div>
+
+
+                <!-- <div [hidden]="isGrades" class="col-md-12 padding-6">
+                    <label class="col-md-6 no-padding input-right">Score</label>
+       
+                    <md-form-field class="input-gpa">
+                        <input mdInput type="number" min="0" max="{{max}}" step="0.1" [ngModel]="score" (ngModelChange)="score = $event">
+                        <span mdSuffix>{{prefix}}</span>
+                    </md-form-field>
+
+                </div> -->
+
+                <!-- <div [hidden]="!isGrades" class="col-md-12 padding-6">
+                    <label class="col-md-6 no-padding input-right">Score</label>
+                    <md-select [(ngModel)]="sgrade" class="select-scale">
+                        <md-option *ngFor="let sgrade of sgrades" (change)="changeGrade(sgrade.code)" [value]="sgrade.code">
+                            {{sgrade.description}}
+                        </md-option>
+                    </md-select>
+                </div> -->
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-myklovr" (click)="setGPAScores() && c('Close click')">Set</button>
+        </div>
+    </ng-template>
+</section>

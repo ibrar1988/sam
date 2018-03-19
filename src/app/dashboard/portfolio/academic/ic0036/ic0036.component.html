@@ -1,0 +1,99 @@
+<section>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="title-section">
+                <div class="row">
+                    <div class="col-sm-7 col-md-9 d-flex align-items-center" data-toggle="collapse" data-target="#ic0036" aria-expanded="true" aria-controls="ic0036">
+                        <span class="container-title">{{container_name}}  </span><span class="fa fa-info-circle container-info-icon" data-container="body" data-toggle="tooltip" data-placement="bottom" title="{{container_tooltip}}"></span>
+                    </div>
+                    <!-- <div class="col-sm-5 col-md-3 text-right">
+                        <div style="display: inline-block;">
+                            <label class="switch">
+                                <input type="checkbox" [checked]="value" (change)="value = !value">
+                                <span class="slider round2"></span>
+                            </label>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            <button type="button" *ngIf="have_container" class="btn btn-outline-warning btn-align-right"
+                (click)="open(false,content)">
+                <i class="fa fa-edit"></i> Edit
+            </button>
+            <hr class="separator">
+        </div>
+    </div>
+    <div id="ic0036" class="collapse show">
+        <div class="row">
+            <div class="col-md-12">
+                <br>
+                <ng-container *ngFor="let test_container of container?.tests_container;">
+                    <div *ngIf="test_container.container_code == 'IC0009' && test_container.visible">
+                        <app-ic0009></app-ic0009>
+                        <br>
+                    </div>
+                    <div *ngIf="test_container.container_code == 'IC0010' && test_container.visible">
+                        <app-ic0010></app-ic0010>
+                        <br>
+                    </div>
+                    <div *ngIf="test_container.container_code == 'IC0011' && test_container.visible">
+                        <app-ic0011></app-ic0011>
+                        <br>
+                    </div>
+                    <div *ngIf="test_container.container_code == 'IC0012' && test_container.visible">
+                        <app-ic0012></app-ic0012>
+                        <br>
+                    </div>
+                    <div *ngIf="test_container.container_code == 'IC0013' && test_container.visible">
+                        <app-ic0013></app-ic0013>
+                        <br>
+                    </div>
+                    <div *ngIf="test_container.container_code == 'IC0014' && test_container.visible">
+                        <app-ic0014></app-ic0014>
+                        <br>
+                    </div>
+                    <div *ngIf="test_container.container_code == 'IC0015' && test_container.visible">
+                        <app-ic0015></app-ic0015>
+                        <br>
+                    </div>
+                </ng-container>
+    
+                <div *ngIf="!have_container" class="container-add">
+                    <div class="row text-center d-flex align-items-center div-btn-add">
+                        <div class="col-md-12" (click)="open(true,content)">
+                            <a class="btn btn-default btn-circle"><i class="fa fa-plus fa-silver"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-header">
+            <h4 class="modal-title">{{title_modal}}</h4>
+            <button type="button" class="close" style="cursor:pointer" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-row">
+                <div class="form-group col-md-12" style="margin-bottom: 0px;">
+                    <div *ngIf="show_alert" class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Alert!</strong> {{errorMessage}}
+                    </div>
+                </div>
+                <div class="form-group col-md-6" *ngFor="let test of tests; let i = index;">
+                    <label class="custom-control custom-checkbox">
+                        <input type="checkbox" [value]="test.visible" [(ngModel)] = "test.visible" class="custom-control-input"/>
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">{{test.description}}</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-myklovr" (click)="saveTestContainer(content) && c('Close click')">Save</button>
+        </div>
+    </ng-template>
+</section>

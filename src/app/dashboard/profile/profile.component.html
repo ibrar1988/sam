@@ -1,0 +1,907 @@
+<div *ngIf="user" class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <!-- Row -->
+    <!-- Modal -->
+    <div class="modal fade myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <!-- Column -->
+        <div class="col-lg-4 col-xlg-3 col-md-5">
+            <div class="card">
+                <div class="card-body">
+                    <div align="center" class="m-t-30">
+                        <img [src]="get_url_image()" class="img-circle img-fluid" style="height: 150px; width: 150px; cursor:pointer" (click)="showPhoto()" />
+                        <!-- <div [dropzone]="config" (error)="onUploadError($event)" (success)="onUploadSuccess($event)"></div> -->
+                        <div *ngIf="isShowPhoto" style="margin: 10px auto;text-align: center;">
+
+                            <div class="file-upload" style="display: inline-block;">
+
+                                <div class="input-file-container" style="display: grid;">
+                                    <input [hidden]='file' class="input-file" id="my-file" type="file" (change)="fileChangeListener($event)">
+                                    <label [hidden]='file' tabindex="0" for="my-file" class="input-file-trigger">Select a file...</label>
+
+                                    <input [hidden]='!file' class="input-file" id="my-file2" type="button" (click)="fileChange()">
+                                </div>
+                                <p class="file-return"></p>
+
+                            </div>
+                            <img-cropper [hidden]='!file' #cropper [image]="data" [settings]="cropperSettings"></img-cropper>
+                            <br>
+                            <div class="input-file-container" style="display: grid;"></div>
+                            <button [hidden]='!file' class="btn" type="button" (click)="clearImage()">Clear</button>   
+                            <label [hidden]='!file' tabindex="1" for="my-file2" class="input-file-trigger">Save</label>                                                 
+                        </div>
+
+                        <br>
+
+                        <h3 class="card-title m-t-10">{{user?.first_name}}</h3>
+                        <h4 class="card-subtitle">{{user?.username}}</h4>
+
+                        <div style="width: 100%; background: #e3e4e4; padding: 10px; border-radius: 10px">
+                            <div class="col-xs-12 col-md-12 col-sm-12">
+                                <div style="text-align: center; padding-top:15px">
+                                    <h4>Premium Subscription</h4>
+                                    <h3 *ngIf="state == 1">
+                                        <span class="badge badge-success">ACTIVE</span>
+                                    </h3>
+                                    <h3 *ngIf="state == 2">
+                                        <span class="badge badge-danger">INACTIVE</span>
+                                    </h3>
+                                    <h3 *ngIf="state == 3">
+                                        <span class="badge badge-success">ACTIVE</span>
+                                    </h3>
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+
+                    </div>
+                </div>
+                <div style="padding: 0">
+                    <hr> </div>
+                <div class="card-body">
+
+                    <div class="animated fadeIn tab-pane active" role="tabpanel">
+                        <div class="card-body" style="padding : 5px;">
+                            <form style="margin-top: 20px" class="form-horizontal form-material" #f1="ngForm" name="form" (submit)="updateProfile(f1.form.valid)">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <!-- <label class="col-md-12">First Name</label> -->
+                                            <!-- <div class="col-md-12"> -->
+                                            <!-- <input type="text" [(ngModel)]="user.first_name" name="first_name" #firstname="ngModel" placeholder="First Name" class="form-control form-control-line" required> -->
+                                            <mat-form-field>
+                                                <input mdInput [(ngModel)]="user.first_name" name="first_name" #firstname="ngModel" placeholder="First Name" required>
+                                            </mat-form-field>
+                                            <!-- </div> -->
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <!-- <div class="form-group">
+                                                <label class="col-md-12">Last Name</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" [(ngModel)]="user.last_name" name="last_name" #lastname="ngModel" placeholder="Last Name" class="form-control form-control-line" required>
+                                                </div>
+                                            </div> -->
+                                        <div class="form-group">
+                                            <mat-form-field>
+                                                <input mdInput [(ngModel)]="user.last_name" name="last_name" #lastname="ngModel" placeholder="Last Name" required>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label>Date of Birth</label>
+                                            <div class="col-md-12">
+                                                <app-datepicker [datetimePicker]="_datetimePicker"></app-datepicker>
+                                                <!-- <date-picker [(ngModel)]="user.birthday" name="date3"></date-picker> -->
+                                            </div>
+                                        </div>
+                                        <!-- <date-picker ngModel name="date"></date-picker> -->
+                                    </div>
+                                    <!-- <date-picker ngModel name="date"></date-picker> -->
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label>Gender</label>
+                                            <div class="col-md-12">
+                                                <select name="gender" [(ngModel)]="user.gender" (change)="setGender($event.target.value)" class="form-control" required>
+                                                    <option value="male">Male</option>
+                                                    <option value="female">Female</option>
+                                                    </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <div style='text-align: center'>
+                                            <button type="submit" class="btn btn-myklovr text-uppercase">Update Account</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <br/>
+
+                </div>
+            </div>
+        </div>
+        <!-- Column -->
+        <!-- Column -->
+        <div class="col-lg-8 col-xlg-9 col-md-7">
+            <div class="card">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs profile-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#premium" role="tab">Premium Account</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#change-password" role="tab">Change Password</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#change-email" role="tab">Change Email</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#billing" role="tab">Billing Information</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#orders" role="tab">My Orders</a>
+                    </li>
+                </ul>
+                <!-- Tab panes -->
+
+
+                <div class="tab-content">
+
+                    <div class="animated fadeIn tab-pane active" id="premium" role="tabpanel">
+                        <div class="card-body">
+
+
+                            <div class="row">
+                                <div class="col-xs-12 col-md-12 col-sm-12">
+                                    <div style="text-align: center;">
+
+
+                                        <h2>Premium Subscription Benefits</h2>
+                                        <switch *ngIf="isState" [status]="getValue()" [onText]="onText" [offText]="offText" [onColor]="onColor" [offColor]="offColor" [size]="size" [disabled]="disabled" (statusChange)="onFlagChange($event)"></switch>
+                                        <switch *ngIf="!isState" [status]="'true'" [onText]="onText" [offText]="offText" [onColor]="onColor" [offColor]="offColor" [size]="size" [disabled]="disabled" (statusChange)="onFlagChange($event)"></switch>
+
+                                        <div *ngIf="state == 2" style="margin-top:10px;">
+                                            <h3>Get Premium</h3>
+                                            <p>Unlock Your Potential With New Features</p>
+                                            <a (click)=toPlans() style="color:cornflowerblue;cursor:pointer;">
+                                                <small>Learn more</small>
+                                            </a>
+                                        </div>
+                                        <div *ngIf="state == 1" style="margin-top:10px;">
+                                            <p>Your Periodically Subscription is enable</p>
+                                        </div>
+                                        <div *ngIf="state == 3" style="margin-top:10px;">
+                                            <p>Your membership expires on {{deadline | date}}</p>
+                                            <a style="cursor:pointer;" (click)='getIsState2()'>
+                            Please renew your Periodically Subscription
+                          </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <hr>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12 col-md-12 col-sm-12">
+                                    <div style="text-align: center;padding-bottom: 20px;">
+
+                                        <a *ngIf="!isColors" style="cursor:pointer;">
+                                            <!-- <h3 (click)="showColors()">Choose a Template Color</h3> -->
+                                        </a>
+
+                                        <a *ngIf="isColors" style="cursor:pointer;">
+                                            <h3 (click)="showColors()">Hide Colors</h3>
+                                        </a>
+                                        <span *ngIf="isColors">
+                                              This a beta feature, your preferences will be save only in your current device and web browser. 
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div *ngIf="isColors" class="row">
+                                <div class="col-12 col-md-4 col-sm-12 mb-3">
+                                    <div (click)='changeThemeColor("black")' style="text-align: center;background: rgba(0,0,0,0.8);cursor:pointer;">
+                                        <h3 style="color:white;padding: 10px;"> Black </h3>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4 col-sm-12 mb-3">
+                                    <div (click)='changeThemeColor("blue")' style="text-align: center;background: rgba(34, 49, 63,0.8);cursor:pointer;">
+                                        <h3 style="color:white;padding: 10px;"> Blue </h3>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4 col-sm-12 mb-3">
+                                    <div (click)='changeThemeColor("red")' style="text-align: center;background: rgba(207, 0, 15,0.8);cursor:pointer;">
+                                        <h3 style="color:white;padding: 10px;"> Red </h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="isColors" class="row">
+                                <div class="col-12 col-md-4 col-sm-12  mb-3">
+                                    <div (click)='changeThemeColor("purple")' style="text-align: center;background: rgba(103, 65, 114,0.8);cursor:pointer;">
+                                        <h3 style="color:white;padding: 10px;"> Purple </h3>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4 col-sm-12  mb-3">
+                                    <div (click)='changeThemeColor("green")' style="text-align: center;background: rgba(30, 130, 76,0.8);cursor:pointer;">
+                                        <h3 style="color:white;padding: 10px;"> Green </h3>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4 col-sm-12  mb-3">
+                                    <div (click)='changeThemeColor("default")' style="text-align: center;background: rgba(17, 9, 49, 0.8);cursor:pointer;">
+                                        <h3 style="color:white;padding: 10px;"> Default </h3>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div *ngIf="isColors" class="row">
+                                <div class="col-12 text-center mt-5 mb-3">
+                                    <h3>Choose a Background</h3>
+                                </div>
+                            </div>
+                            <div *ngIf="isColors" class="row">
+                                <div class="col-12 col-md-4 col-sm-12 text-center">
+                                    <h3 style="padding: 10px;"> Galaxy </h3>
+                                    <div (click)='changeBackground("custom-bg-1")' style="cursor:pointer;">
+                                        <img src="../../../assets/images/slider/bg1.jpg">
+
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-4 col-sm-12 text-center">
+                                    <h3 style="padding: 10px;"> Road </h3>
+                                    <div (click)='changeBackground("custom-bg-2")' style="cursor:pointer;">
+                                        <img src="../../../assets/images/slider/bg2.jpg">
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-4 col-sm-12 text-center">
+                                    <h3 style="padding: 10px;"> Landscape </h3>
+                                    <div (click)='changeBackground("custom-bg-3")' style="cursor:pointer;">
+                                        <img src="../../../assets/images/slider/bg3.jpg">
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="isColors" class="row mt-4">
+                                <div class="col-xs-12 col-md-4 col-sm-12 text-center">
+                                    <h3 style="padding: 10px;"> Space </h3>
+                                    <div (click)='changeBackground("custom-bg-4")' style="cursor:pointer;">
+                                        <img src="../../../assets/images/slider/bg4.jpg">
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-4 col-sm-12 text-center">
+                                    <h3 style="padding: 10px;"> Machine </h3>
+                                    <div (click)='changeBackground("custom-bg-5")' style="cursor:pointer;">
+                                        <img src="../../../assets/images/slider/bg5.jpg">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4 col-sm-12 text-center">
+                                    <h3 style="padding: 10px;"> Default </h3>
+                                    <div (click)='changeBackground("default-bg")' style="cursor:pointer;">
+                                        <img src="../../../assets/images/slider/slide2.jpg">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="isColors" class="row mt-4">
+                                <div class="col-xs-12 col-md-4 col-sm-12  mb-3">
+                                    <div (click)='changeBackground("custom-bg-6")' style="text-align: center;background:#f2f7f8;cursor:pointer;">
+                                        <h3 style="color:#222222;padding: 10px;"> Background Color 1 </h3>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-4 col-sm-12  mb-3">
+                                    <div (click)='changeBackground("custom-bg-7")' style="text-align: center;background:#fbcf18;cursor:pointer;">
+                                        <h3 style="color:#222222;padding: 10px;"> Background Color 2 </h3>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-4 col-sm-12  mb-3">
+                                    <div (click)='changeBackground("custom-bg-8")' style="text-align: center;background:#777777;cursor:pointer;">
+                                        <h3 style="color:#e0e0e0;padding: 10px;"> Background Color 3 </h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div *ngIf="isColors" class="row mt-4">
+                                    <div class="col-xs-12 col-md-4 col-sm-12">
+                                        <div (click)='changeBackground("custom-bg-6")' style="text-align: center;background:#f2f7f8;cursor:pointer;">
+                                            <h3 style="color:#222222;padding: 10px;"> Custom Background Color</h3>
+                                            <p-colorPicker [(ngModel)]="color1"></p-colorPicker>
+                                            <p style="margin-top:.5em">Selected Color: <span style="display:inline-block;width:32px;height:32px;vertical-align:middle" [style.backgroundColor]="color1"></span> {{color1}} </p> 
+                                        </div>
+                                    </div>
+                                </div> -->
+                        </div>
+
+                    </div>
+
+
+                    <div class="animated fadeIn tab-pane" id="change-password" role="tabpanel">
+                        <div class="card-body">
+                            <h4 class="card-title">Change your password</h4>
+                            <!-- <h6 class="card-subtitle">Use the following form to change your password.</h6> -->
+                            <form class="form-horizontal form-material" id="loginform" #f2="ngForm" (ngSubmit)="changePassword(f2.form.valid)">
+                                <div class="col-12 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <mat-form-field>
+                                            <input mdInput type="password" [(ngModel)]="actualPassword" #contactcurrentpass="ngModel" required name="currentpassword" placeholder="Current Password">
+                                        </mat-form-field>
+                                        <div class="md-errors-spacer animated fadeInUp" [hidden]="contactcurrentpass.valid || contactcurrentpass.untouched">
+                                            <div *ngIf="contactcurrentpass.errors && contactcurrentpass.errors.required" class="animated fadeIn">
+                                                <small class="form-control-feedback">Required</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <mat-form-field>
+                                            <input mdInput type="password" [(ngModel)]="newPassword" #contactnewpass="ngModel" required name="newpassword" placeholder="New Password">
+                                        </mat-form-field>
+                                        <div class="md-errors-spacer animated fadeInUp" [hidden]="contactnewpass.valid || contactnewpass.untouched">
+                                            <div *ngIf="contactnewpass.errors && contactnewpass.errors.required" class="animated fadeIn">
+                                                <small class="form-control-feedback">Required</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <mat-form-field>
+                                            <input mdInput type="password" [(ngModel)]="rnewPassword" #contactrnewpass="ngModel" required name="rnewpassword" placeholder="Confirm New Password">
+                                        </mat-form-field>
+                                        <div class="md-errors-spacer animated fadeInUp" [hidden]="contactrnewpass.valid || contactrnewpass.untouched">
+                                            <div *ngIf="contactrnewpass.errors && contactrnewpass.errors.required" class="animated fadeIn">
+                                                <small class="form-control-feedback">Required</small>
+                                            </div>
+
+                                        </div>
+                                        <div *ngIf="newPassword !== rnewPassword" class="md-errors-spacer animated fadeIn">
+                                            <small class="form-control-feedback"> Repeat password must be equal.</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group text-center m-t-20">
+                                    <div class="col-12 col-md-6 col-sm-12">
+                                        <button class="btn btn-myklovr text-uppercase" type="submit">Change Password</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+
+                    <div class="animated fadeIn tab-pane" id="change-email" role="tabpanel">
+                        <div class="card-body">
+                            <h4 class="card-title">Change your email</h4>
+                            <!-- <h6 class="card-subtitle">We'll send you a confirmation code to the new email.</h6> -->
+                            <form style="margin-top: 21px" class="form-horizontal form-material" id="changeemailform" #f3="ngForm" (ngSubmit)="changeEmail(f3.form.valid)">
+                                <!-- <div class="form-group">
+                                        <label for="example-email" class="col-md-6 col-sm-12">New Email</label>
+                                        <div class="col-md-6 col-sm-12">
+                                            <input type="text" placeholder="" [(ngModel)]="change_new_email" class="form-control form-control-line" name="newemail" #contactemail="ngModel" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required >
+                                            <div class="md-errors-spacer animated fadeInUp" [hidden]="contactemail.valid || contactemail.untouched">
+                                                <div *ngIf="contactemail.errors && contactemail.errors.required" class="animated fadeIn">
+                                                    <small class="form-control-feedback">Required</small>
+                                                </div>
+                                                <div *ngIf="contactemail.errors && contactemail.errors.pattern" class="animated fadeIn">
+                                                    <small class="form-control-feedback">Invalid</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                <div class="col-12 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <mat-form-field>
+                                            <input mdInput type="text" [(ngModel)]="change_new_email" name="newemail" #contactemail="ngModel" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required placeholder="New Email">
+                                        </mat-form-field>
+                                        <div class="md-errors-spacer animated fadeInUp" [hidden]="contactemail.valid || contactemail.untouched">
+                                            <div *ngIf="contactemail.errors && contactemail.errors.required" class="animated fadeIn">
+                                                <small class="form-control-feedback">Required</small>
+                                            </div>
+                                            <div *ngIf="contactemail.errors && contactemail.errors.pattern" class="animated fadeIn">
+                                                <small class="form-control-feedback">Invalid</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <mat-form-field>
+                                            <input mdInput type="text" [(ngModel)]="conf_new_email" name="cnewemail" #ncontactemail="ngModel" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required placeholder="Confirm New Email">
+                                        </mat-form-field>
+                                        <div class="md-errors-spacer animated fadeInUp" [hidden]="ncontactemail.valid || ncontactemail.untouched">
+                                            <div *ngIf="ncontactemail.errors && ncontactemail.errors.required" class="animated fadeIn">
+                                                <small class="form-control-feedback">Required</small>
+                                            </div>
+                                            <div *ngIf="ncontactemail.errors && ncontactemail.errors.pattern" class="animated fadeIn">
+                                                <small class="form-control-feedback">Invalid</small>
+                                            </div>
+                                            <div *ngIf="change_new_email !== conf_new_email" class="md-errors-spacer animated fadeIn">
+                                                <small class="form-control-feedback"> Confirm Email must be equal.</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-12 col-md-6 col-sm-12 text-center m-t-20">
+                                        <button class="btn btn-myklovr text-uppercase" type="submit">Send Confirmation</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- BILLING INFO -->
+                    <div class="animated fadeIn tab-pane" id="billing" role="tabpanel">
+                        <div class="card-body">
+                            <h4 class="card-title">Billing Information</h4>
+                            <!-- <h6 class="card-subtitle">Manage your billing information for your orders.</h6> -->
+                            <div *ngIf="editBillingInfo">
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="card-shadow" style="width: 100%;padding: 20px;">
+                                            <div class="col-md-6 col-xs-6">
+                                                <strong>Full Name</strong>
+                                                <br>
+                                                <p class="text-muted">{{ billing_info?.first_name }} {{ billing_info?.last_name }}</p>
+                                                <!-- -->
+                                            </div>
+                                            <div class="col-md-6 col-xs-6">
+                                                <strong>Address</strong>
+                                                <br>
+                                                <p class="text-muted">{{ billing_info?.address }}</p>
+                                            </div>
+                                            <div class="col-md-6 col-xs-6">
+                                                <strong>City</strong>
+                                                <br>
+                                                <p class="text-muted">{{ billing_info?.city }} - {{ billing_info?.state }}</p>
+                                            </div>
+                                            <div class="col-md-6 col-xs-6">
+                                                <strong>Zip Code</strong>
+                                                <br>
+                                                <p class="text-muted">{{ billing_info?.zipcode }}</p>
+                                            </div>
+                                            <div class="col-md-6 col-xs-6">
+                                                <strong>Country</strong>
+                                                <br>
+                                                <p class="text-muted">{{ billing_info?.country }}</p>
+                                            </div>
+                                            <!-- <div class="col-md-6 col-xs-6">
+                                                    <strong>Location</strong>
+                                                    <br>
+                                                    <p class="text-muted">{{ billing_info?.city }} - {{ billing_info?.state }}</p>
+                                                </div> -->
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-12">
+                                    <button (click)="showEditBillingInfo()" type="button" class="btn btn-myklovr text-uppercase">Edit billing information</button>
+                                </div>
+                            </div>
+                            <!-- UPDATE BILLING INFOR -->
+                            <form *ngIf="!editBillingInfo" style="margin-top: 21px" class="form-horizontal form-material animated fadeIn" id="update_billing_form" #f4="ngForm" (submit)="updateBillingInfo(true)">
+                                <div class="row">
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            <!-- <label class="col-md-12">First Name</label> -->
+                                            <div class="col-md-12">
+
+                                                <!-- <input class="form-control" id="billing_first_name" type="text" [(ngModel)]="billing_info.first_name" #billingfirstname="ngModel" required name="billingfirstname" placeholder="First Name"> -->
+                                                <mat-form-field>
+                                                    <input mdInput id="billing_first_name" [(ngModel)]="billing_info.first_name" #billingfirstname="ngModel" required name="billingfirstname" placeholder="First Name">
+                                                </mat-form-field>
+
+                                                <div class="md-errors-spacer animated fadeInUp" [hidden]="billingfirstname.valid || billingfirstname.untouched">
+                                                    <div *ngIf="billingfirstname.errors && billingfirstname.errors.required" class="animated fadeIn">
+                                                        <small class="form-control-feedback">Required.</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            <!-- <label class="col-md-12">Last Name</label> -->
+                                            <div class="col-md-12">
+                                                <!-- <input class="form-control" id="billing_last_name" type="text" [(ngModel)]="billing_info.last_name" #billinglastname="ngModel" required name="billinglastname" placeholder="Last Name"> -->
+                                                <mat-form-field>
+                                                    <input mdInput id="billing_last_name" [(ngModel)]="billing_info.last_name" #billinglastname="ngModel" required name="billinglastname" placeholder="Last Name">
+                                                </mat-form-field>
+                                                <div class="md-errors-spacer animated fadeInUp" [hidden]="billinglastname.valid || billinglastname.untouched">
+                                                    <!-- <div *ngIf="billinglastname.errors && billinglastname.errors.required" class="animated fadeIn">
+                                                        <small class="form-control-feedback">Required</small>
+                                                    </div> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            <!-- <label class="col-md-12">Address</label> -->
+                                            <div class="col-md-12">
+                                                <!-- <input class="form-control" id="billing_address" type="text" [(ngModel)]="billing_info.address" #billingaddress="ngModel" required name="billingaddress" placeholder="Address"> -->
+                                                <mat-form-field>
+                                                    <input mdInput id="billing_address" [(ngModel)]="billing_info.address" #billingaddress="ngModel" name="billingaddress" placeholder="Address">
+                                                </mat-form-field>
+                                                <!-- <div class="md-errors-spacer animated fadeInUp" [hidden]="billingaddress.valid || billingaddress.untouched">
+                                                    <div *ngIf="billingaddress.errors && billingaddress.errors.required" class="animated fadeIn">
+                                                        <small class="form-control-feedback">Required</small>
+                                                    </div>
+                                                </div> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            <!-- <label class="col-md-12">Company</label> -->
+                                            <div class="col-md-12">
+                                                <!-- <input class="form-control" id="billing_company" type="text" [(ngModel)]="billing_info.company" #billingcompany="ngModel" name="billingcompany" placeholder="Company Name"> -->
+                                                <!-- mat-form-field>
+                                                    <input mdInput id="billing_company" [(ngModel)]="billing_info.company" #billingcompany="ngModel" name="billingcompany" placeholder="Company Name">
+                                                </mat-form-field>
+                                                <div class="md-errors-spacer animated fadeInUp" [hidden]="billingcompany.valid || billingcompany.untouched">
+                                                    <div *ngIf="billingcompany.errors && billingcompany.errors.required" class="animated fadeIn">
+                                                        <small class="form-control-feedback">Required</small>
+                                                    </div>
+                                                </div -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="row">
+                                    <!-- <div class="col-12 col-md-3">
+                                            <div class="form-group">
+                                                <label class="col-sm-12">Country</label>
+                                                <div class="col-sm-12">
+                                                    <span [(ngModel)]="billing_info.country" value="USA" name="billingcountry">United States</span>
+                                                </div>
+                                            </div>
+                                        </div> -->
+
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group  animated fadeIn">
+                                            <label class="col-sm-12">Country</label>
+                                            <div class="col-sm-12">
+                                                <select [(ngModel)]="billing_info.country" name="billingcountry" class="form-control" required>
+                                                    <option value="USA">United States</option>
+                                                    </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group  animated fadeIn">
+                                            <label class="col-sm-12">State</label>
+                                            <div class="col-sm-12">
+                                                <select [(ngModel)]="billing_info.state" name="billingstate" (change)="setState($event.target.value,true)" class="form-control" required>
+                                                    <option *ngFor='let state of states_b' value="{{state.code}}">
+                                                        {{state.name}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="billing_info.state" class="col-12 col-md-6">
+                                        <div class="form-group  animated fadeIn">
+                                            <label class="col-sm-12">City</label>
+                                            <div class="col-sm-12">
+                                                <!-- <select [(ngModel)]="billing_info.city" name="billingcity" (change)="setCity($event.target.value,true)" class="form-control" required>
+                                                    <option *ngFor='let city of cities_b' value="{{city.city_name}}">{{city.city_name}}</option>
+                                                </select> -->
+                                                <input class="form-control" type="text" [(ngModel)]="billing_info.city" name="city" required placeholder="City">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-3">
+                                        <div class="form-group">
+                                            <label class="col-md-12">ZIP Code</label>
+                                            <div class="col-md-12">
+                                                <input class="form-control" id="billing_zip" type="text" [(ngModel)]="billing_info.zipcode" #billingzip="ngModel" required name="billingzip" placeholder="Zip Code">
+                                                <div class="md-errors-spacer animated fadeInUp" [hidden]="billingzip.valid || billingzip.untouched">
+                                                    <div *ngIf="billingzip.errors && billingzip.errors.required" class="animated fadeIn">
+                                                        <small class="form-control-feedback">Required</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <button type="submit" class="btn btn-myklovr text-uppercase">Update Profile</button>
+                                        <button (click)="hideEditBillingInfo()" type="button" class="btn btn-myklovr text-uppercase">Cancel</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- LAST ORDERS -->
+                    <div class="animated fadeIn tab-pane" id="orders" role="tabpanel">
+                        <div class="card-body">
+                            <h4 class="card-title">My Orders</h4>
+                            <!-- <h6 class="card-subtitle">Latests orders in your account</h6> -->
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Billed To</th>
+                                            <th>Status</th>
+                                            <!-- <th>Total Amount</th> -->
+                                            <!-- <th>Item</th> -->
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngIf='orders_list?.length > 0'>
+                                        <tr *ngFor='let order of orders_list'>
+                                            <td>
+                                                <span class="text-muted">
+                              <i class="fa fa-clock-o"></i> {{order.creation_timestamp | date}}</span>
+                                            </td>
+                                            <td>
+                                                <i class="fa fa-user"></i>{{ order.billing_name }} {{ order.billing_lastname }}</td>
+                                            <td>
+                                                <div class="label label-table label-success">{{order.status}}</div>
+                                            </td>
+                                            <!-- <td>${{order.amount - order.coupon_discount_amount}}</td> -->
+                                            <!-- <td *ngIf="order.amount == 19.99">MyKlovr Monthly Prescription</td>
+                                            <td *ngIf="order.amount == 199.99">MyKlovr Annual Prescription</td> -->
+                                            <td>
+
+                                                <button class="btn btn-sm btn-outline-default" (click)="open(content,order);">View Detail</button>
+                                            </td>
+                                            <!-- <td><a href="javascript:void(0) {{order.order_id}}">Details</a></td> -->
+
+
+
+
+                                        </tr>
+
+
+
+
+
+                                    </tbody>
+                                </table>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+        <!-- Column -->
+    </div>
+
+    <ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-header">
+            <h4 class="modal-title">Order Detail</h4>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                      
+                      </button>
+        </div>
+        <div class="modal-body">
+
+            <table style="margin-top: 25px;">
+                <tr>
+                    <th style="width: 50%;">Item</th>
+                    <th></th>
+                    <th style="width: 50%;text-align: right;"> <span style="font-size:12px">{{orders_detail?.product_description | uppercase}}</span></th>
+
+                </tr>
+                <tr>
+                    <th style="width: 50%;">Price</th>
+                    <th></th>
+                    <td style="width: 50%;text-align: right;">{{orders_detail?.productValue | currency:'USD':true:'1.2-2'}}</td>
+
+                </tr>
+                <tr>
+                    <th style="width: 50%;">Subtotal</th>
+                    <th></th>
+                    <td style="width: 50%;text-align: right;">{{orders_detail?.subtotal | currency:'USD':true:'1.2-2'}}</td>
+
+                </tr>
+                <tr>
+                    <th style="width: 50%;">Discounts</th>
+                    <th></th>
+                    <td style="width: 50%;text-align: right;color: green;">- {{tmp_discount | currency:'USD':true:'1.2-2'}}</td>
+
+
+                </tr>
+                <tr>
+                    <th style="width: 50%;">Tax</th>
+                    <th></th>
+                    <td style="width: 50%;text-align: right;"> {{(orders_detail?.productValue - tmp_discount) * orders_detail?.product_tax | currency:'USD':true:'1.2-2'}}</td>
+
+
+                </tr>
+                <tr>
+                    <th style="width: 50%;"><b>Total</b></th>
+                    <th></th>
+                    <td style="width: 50%;text-align: right;"><b>{{orders_detail?.productValue - tmp_discount + (orders_detail?.productValue - tmp_discount) * orders_detail?.product_tax | currency:'USD':true:'1.2-2'}}</b></td>
+
+                </tr>
+            </table>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+        </div>
+    </ng-template>
+    <!-- Row -->
+    <!-- ============================================================== -->
+    <!-- End PAge Content -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Right sidebar -->
+    <!-- ============================================================== -->
+    <!-- .right-sidebar -->
+    <div class="right-sidebar">
+        <div class="slimscrollright">
+            <div class="rpanel-title"> Service Panel
+                <span>
+              <i class="ti-close right-side-toggle"></i>
+            </span>
+            </div>
+            <div class="r-panel-body">
+                <ul id="themecolors" class="m-t-20">
+                    <li>
+                        <b>With Light sidebar</b>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" data-theme="default" class="default-theme">1</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" data-theme="green" class="green-theme">2</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" data-theme="red" class="red-theme">3</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" data-theme="blue" class="blue-theme working">4</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" data-theme="purple" class="purple-theme">5</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" data-theme="megna" class="megna-theme">6</a>
+                    </li>
+                    <li class="d-block m-t-30">
+                        <b>With Dark sidebar</b>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" data-theme="default-dark" class="default-dark-theme">7</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" data-theme="green-dark" class="green-dark-theme">8</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" data-theme="red-dark" class="red-dark-theme">9</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" data-theme="blue-dark" class="blue-dark-theme">10</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" data-theme="purple-dark" class="purple-dark-theme">11</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" data-theme="megna-dark" class="megna-dark-theme ">12</a>
+                    </li>
+                </ul>
+                <ul class="m-t-20 chatonline">
+                    <li>
+                        <b>Chat option</b>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <img src="../assets/images/users/1.jpg" alt="user-img" class="img-circle">
+                            <span>Varun Dhavan
+                    <small class="text-success">online</small>
+                  </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <img src="../assets/images/users/2.jpg" alt="user-img" class="img-circle">
+                            <span>Genelia Deshmukh
+                    <small class="text-warning">Away</small>
+                  </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <img src="../assets/images/users/3.jpg" alt="user-img" class="img-circle">
+                            <span>Ritesh Deshmukh
+                    <small class="text-danger">Busy</small>
+                  </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <img src="../assets/images/users/4.jpg" alt="user-img" class="img-circle">
+                            <span>Arijit Sinh
+                    <small class="text-muted">Offline</small>
+                  </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <img src="../assets/images/users/5.jpg" alt="user-img" class="img-circle">
+                            <span>Govinda Star
+                    <small class="text-success">online</small>
+                  </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <img src="../assets/images/users/6.jpg" alt="user-img" class="img-circle">
+                            <span>John Abraham
+                    <small class="text-success">online</small>
+                  </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <img src="../assets/images/users/7.jpg" alt="user-img" class="img-circle">
+                            <span>Hritik Roshan
+                    <small class="text-success">online</small>
+                  </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <img src="../assets/images/users/8.jpg" alt="user-img" class="img-circle">
+                            <span>Pwandeep rajan
+                    <small class="text-success">online</small>
+                  </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>

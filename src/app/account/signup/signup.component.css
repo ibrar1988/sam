@@ -1,0 +1,23 @@
+.home_btns {
+    background: #110931;
+    border-color: #110931;
+    color: white;
+}
+
+.home_nav_btns {
+    background: #110931;
+    border-color: #110931;
+    border-radius: 30px;
+}
+
+.socialButton {
+  max-height: 55px;
+}
+/*
+.bg-image {
+  background-image: url("images/role_bg.png");
+  width: 100%;
+  height:stretch ;
+      background-repeat: no-repeat;
+}*/
+

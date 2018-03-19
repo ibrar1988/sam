@@ -1,0 +1,112 @@
+<div id="portfolio-sop-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myLargeModalLabel">Write Your State Of Purpose</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="updateItem()">&times;</button>
+            </div>
+            <div class="modal-body"> 
+                <div class="row">
+                    <div class="form-group col-12">
+                        <label class="col-md-12">Description</label>
+                        <div class="col-md-12">
+                                <textarea rows="20" cols="50" [(ngModel)]="newItem.description"  class="form-control form-control-line"></textarea>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" (click)="addItem()" class="btn btn-myklovr" data-dismiss="modal">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf='container' class="portfolio-container-base">
+  <div class="row">
+    <div class="col-md-12">
+        
+        <div>
+            <div class="title-section">
+                <div class="row">
+                    <div class="col-sm-7 col-md-9 d-flex align-items-center" data-toggle="collapse" data-target="#ic0002" aria-expanded="false" aria-controls="ic0002">
+                        <span class="container-title">{{container_name}} </span><span class="fa fa-info-circle container-info-icon" data-container="body" data-toggle="tooltip" data-placement="bottom" title="{{container_tooltip}}"></span>
+                    </div>
+                    <!-- <div class="col-sm-5 col-md-3 text-right">
+                        <div style="display: inline-block;">
+                            <label class="switch">
+                                <input type="checkbox" [checked]="value" (change)="value = !value">
+                                <span class="slider round2"></span>
+                            </label>
+                        </div>
+                        <div style="display: inline-block;">
+                            <span style="margin-left: 5px;">{{value ? 'Private' : 'Public'}}</span>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+        <hr class="separator">
+        <div id="ic0002"  class="show">
+            
+        <div class="row" >
+            <div class="col-md-12" *ngIf="container && container.description === ''">
+                <div class="row text-center card-body new-sop-card" data-toggle="modal" data-target="#portfolio-sop-modal"> 
+                        <div class="col-md-12 d-flex justify-content-center align-items-center">
+                            <a class="btn btn-default btn-circle"><i class="fa fa-plus fa-silver"></i></a>
+                        </div>
+                </div>
+            </div>
+            <div class="col-12" *ngIf="container && container.description !== ''">
+                <div class="card general-info-card" data-toggle="modal" data-target="#portfolio-sop-modal" >
+                    <div class="card-body">
+                        <div class="card-shadow-1">
+                            <div class="form-horizontal form-material">   
+                                <div [hidden]="editEnabled">                             
+                                    <div class="card-content-actions">
+                                        <div class="row float-right">
+                                            <!-- <a class="m-r-10"><i class="fa fa-pencil fa-black"></i></a> (click)="enableEdition()" -->
+                                            <!-- <a class="edit m-r-10" ><i class="fa fa-pencil fa-black"></i></a> -->
+                                        </div>
+                                    </div>   
+                                    <div class="row">
+                                        <div class="form-group col">
+                                            <label class="float-right" style="padding: 0;">Written on {{container?.date_of_creation}}</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-12">
+                                            <label class="col-md-12" style="white-space: pre-line; padding: 0;">{{container.description}}</label>
+                                        </div>
+                                    </div>  
+                                </div>                                
+                                <div [hidden]="!editEnabled">
+                                    <div class="row">
+                                        <div class="form-group col-12">
+                                            <label class="col-md-12">Date</label>
+                                            <div class="col-md-12">
+                                                <input type="text" placeholder="Aug 7th, 1992" [(ngModel)]="container.date_of_creation" class="form-control form-control-line">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-12">
+                                            <label class="col-md-12">Content</label>
+                                            <textarea class="col-12" [cols]="30" pInputTextarea  [(ngModel)]="container.description" autoResize="autoResize"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <button style="margin: 10px;" type="button" class="btn btn-myklovr refresh-container-btn float-right" (click)="updateContainer(); disableEdition();">Save</button>
+                                        </div>
+                                    </div>
+                                </div>          
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+  </div>
+</div>
